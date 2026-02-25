@@ -1,4 +1,12 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
+"use client";
+
+import React, {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
 import { gsap } from "gsap";
 
 export interface StaggeredMenuItem {
@@ -34,7 +42,7 @@ export interface StaggeredMenuProps {
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   position = "right",
-  colors = ["#f25623", "#efdbbf"],
+  colors = ["#F25623", "#1A1A1A", "#0D0D0D"],
   items = [],
   socialItems = [],
   displaySocials = true,
@@ -43,875 +51,245 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   logoUrl,
   logoText,
   menuButtonColor = "#fff",
-  openMenuButtonColor = "#000",
-  changeMenuColorOnOpen = true,
-  accentColor = "#5227FF",
-  isFixed = false,
+  openMenuButtonColor = "#fff",
+  accentColor = "#F25623",
+  isFixed = true,
   closeOnClickAway = true,
   onMenuOpen,
   onMenuClose,
-}: StaggeredMenuProps) => {
+}) => {
+  // 1. States & Refs
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
-
   const panelRef = useRef<HTMLDivElement | null>(null);
   const preLayersRef = useRef<HTMLDivElement | null>(null);
-  const preLayerElsRef = useRef<HTMLElement[]>([]);
-
   const plusHRef = useRef<HTMLSpanElement | null>(null);
   const plusVRef = useRef<HTMLSpanElement | null>(null);
-  const iconRef = useRef<HTMLSpanElement | null>(null);
-
-  const textInnerRef = useRef<HTMLSpanElement | null>(null);
-  const textWrapRef = useRef<HTMLSpanElement | null>(null);
+  const textInnerRef = useRef<HTMLDivElement | null>(null);
   const [textLines, setTextLines] = useState<string[]>(["Menu", "Close"]);
-
-  const openTlRef = useRef<gsap.core.Timeline | null>(null);
-  const closeTweenRef = useRef<gsap.core.Tween | null>(null);
-  const spinTweenRef = useRef<gsap.core.Timeline | null>(null);
-  const textCycleAnimRef = useRef<gsap.core.Tween | null>(null);
-  const colorTweenRef = useRef<gsap.core.Tween | null>(null);
-
-  const toggleBtnRef = useRef<HTMLButtonElement | null>(null);
   const busyRef = useRef(false);
 
-  const itemEntranceTweenRef = useRef<gsap.core.Tween | null>(null);
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const panel = panelRef.current;
-      const preContainer = preLayersRef.current;
-      const plusH = plusHRef.current;
-      const plusV = plusVRef.current;
-      const icon = iconRef.current;
-      const textInner = textInnerRef.current;
-
-      if (!panel || !plusH || !plusV || !icon || !textInner) return;
-
-      let preLayers: HTMLElement[] = [];
-      if (preContainer) {
-        preLayers = Array.from(
-          preContainer.querySelectorAll(".sm-prelayer"),
-        ) as HTMLElement[];
-      }
-      preLayerElsRef.current = preLayers;
-
-      const offscreen = position === "left" ? -100 : 100;
-      gsap.set([panel, ...preLayers], { xPercent: offscreen });
-
-      gsap.set(plusH, { transformOrigin: "50% 50%", rotate: 0 });
-      gsap.set(plusV, { transformOrigin: "50% 50%", rotate: 90 });
-      gsap.set(icon, { rotate: 0, transformOrigin: "50% 50%" });
-      gsap.set(textInner, { yPercent: 0 });
-
-      if (toggleBtnRef.current) {
-        gsap.set(toggleBtnRef.current, { color: menuButtonColor });
-      }
-    });
-
-    return () => ctx.revert();
-  }, [menuButtonColor, position]);
-
-  const buildOpenTimeline = useCallback(() => {
-    const panel = panelRef.current;
-    const layers = preLayerElsRef.current;
-    if (!panel) return null;
-
-    openTlRef.current?.kill();
-    if (closeTweenRef.current) {
-      closeTweenRef.current.kill();
-      closeTweenRef.current = null;
-    }
-    itemEntranceTweenRef.current?.kill();
-
-    const itemEls = Array.from(
-      panel.querySelectorAll(".sm-panel-itemLabel"),
-    ) as HTMLElement[];
-    const numberEls = Array.from(
-      panel.querySelectorAll(".sm-panel-list[data-numbering] .sm-panel-item"),
-    ) as HTMLElement[];
-    const socialTitle = panel.querySelector(
-      ".sm-socials-title",
-    ) as HTMLElement | null;
-    const socialLinks = Array.from(
-      panel.querySelectorAll(".sm-socials-link"),
-    ) as HTMLElement[];
-
-    const layerStates = layers.map((el) => ({
-      el,
-      start: Number(gsap.getProperty(el, "xPercent")),
-    }));
-    const panelStart = Number(gsap.getProperty(panel, "xPercent"));
-
-    if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 });
-    if (numberEls.length)
-      gsap.set(numberEls, { ["--sm-num-opacity" as any]: 0 });
-    if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
-    if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
-
-    const tl = gsap.timeline({ paused: true });
-
-    layerStates.forEach((ls, i) => {
-      tl.fromTo(
-        ls.el,
-        { xPercent: ls.start },
-        { xPercent: 0, duration: 0.5, ease: "power4.out" },
-        i * 0.07,
-      );
-    });
-
-    const lastTime = layerStates.length ? (layerStates.length - 1) * 0.07 : 0;
-    const panelInsertTime = lastTime + (layerStates.length ? 0.08 : 0);
-    const panelDuration = 0.65;
-
-    tl.fromTo(
-      panel,
-      { xPercent: panelStart },
-      { xPercent: 0, duration: panelDuration, ease: "power4.out" },
-      panelInsertTime,
-    );
-
-    if (itemEls.length) {
-      const itemsStartRatio = 0.15;
-      const itemsStart = panelInsertTime + panelDuration * itemsStartRatio;
-
-      tl.to(
-        itemEls,
-        {
-          yPercent: 0,
-          rotate: 0,
-          duration: 1,
-          ease: "power4.out",
-          stagger: { each: 0.1, from: "start" },
-        },
-        itemsStart,
-      );
-
-      if (numberEls.length) {
-        tl.to(
-          numberEls,
-          {
-            duration: 0.6,
-            ease: "power2.out",
-            ["--sm-num-opacity" as any]: 1,
-            stagger: { each: 0.08, from: "start" },
-          },
-          itemsStart + 0.1,
-        );
-      }
-    }
-
-    if (socialTitle || socialLinks.length) {
-      const socialsStart = panelInsertTime + panelDuration * 0.4;
-
-      if (socialTitle) {
-        tl.to(
-          socialTitle,
-          { opacity: 1, duration: 0.5, ease: "power2.out" },
-          socialsStart,
-        );
-      }
-
-      if (socialLinks.length) {
-        tl.to(
-          socialLinks,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.55,
-            ease: "power3.out",
-            stagger: { each: 0.08, from: "start" },
-            onComplete: () => {
-              gsap.set(socialLinks, { clearProps: "opacity" });
-            },
-          },
-          socialsStart + 0.04,
-        );
-      }
-    }
-
-    openTlRef.current = tl;
-    return tl;
-  }, [position]);
-
+  // 2. Animations Logic
   const playOpen = useCallback(() => {
     if (busyRef.current) return;
     busyRef.current = true;
-    const tl = buildOpenTimeline();
-    if (tl) {
-      tl.eventCallback("onComplete", () => {
+
+    const tl = gsap.timeline({
+      onComplete: () => {
         busyRef.current = false;
-      });
-      tl.play(0);
-    } else {
-      busyRef.current = false;
-    }
-  }, [buildOpenTimeline]);
+      },
+    });
+
+    const layers = Array.from(preLayersRef.current?.children || []);
+    const labels = Array.from(
+      panelRef.current?.querySelectorAll(".sm-item-label") || [],
+    );
+    const lines = Array.from(
+      panelRef.current?.querySelectorAll(".sm-item-line") || [],
+    );
+    const nums = Array.from(
+      panelRef.current?.querySelectorAll(".sm-item-num") || [],
+    );
+
+    tl.to(layers, {
+      xPercent: 0,
+      duration: 0.4,
+      ease: "expo.inOut",
+      stagger: 0.05,
+    })
+      .to(
+        panelRef.current,
+        { xPercent: 0, duration: 0.5, ease: "expo.out" },
+        "-=0.2",
+      )
+      .fromTo(
+        labels,
+        { yPercent: 100 },
+        { yPercent: 0, duration: 0.6, ease: "power4.out", stagger: 0.05 },
+        "-=0.3",
+      )
+      .fromTo(
+        lines,
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.8, ease: "power4.inOut", stagger: 0.05 },
+        "-=0.6",
+      )
+      .fromTo(
+        nums,
+        { opacity: 0, x: -10 },
+        { opacity: 0.4, x: 0, duration: 0.4 },
+        "-=0.4",
+      );
+  }, []);
 
   const playClose = useCallback(() => {
-    openTlRef.current?.kill();
-    openTlRef.current = null;
-    itemEntranceTweenRef.current?.kill();
-
-    const panel = panelRef.current;
-    const layers = preLayerElsRef.current;
-    if (!panel) return;
-
-    const all: HTMLElement[] = [...layers, panel];
-    closeTweenRef.current?.kill();
-
+    const layers = Array.from(preLayersRef.current?.children || []);
+    const all = [...layers, panelRef.current];
     const offscreen = position === "left" ? -100 : 100;
 
-    closeTweenRef.current = gsap.to(all, {
+    gsap.to(all, {
       xPercent: offscreen,
-      duration: 0.32,
-      ease: "power3.in",
-      overwrite: "auto",
+      duration: 0.4,
+      ease: "power4.inOut",
+      stagger: { each: 0.04, from: "end" },
       onComplete: () => {
-        const itemEls = Array.from(
-          panel.querySelectorAll(".sm-panel-itemLabel"),
-        ) as HTMLElement[];
-        if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 });
-
-        const numberEls = Array.from(
-          panel.querySelectorAll(
-            ".sm-panel-list[data-numbering] .sm-panel-item",
-          ),
-        ) as HTMLElement[];
-        if (numberEls.length) {
-          gsap.set(numberEls, { ["--sm-num-opacity" as any]: 0 });
-        }
-
-        const socialTitle = panel.querySelector(
-          ".sm-socials-title",
-        ) as HTMLElement | null;
-        const socialLinks = Array.from(
-          panel.querySelectorAll(".sm-socials-link"),
-        ) as HTMLElement[];
-        if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
-        if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
-
         busyRef.current = false;
       },
     });
   }, [position]);
 
-  const animateIcon = useCallback((opening: boolean) => {
-    const icon = iconRef.current;
-    const h = plusHRef.current;
-    const v = plusVRef.current;
-    if (!icon || !h || !v) return;
-
-    spinTweenRef.current?.kill();
-
-    if (opening) {
-      gsap.set(icon, { rotate: 0, transformOrigin: "50% 50%" });
-      spinTweenRef.current = gsap
-        .timeline({ defaults: { ease: "power4.out" } })
-        .to(h, { rotate: 45, duration: 0.5 }, 0)
-        .to(v, { rotate: -45, duration: 0.5 }, 0);
-    } else {
-      spinTweenRef.current = gsap
-        .timeline({ defaults: { ease: "power3.inOut" } })
-        .to(h, { rotate: 0, duration: 0.35 }, 0)
-        .to(v, { rotate: 90, duration: 0.35 }, 0)
-        .to(icon, { rotate: 0, duration: 0.001 }, 0);
-    }
-  }, []);
-
-  const animateColor = useCallback(
-    (opening: boolean) => {
-      const btn = toggleBtnRef.current;
-      if (!btn) return;
-      colorTweenRef.current?.kill();
-
-      if (changeMenuColorOnOpen) {
-        const targetColor = opening ? openMenuButtonColor : menuButtonColor;
-        colorTweenRef.current = gsap.to(btn, {
-          color: targetColor,
-          delay: 0.18,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      } else {
-        gsap.set(btn, { color: menuButtonColor });
-      }
-    },
-    [openMenuButtonColor, menuButtonColor, changeMenuColorOnOpen],
-  );
-
-  React.useEffect(() => {
-    if (toggleBtnRef.current) {
-      if (changeMenuColorOnOpen) {
-        const targetColor = openRef.current
-          ? openMenuButtonColor
-          : menuButtonColor;
-        gsap.set(toggleBtnRef.current, { color: targetColor });
-      } else {
-        gsap.set(toggleBtnRef.current, { color: menuButtonColor });
-      }
-    }
-  }, [changeMenuColorOnOpen, menuButtonColor, openMenuButtonColor]);
-
-  const animateText = useCallback((opening: boolean) => {
-    const inner = textInnerRef.current;
-    if (!inner) return;
-
-    textCycleAnimRef.current?.kill();
-
-    const currentLabel = opening ? "Menu" : "Close";
-    const targetLabel = opening ? "Close" : "Menu";
-    const cycles = 3;
-
-    const seq: string[] = [currentLabel];
-    let last = currentLabel;
-    for (let i = 0; i < cycles; i++) {
-      last = last === "Menu" ? "Close" : "Menu";
-      seq.push(last);
-    }
-    if (last !== targetLabel) seq.push(targetLabel);
-    seq.push(targetLabel);
-
-    setTextLines(seq);
-    gsap.set(inner, { yPercent: 0 });
-
-    const lineCount = seq.length;
-    const finalShift = ((lineCount - 1) / lineCount) * 100;
-
-    textCycleAnimRef.current = gsap.to(inner, {
-      yPercent: -finalShift,
-      duration: 0.5 + lineCount * 0.07,
-      ease: "power4.out",
-    });
-  }, []);
-
   const toggleMenu = useCallback(() => {
     const target = !openRef.current;
     openRef.current = target;
     setOpen(target);
+    target ? (onMenuOpen?.(), playOpen()) : (onMenuClose?.(), playClose());
 
-    if (target) {
-      onMenuOpen?.();
-      playOpen();
-    } else {
-      onMenuClose?.();
-      playClose();
-    }
+    gsap.to(plusHRef.current, { rotate: target ? 45 : 0, duration: 0.4 });
+    gsap.to(plusVRef.current, { rotate: target ? -45 : 90, duration: 0.4 });
 
-    animateIcon(target);
-    animateColor(target);
-    animateText(target);
-  }, [
-    playOpen,
-    playClose,
-    animateIcon,
-    animateColor,
-    animateText,
-    onMenuOpen,
-    onMenuClose,
-  ]);
+    const seq = target ? ["Menu", "•••", "Close"] : ["Close", "•••", "Menu"];
+    setTextLines(seq);
 
-  const closeMenu = useCallback(() => {
-    if (openRef.current) {
-      openRef.current = false;
-      setOpen(false);
-      onMenuClose?.();
-      playClose();
-      animateIcon(false);
-      animateColor(false);
-      animateText(false);
-    }
-  }, [playClose, animateIcon, animateColor, animateText, onMenuClose]);
+    gsap.fromTo(
+      textInnerRef.current,
+      { yPercent: 0 },
+      { yPercent: -66.66, duration: 0.5, ease: "expo.inOut" },
+    );
+  }, [playOpen, playClose, onMenuOpen, onMenuClose]);
 
-  React.useEffect(() => {
-    if (!closeOnClickAway || !open) return;
+  // 3. Effects (Must be in body, not inside callbacks)
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const offscreen = position === "left" ? -100 : 100;
+      const layers = Array.from(preLayersRef.current?.children || []);
+      gsap.set([panelRef.current, ...layers], { xPercent: offscreen });
+      gsap.set(plusVRef.current, { rotate: 90 });
+    });
+    return () => ctx.revert();
+  }, [position]);
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        panelRef.current &&
-        !panelRef.current.contains(event.target as Node) &&
-        toggleBtnRef.current &&
-        !toggleBtnRef.current.contains(event.target as Node)
-      ) {
-        closeMenu();
+  useEffect(() => {
+    if (!open || !closeOnClickAway) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
+        toggleMenu();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [closeOnClickAway, open, closeMenu]);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open, closeOnClickAway, toggleMenu]);
 
-  // All provided colors become staggered pre-layers (max 4).
-  // The panel background is set independently via CSS or inline style on the aside.
-  const preColors =
-    colors && colors.length ? colors.slice(0, 4) : ["#1e1e22", "#35353c"];
-
+  // 4. Render
   return (
     <div
-      className={`sm-scope z-40 ${
-        isFixed
-          ? "fixed top-0 left-0 w-screen h-screen overflow-hidden pointer-events-none"
-          : "w-full h-full"
-      }`}
+      className={`sm-scope ${isFixed ? "fixed inset-0 z-100 pointer-events-none" : "relative w-full h-full"}`}
     >
       <div
-        className={
-          (className ? className + " " : "") +
-          "staggered-menu-wrapper pointer-events-auto relative w-full h-full z-40"
-        }
-        style={
-          accentColor
-            ? ({ ["--sm-accent" as any]: accentColor } as React.CSSProperties)
-            : undefined
-        }
-        data-position={position}
-        data-open={open || undefined}
+        className={`staggered-menu-wrapper relative w-full h-full ${open ? "pointer-events-auto" : "pointer-events-none"}`}
       >
-        {/* Pre-layers: decorative color panels that slide in before the main panel */}
+        {/* Pre-Layers */}
         <div
           ref={preLayersRef}
-          className="sm-prelayers absolute top-0 bottom-0 pointer-events-none z-5"
-          style={{ [position === "left" ? "left" : "right"]: 0 }}
-          aria-hidden="true"
+          className="absolute inset-y-0 w-full md:w-137.5 pointer-events-none z-101"
+          style={{ [position]: 0 }}
         >
-          {preColors.map((c, i) => (
+          {colors.map((c, i) => (
             <div
               key={i}
-              className="sm-prelayer absolute top-0 right-0 h-full w-full"
+              className="absolute inset-0 w-full h-full"
               style={{ background: c }}
             />
           ))}
         </div>
 
-        {/* Header: logo + toggle button — always visible */}
-        <header
-          className="staggered-menu-header"
-          aria-label="Main navigation header"
-        >
-          {/* Logo */}
-          <div className="sm-logo" aria-label="Logo">
-            {logoUrl ? (
-              <img
-                src={logoUrl}
-                alt="Logo"
-                className="sm-logo-img"
-                draggable={false}
-                width={110}
-                height={24}
-              />
-            ) : (
-              <span className="sm-logo-text">{logoText ?? "BRAND"}</span>
-            )}
+        <header className="absolute top-0 left-0 w-full flex justify-between items-center p-6 md:p-10 z-110">
+          <div className="font-black text-2xl tracking-tighter uppercase italic text-white mix-blend-difference">
+            {logoText || "HAIKAL"}
           </div>
-
-          {/* Toggle button — MUST always be rendered and visible */}
           <button
-            ref={toggleBtnRef}
-            className="sm-toggle"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            aria-controls="staggered-menu-panel"
             onClick={toggleMenu}
-            type="button"
+            className="group flex items-center gap-4 outline-none text-white cursor-pointer pointer-events-auto"
           >
-            {/* Animated text: cycles between "Menu" and "Close" */}
-            <span
-              ref={textWrapRef}
-              className="sm-toggle-textWrap"
-              aria-hidden="true"
-            >
-              <span ref={textInnerRef} className="sm-toggle-textInner">
+            <div className="h-5 overflow-hidden font-black uppercase text-xs tracking-widest text-right">
+              <div ref={textInnerRef} className="flex flex-col">
                 {textLines.map((l, i) => (
-                  <span className="sm-toggle-line" key={i}>
+                  <span key={i} className="h-5 flex items-center justify-end">
                     {l}
                   </span>
                 ))}
-              </span>
-            </span>
-
-            {/* Plus / X icon */}
-            <span ref={iconRef} className="sm-icon" aria-hidden="true">
-              <span ref={plusHRef} className="sm-icon-line sm-icon-h" />
-              <span ref={plusVRef} className="sm-icon-line sm-icon-v" />
-            </span>
+              </div>
+            </div>
+            <div className="relative w-6 h-6 flex items-center justify-center">
+              <span
+                ref={plusHRef}
+                className="absolute w-full h-0.5 bg-[#F25623]"
+              />
+              <span
+                ref={plusVRef}
+                className="absolute w-full h-0.5 bg-[#F25623]"
+              />
+            </div>
           </button>
         </header>
 
-        {/* Slide-in navigation panel */}
+        {/* Panel Menu */}
         <aside
-          id="staggered-menu-panel"
           ref={panelRef}
-          className="staggered-menu-panel"
-          aria-hidden={!open}
+          className="absolute inset-y-0 w-full md:w-137.5 bg-[#0A0A0A] z-102 flex flex-col pt-12 pb-12 px-8 md:px-16 border-l border-white/5 shadow-2xl overflow-y-auto"
+          style={{ [position]: 0 }}
         >
-          <div className="sm-panel-inner">
-            <ul
-              className="sm-panel-list"
-              role="list"
-              data-numbering={displayItemNumbering || undefined}
-            >
-              {items && items.length ? (
-                items.map((it, idx) => (
-                  <li className="sm-panel-itemWrap" key={it.label + idx}>
-                    <a
-                      className="sm-panel-item"
-                      href={it.link}
-                      aria-label={it.ariaLabel}
-                      data-index={idx + 1}
-                    >
-                      <span className="sm-panel-itemLabel">{it.label}</span>
-                    </a>
-                  </li>
-                ))
-              ) : (
-                <li className="sm-panel-itemWrap" aria-hidden="true">
-                  <span className="sm-panel-item">
-                    <span className="sm-panel-itemLabel">No items</span>
-                  </span>
-                </li>
-              )}
-            </ul>
+          <nav className="flex flex-col grow justify-center">
+            {items.map((it, idx) => (
+              <div key={idx} className="relative group w-full overflow-hidden">
+                <div className="absolute left-0 top-0 w-1 h-full bg-[#F25623] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-center ease-expo" />
+                <div className="sm-item-line absolute bottom-0 left-0 w-full h-px bg-white/10 origin-left scale-x-0" />
 
-            {displaySocials && socialItems && socialItems.length > 0 && (
-              <div className="sm-socials" aria-label="Social links">
-                <h3 className="sm-socials-title">Socials</h3>
-                <ul className="sm-socials-list" role="list">
-                  {socialItems.map((s, i) => (
-                    <li key={s.label + i} className="sm-socials-item">
-                      <a
-                        href={s.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="sm-socials-link"
-                      >
-                        {s.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <a
+                  href={it.link}
+                  className="flex items-center gap-6 py-6 md:py-8 no-underline group relative z-10 w-full transition-all duration-500 group-hover:pl-4"
+                >
+                  <span className="sm-item-num font-mono text-xs font-bold text-[#F25623] opacity-40 group-hover:opacity-100 transition-opacity">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <div className="overflow-hidden">
+                    <span className="sm-item-label block font-black text-5xl md:text-7xl leading-none lowercase tracking-tighter text-white transition-all duration-500 group-hover:text-[#F25623]">
+                      {it.label}
+                    </span>
+                  </div>
+                </a>
               </div>
-            )}
-          </div>
+            ))}
+          </nav>
+
+          {displaySocials && socialItems.length > 0 && (
+            <div className="mt-auto pt-10">
+              <h3 className="font-black uppercase tracking-[0.5em] text-[10px] text-[#F25623] mb-4">
+                Social
+              </h3>
+              <div className="flex flex-wrap gap-x-8 gap-y-2">
+                {socialItems.map((s, i) => (
+                  <a
+                    key={i}
+                    href={s.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-[11px] uppercase tracking-widest text-white hover:text-[#F25623] transition-colors"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </aside>
       </div>
 
-      <style>{`
-        /* ─── Scope reset ─── */
-        .sm-scope {
-          box-sizing: border-box;
+      <style jsx global>{`
+        .ease-expo {
+          transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
         }
-
-        /* ─── Wrapper ─── */
-        .sm-scope .staggered-menu-wrapper {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          z-index: 40;
-          pointer-events: none; /* children opt-in */
-        }
-
-        /* ─── Header: always on top, always visible ─── */
-        .sm-scope .staggered-menu-header {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 2em;
-          background: transparent;
-          pointer-events: auto; /* ← critical: header must receive clicks */
-          z-index: 50; /* above panel (z-10) and pre-layers (z-5) */
-          box-sizing: border-box;
-        }
-
-        /* ─── Logo ─── */
-        .sm-scope .sm-logo {
-          display: flex;
-          align-items: center;
-          user-select: none;
-          pointer-events: auto;
-        }
-        .sm-scope .sm-logo-img {
-          display: block;
-          height: 22px;
-          width: auto;
-          object-fit: contain;
-        }
-        .sm-scope .sm-logo-text {
-          font-size: 1rem;
-          font-weight: 900;
-          letter-spacing: 0.05em;
-          color: inherit;
-          text-transform: uppercase;
-        }
-
-        /* ─── Toggle button ─── */
-        .sm-scope .sm-toggle {
-          position: relative;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          font-size: 18px;
-          font-weight: 900;
-          line-height: 1;
-          text-transform: uppercase;
-          letter-spacing: 0.03em;
-          color: #fff; /* default; overridden by GSAP */
-          pointer-events: auto; /* ← critical */
-          z-index: 51;
-          padding: 0;
-          font-family: inherit;
-          -webkit-font-smoothing: antialiased;
-        }
-        .sm-scope .sm-toggle:focus-visible {
-          outline: 2px solid rgba(255,255,255,0.7);
-          outline-offset: 4px;
-          border-radius: 4px;
-        }
-
-        /* Text wrap — clips the cycling animation */
-        .sm-scope .sm-toggle-textWrap {
-          position: relative;
-          display: inline-block;
-          height: 1em;
-          overflow: hidden;
-          white-space: nowrap;
-        }
-        .sm-scope .sm-toggle-textInner {
-          display: flex;
-          flex-direction: column;
-          line-height: 1;
-        }
-        .sm-scope .sm-toggle-line {
-          display: block;
-          height: 1em;
-          line-height: 1;
-        }
-
-        /* Plus / X icon */
-        .sm-scope .sm-icon {
-          position: relative;
-          width: 16px;
-          height: 16px;
-          flex: 0 0 16px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          will-change: transform;
-        }
-        .sm-scope .sm-icon-line {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          width: 100%;
-          height: 2px;
-          background: currentColor;
-          border-radius: 2px;
-          transform: translate(-50%, -50%);
-          will-change: transform;
-        }
-        /* Vertical bar (rotated 90deg = vertical) */
-        .sm-scope .sm-icon-v {
-          /* GSAP controls rotation; base state is horizontal then rotated via useLayoutEffect */
-        }
-
-        /* ─── Pre-layers ─── */
-        .sm-scope .sm-prelayers {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          width: clamp(220px, 32vw, 420px);
-          pointer-events: none;
-          z-index: 5;
-        }
-        .sm-scope[data-position="left"] .sm-prelayers,
-        .sm-scope .staggered-menu-wrapper[data-position="left"] .sm-prelayers {
-          right: auto;
-          left: 0;
-        }
-        .sm-scope .sm-prelayer {
-          position: absolute;
-          top: 0;
-          right: 0;
-          height: 100%;
-          width: 100%;
-          box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
-        }
-
-        /* ─── Main panel ─── */
-        .sm-scope .staggered-menu-panel {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: clamp(240px, 34vw, 420px);
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          padding: 6em 2em 2em 2em;
-          overflow-y: auto;
-          z-index: 10;
-          box-sizing: border-box;
-          pointer-events: auto;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-        }
-        .sm-scope .staggered-menu-wrapper[data-position="left"] .staggered-menu-panel {
-          right: auto;
-          left: 0;
-        }
-
-        /* ─── Panel inner ─── */
-        .sm-scope .sm-panel-inner {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-        }
-
-        /* ─── Nav list ─── */
-        .sm-scope .sm-panel-list {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-        }
-        .sm-scope .sm-panel-itemWrap {
-          position: relative;
-          overflow: hidden;
-          line-height: 1;
-          border-radius: 999px;
-          padding: 0.3em 1.8em;
-          transition: background 0.2s ease;
-        }
-        .sm-scope .sm-panel-itemWrap:hover {
-          background: rgba(242, 86, 35, 0.8);
-        }
-        .sm-scope .sm-panel-item {
-          position: relative;
-          color: #121211;
-          font-weight: 900;
-          font-size: 4rem;
-          cursor: pointer;
-          line-height: 1.1;
-          letter-spacing: -3px;
-          text-transform: lowercase;
-          display: inline-block;
-          text-decoration: none;
-          padding-right: 1.4em;
-          transition: color 0.2s ease;
-        }
-
-        /* Remove text color change on hover — pill background handles the state */
-        .sm-scope .sm-panel-item:hover {
-          color: #121211;
-        }
-
-        .sm-scope .sm-panel-itemLabel {
-          display: inline-block;
-          will-change: transform;
-          transform-origin: 50% 100%;
-        }
-
-        /* Numbering via CSS counter */
-        .sm-scope .sm-panel-list[data-numbering] {
-          counter-reset: smItem;
-        }
-        .sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after {
-          counter-increment: smItem;
-          content: counter(smItem, decimal-leading-zero);
-          position: absolute;
-          top: 0.1em;
-          right: 0.2em;
-          font-size: 18px;
-          font-weight: 400;
-          color: var(--sm-accent, #ff0000);
-          letter-spacing: 0;
-          pointer-events: none;
-          user-select: none;
-          opacity: var(--sm-num-opacity, 0);
-        }
-
-        /* ─── Socials ─── */
-        .sm-scope .sm-socials {
-          margin-top: auto;
-          padding-top: 2rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-        .sm-scope .sm-socials-title {
-          margin: 0;
-          font-size: 1.2rem;
-          font-weight: 800;
-          color: var(--sm-accent, #ff0000);
-        }
-        .sm-scope .sm-socials-list {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-        .sm-scope .sm-socials-link {
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: #111;
-          text-decoration: none;
-          display: inline-block;
-          padding: 2px 0;
-          transition: color 0.25s ease, opacity 0.25s ease;
-          opacity: 1;
-        }
-        .sm-scope .sm-socials-link:hover {
-          color: var(--sm-accent, #ff0000);
-        }
-        .sm-scope .sm-socials-list:hover .sm-socials-link:not(:hover) {
-          opacity: 0.35;
-        }
-        .sm-scope .sm-socials-link:focus-visible {
-          outline: 2px solid var(--sm-accent, #ff0000);
-          outline-offset: 3px;
-        }
-
-        /* ─── Responsive ─── */
-        @media (max-width: 1024px) {
-          .sm-scope .staggered-menu-panel,
-          .sm-scope .sm-prelayers {
-            width: 100%;
-            left: 0;
-            right: 0;
-          }
-          .sm-scope .sm-panel-item {
-            font-size: 3rem;
-            letter-spacing: -2px;
-          }
-        }
-        @media (max-width: 640px) {
-          .sm-scope .staggered-menu-panel,
-          .sm-scope .sm-prelayers {
-            width: 100%;
-            left: 0;
-            right: 0;
-          }
-          .sm-scope .sm-panel-item {
-            font-size: 2.2rem;
-            letter-spacing: -1px;
-          }
-          .sm-scope .staggered-menu-header {
-            padding: 1.25em 1.5em;
-          }
+        aside::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </div>

@@ -3,6 +3,7 @@
 import SlideIn from "@/src/components/animation/SlideIn";
 import Typography from "@/src/components/ui/Typhography";
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // --- TYPES ---
 type Project = {
@@ -11,6 +12,7 @@ type Project = {
   description: string;
   tags: string[];
   category: "web" | "mobile" | "3D";
+  year: string;
 };
 
 type InfoData = {
@@ -21,7 +23,7 @@ type InfoData = {
   skills?: string[];
 };
 
-// --- DATA (Directly in file as requested) ---
+// --- DATA ---
 const PROJECTS_DATA: Project[] = [
   {
     id: "1",
@@ -30,6 +32,7 @@ const PROJECTS_DATA: Project[] = [
       "Personal portfolio with smooth animations and brutalist aesthetic.",
     tags: ["Next.js", "Framer Motion"],
     category: "web",
+    year: "2025",
   },
   {
     id: "2",
@@ -38,6 +41,7 @@ const PROJECTS_DATA: Project[] = [
       "Admin dashboard with clean UI and complex data visualization.",
     tags: ["React", "Tailwind"],
     category: "web",
+    year: "2024",
   },
   {
     id: "3",
@@ -46,6 +50,7 @@ const PROJECTS_DATA: Project[] = [
       "Mobile application for tracking daily workouts and nutrition.",
     tags: ["React Native", "Firebase"],
     category: "mobile",
+    year: "2024",
   },
 ];
 
@@ -55,20 +60,9 @@ const INFOS_DATA: InfoData[] = [
     title: "web & mobile apps",
     overlayText: "coding sampe mampus",
     descriptions: [
-      "I am a passionate Multimedia Engineering Technology student at Politeknik Negeri Batam, experienced in web development.",
-      "I combine technical skills in front-end and back-end development with a creative approach.",
+      "Multimedia Engineering student at Polibatam. Focus on scalable systems and sick UI.",
     ],
     skills: ["React", "Next.js", "TypeScript", "Node.js"],
-  },
-  {
-    id: "info-2",
-    title: "creative tech",
-    overlayText: "pixel perfect",
-    descriptions: [
-      "Experienced in building 3D interactive experiences and multimedia solutions.",
-      "Always pushing the boundaries of what's possible in the browser.",
-    ],
-    skills: ["Three.js", "Blender", "Unity", "C#"],
   },
 ];
 
@@ -82,7 +76,7 @@ const RedactedOverlay = ({
   className?: string;
 }) => (
   <Typography
-    className={`absolute font-redacted text-[#F25623] opacity-30 mix-blend-plus-lighter pointer-events-none tracking-normal whitespace-nowrap ${className}`}
+    className={`absolute font-redacted text-[#F25623] opacity-30 mix-blend-difference pointer-events-none tracking-normal whitespace-nowrap z-0 ${className}`}
   >
     {text}
   </Typography>
@@ -96,106 +90,63 @@ const ProjectCard = ({
   delay: number;
 }) => (
   <SlideIn delay={delay}>
-    <div className="bg-main-text text-main-bg rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] group">
-      <div className="aspect-video bg-black rounded-xl overflow-hidden mb-6 relative">
-        <div className="absolute inset-0 flex items-center justify-center text-main-text/5 font-black text-4xl italic group-hover:text-main-text/10 transition-all">
-          PREVIEW
+    <motion.div
+      whileHover={{ y: -10 }}
+      className="group relative bg-[#1a1a1a] border-2 border-main-text p-6 mb-8 transition-shadow hover:shadow-[12px_12px_0px_rgba(242,86,35,1)]"
+    >
+      <div className="absolute top-4 right-6 font-redacted text-main-text/20 text-xl italic pointer-events-none">
+        {project.year}
+      </div>
+
+      <div className="aspect-16/10 bg-main-text/5 border border-main-text/10 overflow-hidden mb-8 relative group-hover:border-[#F25623]/30 transition-colors">
+        <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
+          <Typography className="text-4xl font-black italic lowercase select-none tracking-tighter">
+            view_content
+          </Typography>
+        </div>
+        {/* Placeholder decorative lines */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
+          <div className="absolute top-1/2 left-0 w-full h-px bg-main-text" />
+          <div className="absolute top-0 left-1/2 w-px h-full bg-main-text" />
         </div>
       </div>
-      <div className="flex justify-between items-end">
-        <div className="flex-1">
+
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
+          <div className="h-6 w-1 bg-[#F25623]" />
           <Typography
             variant="h3"
-            className="font-poppins font-bold text-2xl tracking-tight lowercase mb-2"
+            className="text-3xl font-black lowercase tracking-tighter leading-none"
           >
-            {project.title}.
+            {project.title}
           </Typography>
-          <div className="flex gap-2 mb-3">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-[9px] font-black uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity"
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-          <p className="text-[12px] font-medium leading-relaxed opacity-80 line-clamp-2">
-            {project.description}
-          </p>
         </div>
-        <button className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center hover:bg-black hover:text-main-text transition-all shrink-0 ml-4">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3"
-          >
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </SlideIn>
-);
 
-const ProjectInfoCard = ({
-  info,
-  delay,
-  children,
-}: {
-  info: InfoData;
-  delay: number;
-  children?: React.ReactNode;
-}) => (
-  <SlideIn delay={delay}>
-    <div className="relative border-[3px] border-dashed border-main-text rounded-2xl p-8 flex flex-col justify-between group bg-main-bg/50 backdrop-blur-sm">
-      <div>
-        <div className="flex justify-between items-start mb-6">
-          <div className="relative">
-            <Typography
-              variant="h2"
-              className="font-poppins font-black text-3xl lowercase leading-none"
+        <div className="flex flex-wrap gap-x-4 gap-y-2">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-[10px] font-bold uppercase tracking-widest text-[#F25623]"
             >
-              {info.title}.
-            </Typography>
-            <RedactedOverlay
-              text={info.overlayText}
-              className="text-[28px] -top-2 left-0 opacity-20"
-            />
-          </div>
-          <div className="flex gap-1">
-            {[1, 2].map((i) => (
-              <div
-                key={i}
-                className="w-2 h-2 bg-main-text rounded-full opacity-20"
-              />
-            ))}
-          </div>
-        </div>
-        <div className="space-y-4">
-          {info.descriptions.map((desc, idx) => (
-            <p
-              key={idx}
-              className="text-[13px] opacity-70 leading-relaxed font-medium"
-            >
-              {desc}
-            </p>
+              [{tag}]
+            </span>
           ))}
         </div>
-        {children}
-      </div>
-      <button className="flex items-center gap-3 text-main-text group-hover:gap-5 transition-all duration-300 mt-10">
-        <span className="text-xs lowercase tracking-[0.2em] font-bold">
-          view details
-        </span>
-        <div className="w-8 h-8 rounded-full border border-main-text flex items-center justify-center text-[12px]">
-          →
+
+        <p className="text-sm font-medium opacity-60 leading-snug max-w-[90%]">
+          {project.description}
+        </p>
+
+        <div className="pt-4 flex justify-end">
+          <button className="flex items-center gap-2 group/btn font-black text-xs uppercase tracking-tighter">
+            Explore case study
+            <span className="w-8 h-8 rounded-full border border-main-text flex items-center justify-center group-hover/btn:bg-[#F25623] group-hover/btn:border-[#F25623] transition-colors">
+              ↗
+            </span>
+          </button>
         </div>
-      </button>
-    </div>
+      </div>
+    </motion.div>
   </SlideIn>
 );
 
@@ -210,94 +161,170 @@ export default function ProjectsPage() {
       : PROJECTS_DATA.filter((p) => p.category === filter);
 
   return (
-    <main className="min-h-screen py-24 bg-transparent text-main-text">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* BIG HEADER SECTION */}
-        <header className="relative mb-24 flex flex-col items-center">
+    <main className="min-h-screen pt-32 pb-24 bg-transparent text-main-text relative selection:bg-[#F25623]">
+      {/* Background Decor */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-5">
+        <div className="absolute top-[10%] left-[-5%] text-[30vw] font-black leading-none rotate-90">
+          WORKS
+        </div>
+        <div className="absolute bottom-[10%] right-[-5%] text-[30vw] font-black leading-none -rotate-90 italic">
+          2026
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6 relative z-10">
+        {/* HEADER */}
+        <header className="mb-32 relative">
           <SlideIn>
-            <div className="relative inline-block text-center">
-              <Typography
-                variant="h1"
-                className="font-poppins font-black text-[12vw] md:text-[8vw] leading-none lowercase relative z-10"
-              >
-                archive.
-              </Typography>
-              <RedactedOverlay
-                text="selected works"
-                className="text-[6vw] -top-10 left-1/2 -translate-x-1/2 opacity-10"
-              />
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+              <div className="relative">
+                <Typography
+                  variant="h1"
+                  className="text-[15vw] md:text-[10vw] font-black leading-[0.8] lowercase tracking-tighter"
+                >
+                  archi-
+                  <br />
+                  ve.
+                </Typography>
+                <RedactedOverlay
+                  text="personal_records"
+                  className="text-[4vw] -top-8 left-0 opacity-20"
+                />
+              </div>
+
+              <div className="flex flex-col items-end gap-6">
+                <div className="text-right max-w-50">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">
+                    filtering by system:{" "}
+                    <span className="text-[#F25623]">{filter}</span>
+                  </p>
+                </div>
+                {/* CUSTOM FILTER TABS */}
+                <div className="flex border-2 border-main-text p-1 bg-main-text/5 backdrop-blur-md">
+                  {["all", "web", "mobile", "3D"].map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setFilter(cat)}
+                      className={`px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-all ${
+                        filter === cat
+                          ? "bg-main-text text-main-bg scale-105"
+                          : "hover:text-[#F25623]"
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </SlideIn>
-
-          {/* CATEGORY FILTER */}
-          <div className="flex gap-8 mt-12 overflow-x-auto pb-4 w-full justify-center no-scrollbar">
-            {["all", "web", "mobile", "3D"].map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`text-[11px] font-black uppercase tracking-[0.3em] transition-all ${filter === cat ? "opacity-100 scale-110" : "opacity-30 hover:opacity-60"}`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
         </header>
 
-        {/* MAIN GRID SYSTEM */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-16 items-start">
-          {/* LEFT COLUMN: INFO LIST */}
-          <div className="flex flex-col gap-10 sticky top-32">
-            {INFOS_DATA.map((info, index) => (
-              <ProjectInfoCard key={info.id} info={info} delay={0.1 * index}>
-                {info.skills && (
-                  <div className="flex flex-wrap gap-2 mt-6">
-                    {info.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-2 py-1 border border-main-text/10 rounded text-[9px] font-bold opacity-50"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </ProjectInfoCard>
-            ))}
-          </div>
-
-          {/* CENTER DIVIDER */}
-          <div className="hidden md:block w-px self-stretch bg-linear-to-b from-transparent via-main-text/20 to-transparent relative min-h-125">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-main-text rounded-full shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
-          </div>
-
-          {/* RIGHT COLUMN: PROJECT LIST */}
-          <div className="flex flex-col gap-12">
-            {filteredProjects.length > 0 ? (
-              filteredProjects.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  delay={0.2 * index}
-                />
-              ))
-            ) : (
-              <div className="p-12 border-2 border-dashed border-main-text/10 rounded-3xl text-center">
-                <Typography className="opacity-30 italic">
-                  No projects found in this category bjir.
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          {/* LEFT: INFO STICKY */}
+          <aside className="lg:col-span-4 h-fit lg:sticky lg:top-40 order-2 lg:order-1">
+            <div className="space-y-12">
+              <div className="relative p-8 border-4 border-main-text bg-[#F25623] text-white -rotate-2">
+                <Typography className="text-xl font-black leading-tight italic lowercase">
+                  "archive ini isinya bukan cuma sampah kode, tapi keringet sama
+                  air mata pas debug jam 3 pagi bjir."
                 </Typography>
               </div>
-            )}
-          </div>
+
+              <div className="space-y-8 opacity-80">
+                {INFOS_DATA.map((info) => (
+                  <div key={info.id} className="group">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-8 h-0.5 bg-main-text" />
+                      <Typography className="text-sm font-black uppercase tracking-widest">
+                        {info.title}
+                      </Typography>
+                    </div>
+                    <p className="text-xs font-medium leading-relaxed uppercase mb-6 italic">
+                      {info.descriptions[0]}
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {info.skills?.map((s) => (
+                        <div
+                          key={s}
+                          className="border border-main-text/20 p-2 text-[9px] font-bold uppercase text-center group-hover:border-[#F25623] transition-colors"
+                        >
+                          {s}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-10 border-t border-main-text/10">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 rounded-full border border-main-text flex items-center justify-center animate-pulse">
+                    <div className="w-2 h-2 bg-[#F25623] rounded-full" />
+                  </div>
+                  <p className="text-[10px] font-bold uppercase tracking-tighter opacity-40 max-w-37.5">
+                    system active and ready for new deployment 2026.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          {/* RIGHT: PROJECTS SCROLL */}
+          <section className="lg:col-span-8 order-1 lg:order-2">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={filter}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-col"
+              >
+                {filteredProjects.length > 0 ? (
+                  filteredProjects.map((project, index) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      delay={index * 0.1}
+                    />
+                  ))
+                ) : (
+                  <div className="py-40 border-4 border-dashed border-main-text/10 text-center">
+                    <Typography className="font-redacted text-5xl opacity-10 mb-4">
+                      NOT FOUND
+                    </Typography>
+                    <Typography className="text-sm font-bold opacity-30 italic lowercase">
+                      catatan tidak ditemukan dalam database bjir.
+                    </Typography>
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </section>
         </div>
 
-        {/* FOOTER DECOR */}
-        <footer className="mt-32 pt-12 border-t border-main-text/10 flex justify-between items-center">
-          <Typography className="text-[10px] font-black uppercase tracking-widest opacity-30">
-            Selection Vol. 01
+        {/* FOOTER */}
+        <footer className="mt-40 py-10 border-t-2 border-main-text flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-4">
+            <div className="w-3 h-3 bg-[#F25623]" />
+            <Typography className="text-[10px] font-black uppercase tracking-[0.4em]">
+              Volume: Archive_001
+            </Typography>
+          </div>
+          <Typography className="text-[10px] font-black uppercase tracking-[0.4em] opacity-40 italic">
+            (c) 2026 - batam multimedia engineering
           </Typography>
-          <Typography className="text-[10px] font-black uppercase tracking-widest opacity-30">
-            Batam • 2026
-          </Typography>
+          <div className="flex gap-8">
+            {["TW", "IG", "GH"].map((s) => (
+              <span
+                key={s}
+                className="text-[10px] font-black hover:text-[#F25623] cursor-pointer transition-colors tracking-widest"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
         </footer>
       </div>
     </main>

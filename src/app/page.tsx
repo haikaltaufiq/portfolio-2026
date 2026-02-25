@@ -1,5 +1,6 @@
 // src/app/page.tsx
 
+import { motion } from "framer-motion";
 import ScrollSvg from "../components/animation/ScrollSvg";
 import Navbar from "../components/layouts/Navbar";
 import AboutSection from "../components/sections/about/AboutSection";
@@ -17,6 +18,7 @@ export default function HomePage() {
         <div className="relative z-10">
           <HeroSection />
           <AboutSection />
+
           <ProjectsSection />
           <ContactSection />
         </div>

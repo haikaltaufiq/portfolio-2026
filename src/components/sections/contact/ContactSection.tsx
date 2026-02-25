@@ -4,88 +4,154 @@ import ContactCard from "@/src/features/portfolio/components/ContactCardProps";
 import RedactedOverlay from "@/src/features/portfolio/components/RedactedOverlay";
 import SlideIn from "../../animation/SlideIn";
 import Typography from "../../ui/Typhography";
+import { motion } from "framer-motion";
 
 const SOCIALS = [
   {
     title: "LinkedIn",
     label: "Professional Network",
-    href: "https://linkedin.com/in/yourprofile",
+    href: "https://linkedin.com/in/haikal-taufiq",
   },
-  { title: "Email", label: "Direct Inquiry", href: "mailto:your@email.com" },
+  { title: "Email", label: "Direct Inquiry", href: "mailto:hello@haikal.dev" },
   {
     title: "GitHub",
     label: "Code Repositories",
-    href: "https://github.com/yourusername",
+    href: "https://github.com/haikaltfq",
   },
   {
     title: "Instagram",
     label: "Digital Playground",
-    href: "https://instagram.com/yourhandle",
+    href: "https://instagram.com/haikaltfq_",
   },
 ];
 
 export default function ContactSection() {
   return (
-    <section className="min-h-screen py-24 bg-transparent text-main-text overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
-          {/* LEFT: BIG ASS HEADER */}
-          <div className="md:col-span-5 relative">
+    <section className="relative min-h-screen py-32 bg-transparent text-main-text overflow-hidden selection:bg-[#F25623]">
+      <div className="absolute inset-0 pointer-events-none -z-10">
+        <Typography className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] font-black opacity-[0.02] whitespace-nowrap select-none">
+          REACH OUT
+        </Typography>
+        {/* Decorative Grid Lines */}
+        <div className="absolute top-0 left-1/4 w-px h-full bg-main-text/5 hidden md:block" />
+        <div className="absolute top-0 left-3/4 w-px h-full bg-main-text/5 hidden md:block" />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+          {/* LEFT: DRAMATIC HEADER */}
+          <div className="lg:col-span-5 relative">
             <SlideIn direction="up">
-              <div className="relative inline-block">
+              <div className="relative inline-block group">
+                {/* Visual Accent */}
+                <div className="absolute -left-6 top-0 w-2 h-full bg-[#F25623] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
+
                 <Typography
                   variant="h1"
-                  className="font-poppins font-black text-7xl md:text-8xl leading-[0.8] lowercase mb-6"
+                  className="font-poppins font-black text-8xl md:text-[140px] leading-[0.75] lowercase mb-8 tracking-tighter"
                 >
-                  let's <br /> talk.
+                  let's <br />
+                  <span className="text-[#F25623]">talk.</span>
                 </Typography>
+
                 <RedactedOverlay
-                  text="connect  "
-                  className="text-[80px] -top-10 -left-4 opacity-10"
+                  text="jirlahbr"
+                  className="text-[6vw] md:text-[100px] -top-8 -left-4 opacity-10 blur-[2px]"
                 />
               </div>
-              <p className="max-w-xs text-sm font-medium opacity-60 leading-relaxed mt-4">
-                Have a project in mind or just want to say hi? Feel free to
-                reach out through any of these platforms.
-              </p>
 
-              <div className="mt-12 hidden md:block">
-                <div className="w-24 h-0.5 bg-main-text" />
-                <Typography className="text-xs font-semibold uppercase tracking-[0.4em] mt-4">
-                  Available for freelance
-                </Typography>
+              <div className="space-y-8 mt-10">
+                <p className="max-w-sm text-lg font-bold leading-tight italic opacity-80">
+                  "Punya ide gila atau cuma mau bahas sistem yang scalable
+                  sambil ngopi? Gas langsung kontak gw bjir. I'm always online
+                  (mostly)."
+                </p>
+
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+                    <Typography className="text-[10px] font-black uppercase tracking-[0.4em]">
+                      System Status: Ready to Build
+                    </Typography>
+                  </div>
+                  <div className="w-24 h-1 bg-main-text" />
+                </div>
               </div>
             </SlideIn>
           </div>
 
-          {/* RIGHT: CONTACT GRID */}
-          <div className="md:col-span-7">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* RIGHT: CONTACT GRID SYSTEM */}
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full">
               {SOCIALS.map((social, index) => (
-                <SlideIn key={social.title} delay={index * 0.1}>
-                  <ContactCard
-                    title={social.title}
-                    label={social.label}
-                    href={social.href}
-                    index={index}
-                  />
-                </SlideIn>
+                <ContactCard
+                  key={social.title}
+                  title={social.title}
+                  label={social.label}
+                  href={social.href}
+                  index={index}
+                />
               ))}
             </div>
 
-            {/* FOOTER-ISH ELEMENT inside grid */}
+            {/* INTERACTIVE FOOTER BLOCK */}
             <SlideIn delay={0.5}>
-              <div className="mt-8 p-8 border-[3px] border-dashed border-main-text/20 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4">
-                <Typography className="text-xs font-bold opacity-40 uppercase tracking-widest">
-                  Based in Batam, Indonesia
-                </Typography>
-                <Typography className="text-xs font-semibold opacity-40 uppercase tracking-widest">
-                  © 2026 Haikal Taufiq
-                </Typography>
+              <div className="mt-12 group relative p-10 border-2 border-main-text/10 bg-main-text/5 hover:border-[#F25623]/30 transition-all duration-500 overflow-hidden">
+                {/* Glitch Overlay Effect on Hover */}
+                <div className="absolute inset-0 bg-[#F25623]/5 translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
+
+                <div className="relative z-10 flex flex-col md:flex-row justify-between items-end md:items-center gap-8">
+                  <div className="space-y-2">
+                    <Typography className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#F25623]">
+                      current location
+                    </Typography>
+                    <Typography className="text-2xl font-black lowercase tracking-tighter">
+                      Batam, Indonesia.
+                    </Typography>
+                  </div>
+
+                  <div className="text-right space-y-2">
+                    <Typography className="text-[10px] font-black uppercase tracking-[0.2em] opacity-40">
+                      Local Time
+                    </Typography>
+                    <Typography className="text-xl font-mono font-bold">
+                      {new Date().getHours().toString().padStart(2, "0")}:
+                      {new Date().getMinutes().toString().padStart(2, "0")}{" "}
+                      GMT+7
+                    </Typography>
+                  </div>
+                </div>
+
+                <div className="mt-10 pt-6 border-t border-main-text/10 flex justify-between items-center relative z-10">
+                  <Typography className="text-[9px] font-semibold uppercase tracking-[0.4em] opacity-30">
+                    © 2026 HAIKAL TAUFIQ — ALL RIGHTS RESERVED
+                  </Typography>
+                  <div className="flex gap-2">
+                    <div className="w-1.5 h-1.5 bg-[#F25623] rounded-full" />
+                    <div className="w-1.5 h-1.5 bg-main-text/20 rounded-full" />
+                    <div className="w-1.5 h-1.5 bg-main-text/20 rounded-full" />
+                  </div>
+                </div>
               </div>
             </SlideIn>
           </div>
         </div>
+      </div>
+
+      {/* Side Marquee for that "Industrial" feel */}
+      <div className="absolute bottom-10 left-0 w-full overflow-hidden opacity-5 pointer-events-none hidden md:block">
+        <motion.div
+          animate={{ x: [0, -1000] }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="flex gap-20 whitespace-nowrap text-[12vw] font-black lowercase leading-none"
+        >
+          <span>
+            available for new opportunities • let's build the future •{" "}
+          </span>
+          <span>
+            available for new opportunities • let's build the future •{" "}
+          </span>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,11 +1,18 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+import { motion } from "framer-motion";
 import SlideIn from "@/src/components/animation/SlideIn";
 import Typography from "@/src/components/ui/Typhography";
-import React from "react";
 
-// --- SUB-COMPONENTS (Modular internal to this file) ---
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+import lineAnim from "@/src/lotties/men-white.json";
 
+/**
+ * REDACTED OVERLAY COMPONENT
+ * Consistent with established industrial theme.
+ */
 const RedactedOverlay = ({
   text,
   className = "",
@@ -14,48 +21,77 @@ const RedactedOverlay = ({
   className?: string;
 }) => (
   <Typography
-    className={`absolute font-redacted text-[#F25623] opacity-30 mix-blend-plus-lighter pointer-events-none tracking-normal whitespace-nowrap ${className}`}
+    className={`absolute font-redacted text-[#F25623] opacity-30 mix-blend-difference pointer-events-none tracking-normal whitespace-nowrap z-0 ${className}`}
   >
     {text}
   </Typography>
 );
 
-const SkillBadge = ({ text }: { text: string }) => (
-  <span className="px-4 py-2 border-2 border-main-text font-black text-[12px] lowercase tracking-tighter hover:bg-main-text hover:text-main-bg transition-colors duration-300">
-    {text}
-  </span>
-);
-
-const ExperienceCard = ({
+/**
+ * EXPERIENCE CARD COMPONENT
+ * Refined for scannability and technical aesthetics.
+ */ const ExperienceCard = ({
   year,
   role,
   company,
+  desc,
 }: {
   year: string;
   role: string;
   company: string;
+  desc: string;
 }) => (
-  <div className="flex justify-between items-center border-b-[3px] border-main-text/10 py-6 group hover:border-main-text transition-colors">
-    <div className="flex flex-col">
-      <Typography
-        variant="h3"
-        className="text-xl font-black lowercase leading-none"
-      >
-        {role}
-      </Typography>
-      <Typography className="text-xs opacity-50 font-bold uppercase tracking-widest mt-1">
-        {company}
-      </Typography>
+  <div className="group relative border-b-2 border-main-text/10 py-8 transition-all duration-500 hover:bg-main-text/3 px-6 overflow-hidden">
+    {/* Animated Orange Line Indicator */}
+    <div className="absolute left-0 top-0 w-1 h-full bg-[#F25623] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
+
+    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+      <div className="flex-1">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-[10px] font-mono font-black text-[#F25623]">
+            [{year}]
+          </span>
+          <div className="h-px w-8 bg-[#F25623]/30 group-hover:w-12 group-hover:bg-[#F25623] transition-all duration-500" />
+          <Typography className="text-[10px] font-mono font-bold opacity-40 group-hover:opacity-100 group-hover:text-main-text uppercase tracking-widest transition-all">
+            {company}
+          </Typography>
+        </div>
+
+        <Typography
+          variant="h3"
+          className="text-2xl md:text-3xl font-black lowercase leading-none tracking-tighter group-hover:translate-x-2 transition-transform duration-300"
+        >
+          <span className="group-hover:text-[#F25623] transition-colors whitespace-nowrap">
+            {role}.
+          </span>
+        </Typography>
+      </div>
+
+      <p className="text-[11px] font-mono leading-relaxed opacity-60 max-w-sm md:text-right italic group-hover:opacity-100 transition-opacity">
+        // {desc}
+      </p>
     </div>
-    <Typography className="font-redacted text-2xl opacity-20 group-hover:opacity-100 transition-opacity">
-      {year}
-    </Typography>
+
+    <RedactedOverlay
+      text="classifiedrecord"
+      className="text-[40px] top-8 -left-4 opacity-5 group-hover:opacity-10 transition-opacity"
+    />
   </div>
 );
 
-// --- MAIN PAGE COMPONENT ---
-
+/**
+ * MAIN ABOUT PAGE
+ * Reconstructed to match the learned "Haikal Taufiq" identity and industrial layout.
+ */
 export default function AboutPage() {
+  const lottieRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (lottieRef.current) {
+      lottieRef.current.setSpeed(0.5);
+    }
+  }, []);
+
   const skills = [
     "React",
     "Next.js",
@@ -65,157 +101,219 @@ export default function AboutPage() {
     "Tailwind",
     "Three.js",
     "PostgreSQL",
+    "Go",
+    "Docker",
+    "Figma",
+    "Shadcn UI",
   ];
 
   return (
-    <main className="min-h-screen bg-transparent text-main-text pt-32 pb-24 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* HERO SECTION: THE STACKED HEADER */}
-        <section className="relative mb-32">
-          <SlideIn direction="up">
-            <div className="relative">
-              <Typography
-                variant="h1"
-                className="font-poppins font-black text-[12vw] md:text-[10vw] leading-[0.75] lowercase tracking-tighter"
-              >
-                about <br />
-                <span>me.</span>
-              </Typography>
-              <RedactedOverlay
-                text="multimedia "
-                className="text-[6vw] top-1/2 -translate-y-1/2 left-[20vw] opacity-15"
-              />
-            </div>
-          </SlideIn>
+    <main className="min-h-screen bg-transparent text-main-text pt-32 pb-24 overflow-hidden selection:bg-[#F25623] selection:text-white relative">
+      {/* 1. BACKGROUND DECORATION SYSTEM */}
+      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+        {/* Blueprint Grid Dots */}
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, currentColor 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+        {/* Vertical Technical Guidelines */}
+        <div className="absolute top-0 left-6 w-px h-full bg-main-text/5 hidden md:block" />
+        <div className="absolute top-0 right-6 w-px h-full bg-main-text/5 hidden md:block" />
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mt-20">
-            <div className="md:col-span-5 flex flex-col gap-8">
-              <SlideIn delay={0.2}>
-                <div className="p-8 border-4 border-main-text rounded-3xl bg-main-text text-main-bg transform -rotate-2">
-                  <Typography className="text-lg font-bold leading-tight">
-                    "I build things that work, then I make them look like
-                    they’re from the future but coded in 1995."
+        {/* Large Background Title */}
+        <Typography className="absolute top-10 -right-20 text-[18vw] font-black opacity-[0.02] whitespace-nowrap select-none leading-none tracking-tighter italic">
+          BIOGRAPHY_EXT
+        </Typography>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6 relative z-10">
+        {/* 2. HERO SECTION: Industrial Identity */}
+        <section className="relative mb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+            <div className="lg:col-span-8">
+              <div className="absolute italic -top-15 left-75 text-[15vw] font-black opacity-[0.02] select-none tracking-tight leading-tight pointer-events-none -rotate-2">
+                ABOUT ME
+              </div>
+              <SlideIn direction="up">
+                <div className="relative inline-block mb-4">
+                  <Typography
+                    variant="h1"
+                    className="font-black text-[14vw] md:text-[10vw] leading-[0.8] lowercase tracking-tighter"
+                  >
+                    haikal <br />
+                    <span className="text-[#F25623]">.interface</span>
+                  </Typography>
+                  <RedactedOverlay
+                    text="haikal taufiq"
+                    className="text-[10vw] -top-10 left-0 opacity-10"
+                  />
+                </div>
+                <div className="max-w-xl mt-12">
+                  <Typography className="text-xl md:text-2xl font-poppins font-bold leading-tight lowercase border-l-4 border-[#F25623] pl-6 py-2">
+                    "Multimedia Engineering student at Politeknik Negeri Batam.
+                    I don't just write code; I architect digital experiences
+                    that blur the line between utility and art."
                   </Typography>
                 </div>
               </SlideIn>
-
-              <SlideIn delay={0.4}>
-                <div className="space-y-6 opacity-80 font-medium leading-relaxed">
-                  <p>
-                    I am a passionate Multimedia Engineering Technology student
-                    at Politeknik Negeri Batam. I don't just write code; I craft
-                    digital experiences that balance raw aesthetics with
-                    high-performance engineering.
-                  </p>
-                  <p>
-                    Focused on modern web technologies and mobile applications,
-                    I spend most of my time debugging things that worked 5
-                    minutes ago and exploring the boundaries of UI/UX in a
-                    brutalist context.
-                  </p>
-                </div>
-              </SlideIn>
             </div>
 
-            <div className="md:col-span-7">
-              <SlideIn delay={0.3}>
-                <div className="relative aspect-square md:aspect-auto md:h-125 bg-main-text/5 rounded-3xl overflow-hidden group">
-                  {/* Placeholder for Profile Image */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Typography className="font-redacted text-[15vw] opacity-5 select-none">
-                      BIO DATA
+            <div className="lg:col-span-4 w-full">
+              {/* SYSTEM STATUS DASHBOARD */}
+              <div className="relative group">
+                <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[#F25623] z-20" />
+                <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-[#F25623] z-20" />
+
+                <div className="bg-main-text text-main-bg p-6 rounded-sm relative overflow-hidden">
+                  <div className="flex justify-between items-center mb-6 border-b border-main-bg/10 pb-2">
+                    <div className="flex gap-1.5">
+                      {[...Array(3)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="w-2 h-2 rounded-full bg-main-bg/20"
+                        />
+                      ))}
+                    </div>
+                    <Typography className="text-[9px] font-mono font-black uppercase tracking-widest opacity-40">
+                      Identity_Card_v1.0
                     </Typography>
                   </div>
-                  {/* Decorative Elements */}
-                  <div className="absolute top-8 left-8 p-4 border-2 border-main-text rotate-12 group-hover:rotate-0 transition-transform">
-                    <Typography className="text-[10px] font-black uppercase tracking-widest">
-                      Available for Hire
-                    </Typography>
+
+                  {/* Lottie Container */}
+                  <div className="aspect-video w-full bg-[#0d0d0d] rounded-sm mb-6 overflow-hidden flex items-center justify-center relative">
+                    <Lottie
+                      lottieRef={lottieRef}
+                      animationData={lineAnim}
+                      loop={true}
+                      autoplay
+                      className="w-full h-full scale-125 opacity-80"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#F25623]/10 to-transparent h-1/2 w-full animate-pulse" />
+                  </div>
+
+                  <div className="space-y-2 font-mono text-[10px] uppercase tracking-wider">
+                    <div className="flex justify-between">
+                      <span className="opacity-50">Status:</span>
+                      <span className="text-[#F25623] animate-pulse">
+                        ● Active_Unit
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="opacity-50">Sector:</span>
+                      <span>Tech_Dev</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="opacity-50">Loc:</span>
+                      <span>BTM_ID_2026</span>
+                    </div>
                   </div>
                 </div>
-              </SlideIn>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* SKILLS & STACK: MARQUEE STYLE VIBE */}
-        <section className="mb-32">
-          <SlideIn>
-            <div className="flex flex-col gap-12">
-              <div className="flex items-center gap-6">
-                <div className="h-0.5 flex-1 bg-main-text/20"></div>
-                <Typography
-                  variant="h2"
-                  className="text-4xl font-black lowercase italic"
-                >
-                  tech stack.
-                </Typography>
-              </div>
-              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                {skills.map((skill) => (
-                  <SkillBadge key={skill} text={skill} />
-                ))}
-              </div>
-            </div>
-          </SlideIn>
+        {/* 3. ARSENAL: Grid System */}
+        <section className="mb-40">
+          <div className="flex items-center gap-4 mb-12">
+            <Typography
+              variant="h2"
+              className="text-4xl font-black lowercase tracking-tighter"
+            >
+              arsenal.
+            </Typography>
+            <div className="h-px flex-1 bg-main-text/10" />
+            <Typography className="text-[10px] font-mono opacity-30">
+              TECH_STACK_v2
+            </Typography>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 border-t-2 border-l-2 border-main-text">
+            {skills.map((skill) => (
+              <motion.div
+                key={skill}
+                whileHover={{ backgroundColor: "#F25623", color: "#fff" }}
+                className="p-8 border-r-2 border-b-2 border-main-text flex flex-col gap-4 group transition-colors duration-300"
+              >
+                <span className="font-mono font-black text-xs uppercase tracking-widest">
+                  {skill}
+                </span>
+                <div className="w-4 h-0.5 bg-current opacity-20" />
+              </motion.div>
+            ))}
+          </div>
         </section>
 
-        {/* EXPERIENCE SECTION */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-20">
-          <div>
-            <SlideIn direction="up">
+        {/* 4. TRACK RECORD & PHILOSOPHY */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 relative">
+          <div className="absolute -top-24 -left-10 text-[17vw] font-black opacity-[0.02] select-none pointer-events-none -rotate-2">
+            HISTORY
+          </div>
+          <div className="lg:col-span-8">
+            <div className="flex items-center gap-4 mb-10">
               <Typography
                 variant="h2"
-                className="text-5xl font-black lowercase mb-12"
+                className="text-4xl font-black lowercase tracking-tighter"
               >
-                experience.
+                track record.
               </Typography>
-              <div className="flex flex-col">
-                <ExperienceCard
-                  year="2024 - Present"
-                  role="Frontend Developer"
-                  company="Freelance Projects"
-                />
-                <ExperienceCard
-                  year="2023 - 2024"
-                  role="Lab Assistant"
-                  company="Politeknik Negeri Batam"
-                />
-                <ExperienceCard
-                  year="2022"
-                  role="Junior Web Dev"
-                  company="Startup Inc."
-                />
-              </div>
-            </SlideIn>
-          </div>
+              <div className="h-0.5 w-12 bg-[#F25623]" />
+            </div>
 
-          <div className="flex flex-col justify-end gap-12">
-            <SlideIn delay={0.2}>
-              <div className="p-10 border-2 border-dashed border-main-text/30 rounded-3xl">
-                <Typography
-                  variant="h3"
-                  className="text-2xl font-black lowercase mb-4"
-                >
-                  mission.
-                </Typography>
-                <p className="text-sm opacity-70 font-medium italic">
-                  "Creating a bridge between technical complexity and artistic
-                  expression. If it doesn't challenge the status quo, it's not
-                  worth building."
-                </p>
-              </div>
-            </SlideIn>
-
-            {/* Dynamic Circle Decor */}
-            <div className="flex justify-center md:justify-end">
-              <div className="w-32 h-32 rounded-full border-4 border-main-text flex items-center justify-center animate-spin-slow">
-                <span className="text-[10px] font-black uppercase tracking-tight text-center">
-                  Batam • 2026 • Batam • 2026
-                </span>
-              </div>
+            <div className="space-y-2">
+              <ExperienceCard
+                year="2024 - 2026"
+                role="Lead Frontend Architect"
+                company="Independent Studio"
+                desc="Deploying high-performance web systems with focus on motion design."
+              />
+              <ExperienceCard
+                year="2023 - 2024"
+                role="Research Intern"
+                company="Polibatam Tech"
+                desc="Optimizing multimedia processing pipelines for web-based tools."
+              />
+              <ExperienceCard
+                year="2022 - 2023"
+                role="Creative Developer"
+                company="Digital Lab"
+                desc="Experimental UI development using Three.js and WebGL."
+              />
             </div>
           </div>
+
+          <aside className="lg:col-span-4">
+            <div className="sticky top-32 space-y-8">
+              {/* Technical Indicator */}
+              <div className="border-2 border-dashed border-main-text/20 p-8 flex flex-col items-center group hover:border-[#F25623]/40 transition-colors">
+                <div className="w-full flex justify-between text-[8px] font-mono mb-4 opacity-50">
+                  <span>CPU_LOAD: 12%</span>
+                  <span>TEMP: OPTIMAL</span>
+                </div>
+                <div className="w-full h-12 bg-main-text/5 relative overflow-hidden">
+                  <motion.div
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="absolute inset-0 w-32 bg-[#F25623]/10 skew-x-12"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-[90%] h-px bg-main-text/10" />
+                  </div>
+                </div>
+                <Typography className="mt-6 text-[10px] font-mono font-bold tracking-[0.5em] opacity-30 group-hover:opacity-100 transition-opacity">
+                  SYSTEM_ACTIVE
+                </Typography>
+              </div>
+            </div>
+          </aside>
         </section>
       </div>
     </main>
