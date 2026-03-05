@@ -14,9 +14,12 @@ export default function Navbar() {
   ];
 
   const socialItems = [
-    { label: "github", link: "https://github.com/haikaltaufiq" },
-    { label: "linkedin", link: "https://linkedin.com" },
-    { label: "instagram", link: "https://instagram.com" },
+    { label: "github", link: "https://github.com/HaikalTaufiq" },
+    {
+      label: "linkedin",
+      link: "https://www.linkedin.com/in/m-taufiq-karim-haikal-3050b1284",
+    },
+    { label: "instagram", link: "https://instagram.com/haikal.taufiq" },
     { label: "email", link: "mailto:haikaltaufiq4@gmail.com" },
   ];
 

@@ -56,7 +56,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.gif')] z-50" />
 
         {/* Floating System Coordinates */}
-        <div className="absolute top-10 left-10 flex flex-col gap-1 opacity-20">
+        <div className="absolute -top-5 left-10 flex flex-col gap-1 opacity-20">
           <Typography className="text-[10px] font-mono font-black">
             LAT: 1.1301° N
           </Typography>
@@ -69,7 +69,7 @@ export default function HeroSection() {
         </div>
 
         {/* Big Background Text Artifact */}
-        <Typography className="absolute -bottom-10 -right-20 text-[25vw] font-black opacity-[0.02] select-none leading-none z-0 rotate-12">
+        <Typography className="absolute bottom-10  -right-10 text-[25vw] font-black opacity-[0.02] select-none leading-none z-0 rotate-12">
           2026
         </Typography>
       </div>
@@ -133,13 +133,13 @@ export default function HeroSection() {
 
               <div className="flex justify-center">
                 <SlideIn delay={0.8}>
-                  <RedactedLayer text="Mobile App Developer" />
+                  <RedactedLayer text="Web & Mobile Developer" />
                 </SlideIn>
               </div>
 
               <div className="flex justify-center md:justify-end">
                 <SlideIn delay={1.0}>
-                  <RedactedLayer text="Multimedia Engineer" />
+                  <RedactedLayer text="Multimedia Enthusias" />
                 </SlideIn>
               </div>
             </div>
@@ -150,10 +150,12 @@ export default function HeroSection() {
       </Container>
 
       {/* Side Marquee - Urakan touch */}
-      <div className="absolute right-0 top-1/2 -rotate-90 origin-right translate-y-1/2 opacity-5 pointer-events-none hidden lg:block">
-        <Typography className="text-8xl font-black lowercase tracking-tighter">
-          multimedia.technology.engineering.multimedia.technology.engineering.
-        </Typography>
+      <div className="absolute right-16 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-5 pointer-events-none lg:block z-0">
+        <div className="-rotate-90 origin-center translate-x-1/2">
+          <Typography className="text-9xl font-black lowercase tracking-tighter whitespace-nowrap">
+            haikal.taufiq
+          </Typography>
+        </div>
       </div>
     </section>
   );

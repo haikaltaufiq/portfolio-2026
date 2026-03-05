@@ -18,11 +18,9 @@ export default function ContactCard({
   href,
   index,
 }: ContactCardProps) {
-  // 1. Pake state biar token cuma muncul di client
   const [token, setToken] = useState<string>("");
 
   useEffect(() => {
-    // Generate token pas komponen udah mount di browser
     setToken(Math.random().toString(36).substring(7).toUpperCase());
   }, []);
 
@@ -36,11 +34,7 @@ export default function ContactCard({
         initial="initial"
         className="group relative block w-full bg-main-text text-main-bg p-4 md:p-8 min-h-60 overflow-hidden border-2 border-transparent hover:border-[#F25623] transition-colors duration-300"
       >
-        {/* ... (konten lainnya sama) ... */}
-
         <div className="relative z-10 h-full flex flex-col items-stretch">
-          {/* Header, Filler, Bottom Section sama kayak kode lu sebelumnya */}
-          {/* ... */}
           <div className="flex justify-between items-start w-full">
             <div className="flex-1">
               <span className="text-[10px] font-mono font-black opacity-30 group-hover:text-[#F25623] group-hover:opacity-100 transition-colors block mb-2">
@@ -53,7 +47,6 @@ export default function ContactCard({
                 {title}.
               </Typography>
             </div>
-            {/* Circle Arrow */}
             <div className="shrink-0 ml-4 pt-1">
               <div className="w-14 h-14 border-2 border-main-bg rounded-full flex items-center justify-center group-hover:rotate-45 group-hover:bg-[#F25623] group-hover:border-[#F25623] transition-all duration-500 bg-transparent">
                 <svg

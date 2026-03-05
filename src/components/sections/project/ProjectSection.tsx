@@ -25,7 +25,7 @@ export default function ProjectsSection() {
             <div className="flex items-center gap-6 mb-4">
               <span className="h-0.5 w-12 bg-[#F25623]" />
               <Typography className="text-[10px] font-semibold uppercase tracking-[0.8em] opacity-40">
-                deployment registry 2026
+                prototype archive 2026
               </Typography>
             </div>
             <div className="relative inline-block">
@@ -54,41 +54,49 @@ export default function ProjectsSection() {
               <div className="h-px flex-1 bg-main-text/10" />
             </div>
 
-            {infoList.map((info, index) => (
-              <div key={info.id} className="relative group">
-                <ProjectInfoCard
-                  title={info.title}
-                  overlayText={info.overlayText}
-                  descriptions={info.descriptions}
-                  delay={0.1 * index}
-                >
-                  {info.skills && (
-                    <div className="flex flex-wrap gap-2 mt-6">
-                      {info.skills.map((skill) => (
-                        <motion.span
-                          key={skill}
-                          whileHover={{
-                            scale: 1.05,
-                            backgroundColor: "#F25623",
-                            color: "#fff",
-                            borderColor: "#F25623",
-                          }}
-                          className="px-3 py-1 border border-main-text/20 rounded-full text-[9px] font-black uppercase tracking-wider opacity-60 hover:opacity-100 transition-all cursor-default"
-                        >
-                          {skill}
-                        </motion.span>
-                      ))}
-                    </div>
-                  )}
-                </ProjectInfoCard>
-              </div>
-            ))}
+            {infoList.map((info, index) => {
+              const matchedProject = projects.find(
+                (project) => project.title === info.title,
+              );
+
+              return (
+                <div key={info.id} className="relative group">
+                  <ProjectInfoCard
+                    title={info.title}
+                    overlayText={info.overlayText}
+                    descriptions={info.descriptions}
+                    delay={0.1 * index}
+                    link={info.link ?? matchedProject?.slug}
+                  >
+                    {info.skills && (
+                      <div className="flex flex-wrap gap-2 mt-6">
+                        {info.skills.map((skill) => (
+                          <motion.span
+                            key={skill}
+                            whileHover={{
+                              scale: 1.05,
+                              backgroundColor: "#F25623",
+                              color: "#fff",
+                              borderColor: "#F25623",
+                            }}
+                            className="px-3 py-1 border border-main-text/20 rounded-full text-[9px] font-black uppercase tracking-wider opacity-60 hover:opacity-100 transition-all cursor-default"
+                          >
+                            {skill}
+                          </motion.span>
+                        ))}
+                      </div>
+                    )}
+                  </ProjectInfoCard>
+                </div>
+              );
+            })}
 
             {/* Status Artifact */}
             <div className="p-6 border-l-2 border-[#F25623] bg-main-text/5 hidden md:block">
-              <Typography className="text-[11px] font-bold leading-relaxed opacity-40 italic">
-                "Every project is a deep dive into problem solving and system
-                efficiency. No cookie-cutter solutions allowed here bjir."
+              <Typography className="text-[11px] font-semibold leading-relaxed opacity-40 italic">
+                &quot;Every project is a deep dive into problem-solving and
+                system efficiency. Custom-built logic forged through technical
+                precision.&quot;
               </Typography>
             </div>
           </div>
@@ -113,8 +121,8 @@ export default function ProjectsSection() {
           <div className="flex flex-col gap-16">
             <div className="flex items-center gap-4 mb-2">
               <div className="h-px flex-1 bg-main-text/10" />
-              <Typography className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F25623]">
-                active deployments
+              <Typography className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#F25623]">
+                development logs
               </Typography>
             </div>
 
@@ -127,6 +135,8 @@ export default function ProjectsSection() {
                 <ProjectCard
                   title={project.title}
                   description={project.description}
+                  slug={project.slug}
+                  image={project.image}
                   delay={0.1 * index}
                   index={index}
                 />
@@ -134,14 +144,16 @@ export default function ProjectsSection() {
             ))}
 
             {/* Bottom Call to Action Decor */}
-            <div className="mt-10 p-10 border-2 border-dashed border-main-text/10 flex flex-col items-center justify-center gap-4 text-center group hover:border-[#F25623]/30 transition-colors">
-              <Typography className="text-xs font-black uppercase tracking-[0.3em] opacity-40">
-                End of Registry
-              </Typography>
-              <div className="text-2xl font-black lowercase opacity-20 group-hover:opacity-100 group-hover:text-[#F25623] transition-all cursor-help">
-                Want to see more hidden gems?
+            <a href="/project">
+              <div className="mt-10 p-10 border-2 border-dashed border-main-text/10 flex flex-col items-center justify-center gap-4 text-center group hover:border-[#F25623]/30 transition-colors">
+                <Typography className="text-xs font-black uppercase tracking-[0.3em] opacity-40">
+                  End of Registry
+                </Typography>
+                <div className="text-2xl font-black lowercase opacity-20 group-hover:opacity-100 group-hover:text-[#F25623] transition-all cursor-help">
+                  Want to see more hidden gems?
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>

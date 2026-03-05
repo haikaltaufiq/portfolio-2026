@@ -28,8 +28,8 @@ const redactedScript = RedactedFont({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal portfolio",
+  title: "Haikal Taufiq",
+  description: "Haikal's portfolio",
 };
 
 export default function RootLayout({

@@ -203,9 +203,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         </div>
 
         <header className="absolute top-0 left-0 w-full flex justify-between items-center p-6 md:p-10 z-110">
-          <div className="font-black text-2xl tracking-tighter uppercase italic text-white mix-blend-difference">
-            {logoText || "HAIKAL"}
-          </div>
+          <div className="font-black text-sm tracking-tighter uppercase  text-white mix-blend-difference"></div>
           <button
             onClick={toggleMenu}
             className="group flex items-center gap-4 outline-none text-white cursor-pointer pointer-events-auto"
@@ -263,7 +261,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
           {displaySocials && socialItems.length > 0 && (
             <div className="mt-auto pt-10">
-              <h3 className="font-black uppercase tracking-[0.5em] text-[10px] text-[#F25623] mb-4">
+              <h3 className="font-bold uppercase tracking-[0.5em] text-[10px] text-[#F25623] mb-4">
                 Social
               </h3>
               <div className="flex flex-wrap gap-x-8 gap-y-2">

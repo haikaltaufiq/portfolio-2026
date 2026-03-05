@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import SlideIn from "@/src/components/animation/SlideIn";
 import Typography from "@/src/components/ui/Typhography";
-import { ReactNode } from "react";
+import Image from "next/image";
 
 interface ProjectCardProps {
   title: string;
   description: string;
+  slug: string;
+  image?: string;
   delay?: number;
   index: number;
 }
@@ -15,89 +17,99 @@ interface ProjectCardProps {
 export default function ProjectCard({
   title,
   description,
+  slug,
+  image,
   delay = 0.3,
   index,
 }: ProjectCardProps) {
   return (
     <SlideIn delay={delay} direction="up">
-      <motion.div
-        whileHover="hover"
-        initial="initial"
-        className="group relative bg-main-text text-main-bg p-6 md:p-8 overflow-hidden border-2 border-transparent hover:border-[#F25623] transition-colors duration-300"
-      >
-        {/* BG DECORATION: Glitch Text (Selaras sama ContactCard) */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-10 transition-opacity duration-500 overflow-hidden pointer-events-none select-none z-0">
-          <span className="text-[10rem] font-black italic uppercase tracking-tighter whitespace-nowrap rotate-[-10deg]">
-            {title}
-          </span>
-        </div>
-
-        {/* INDUSTRIAL SCANLINE */}
-        <div className="absolute inset-x-0 top-0 h-0.5 bg-[#F25623] opacity-0 group-hover:opacity-100 group-hover:animate-scan-fast z-30 pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col h-full">
-          {/* PROJECT PREVIEW / IMAGE HOLDER */}
-          <div className="relative aspect-video bg-black rounded-sm overflow-hidden mb-8 border border-main-bg/10">
-            <div className="absolute inset-0 flex items-center justify-center text-main-text/5 font-black text-6xl italic tracking-tighter group-hover:text-[#F25623]/20 transition-colors">
-              PREVIEW_DATA
-            </div>
-
-            {/* Corner Accents (Brutalist Style) */}
-            <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-[#F25623] opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-[#F25623] opacity-0 group-hover:opacity-100 transition-opacity" />
+      <a href={`/project/${slug}`}>
+        <motion.div
+          whileHover="hover"
+          initial="initial"
+          className="group relative bg-[#E6D5B8] text-black p-6 md:p-8 overflow-hidden border-2 border-black hover:border-[#F25623] transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_#F25623]"
+        >
+          {/* BG DECORATION */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-5 transition-opacity duration-500 overflow-hidden pointer-events-none select-none z-0">
+            <span className="text-[12rem] font-black italic uppercase tracking-tighter whitespace-nowrap rotate-[-5deg]">
+              {title}
+            </span>
           </div>
 
-          {/* PROJECT INFO */}
-          <div className="flex justify-between items-end gap-6">
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono font-black opacity-30 group-hover:text-[#F25623] group-hover:opacity-100 transition-colors">
-                  PROJECT_REF: 0{index + 1} // TYPE: BUILD
-                </span>
-                <Typography
-                  variant="h2"
-                  className="text-4xl md:text-5xl font-black lowercase tracking-tighter leading-[0.9] pb-1"
-                >
-                  {title}.
-                </Typography>
+          <div className="relative z-10 flex flex-col h-full">
+            {/* PROJECT PREVIEW: THE FIX */}
+            <div className="relative aspect-video bg-black overflow-hidden mb-8 border-2 border-black">
+              {image ? (
+                <div className="relative w-full h-full overflow-hidden">
+                  <Image
+                    src={image}
+                    alt={`${title} preview`}
+                    fill
+                    className="object-cover transition-all duration-700 
+                               grayscale contrast-[1.2] brightness-[0.8]
+                               group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 group-hover:scale-105
+                               mix-blend-luminosity"
+                  />
+                  {/* Color Overlay: Ini yang bikin gambar 'nyambung' sama kartu */}
+                  <div className="absolute inset-0 bg-[#E6D5B8] mix-blend-color opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none" />
+
+                  {/* Scanline Effect */}
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] z-20 bg-size-[100%_2px,3px_100%] pointer-events-none opacity-20" />
+                </div>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-black/20 font-mono text-xl font-bold italic">
+                  NO_PREVIEW_AVAILABLE
+                </div>
+              )}
+
+              {/* Hard Accents */}
+              <div className="absolute top-0 left-0 bg-black text-[#E6D5B8] px-2 py-1 text-[10px] font-mono font-bold z-30">
+                SCR_SHOT_{index + 1}
+              </div>
+            </div>
+
+            {/* PROJECT INFO */}
+            <div className="flex justify-between items-end gap-6">
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-[#F25623] animate-pulse" />
+                    <span className="text-[10px] font-mono font-black tracking-widest uppercase text-black/50">
+                      REF: 0{index + 1} // BUILD_V1.0
+                    </span>
+                  </div>
+                  <Typography
+                    variant="h2"
+                    className="text-4xl md:text-5xl font-black lowercase tracking-tighter leading-[0.8] py-2"
+                  >
+                    {title}.
+                  </Typography>
+                </div>
+
+                <p className="max-w-md text-[13px] font-mono leading-tight font-bold opacity-80 uppercase italic">
+                  {description}
+                </p>
               </div>
 
-              <p className="max-w-md text-[13px] font-mono leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity">
-                {description}
-              </p>
+              {/* ACTION BUTTON: Brutalist Circle */}
+              <div className="relative w-16 h-16 shrink-0 group-hover:rotate-90 transition-all duration-500 border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:bg-[#F25623]">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="black"
+                  strokeWidth="4"
+                  className="absolute inset-0 m-auto"
+                >
+                  <path d="M7 17L17 7M17 7H7M17 7V17" />
+                </svg>
+              </div>
             </div>
-
-            {/* ACTION BUTTON: Muter pas hover */}
-            <button className="relative w-16 h-16 shrink-0 group-hover:rotate-45 transition-all duration-500">
-              <div className="absolute inset-0 border-2 border-main-bg rounded-full group-hover:border-[#F25623] group-hover:bg-[#F25623] transition-all" />
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3.5"
-                strokeLinecap="square"
-                className="absolute inset-0 m-auto"
-              >
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </button>
           </div>
-
-          {/* INTERACTIVE PROGRESS BAR */}
-          <div className="mt-8 relative h-1 w-full bg-main-bg/10 overflow-hidden">
-            <motion.div
-              variants={{
-                initial: { x: "-100%" },
-                hover: { x: "0%" },
-              }}
-              transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-              className="absolute inset-0 bg-[#F25623]"
-            />
-          </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </a>
     </SlideIn>
   );
 }

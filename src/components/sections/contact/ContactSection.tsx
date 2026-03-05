@@ -10,18 +10,22 @@ const SOCIALS = [
   {
     title: "LinkedIn",
     label: "Professional Network",
-    href: "https://linkedin.com/in/haikal-taufiq",
+    href: "https://www.linkedin.com/in/m-taufiq-karim-haikal-3050b1284",
   },
-  { title: "Email", label: "Direct Inquiry", href: "mailto:hello@haikal.dev" },
+  {
+    title: "Email",
+    label: "Direct Inquiry",
+    href: "mailto:haikaltaufiq4@gmail.com",
+  },
   {
     title: "GitHub",
     label: "Code Repositories",
-    href: "https://github.com/haikaltfq",
+    href: "https://github.com/HaikalTaufiq",
   },
   {
     title: "Instagram",
     label: "Digital Playground",
-    href: "https://instagram.com/haikaltfq_",
+    href: "https://instagram.com/haikal.taufiq",
   },
 ];
 
@@ -60,21 +64,21 @@ export default function ContactSection() {
                 />
               </div>
 
-              <div className="space-y-8 mt-10">
-                <p className="max-w-sm text-lg font-bold leading-tight italic opacity-80">
-                  "Punya ide gila atau cuma mau bahas sistem yang scalable
-                  sambil ngopi? Gas langsung kontak gw bjir. I'm always online
-                  (mostly)."
+              <div className="space-y-8 mt-2">
+                <p className="max-w-sm text-sm font-semibold leading-tight opacity-80">
+                  "Have a vision to build or a system to scale? I'm ready to
+                  turn complex ideas into functional reality. Let’s connect and
+                  build something impactful."
                 </p>
 
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                    <Typography className="text-[10px] font-black uppercase tracking-[0.4em]">
+                    <Typography className="text-[12px] font-semibold uppercase tracking-[0.4em]">
                       System Status: Ready to Build
                     </Typography>
                   </div>
-                  <div className="w-24 h-1 bg-main-text" />
+                  <div className="w-24 h-0.5 bg-main-text" />
                 </div>
               </div>
             </SlideIn>

@@ -61,8 +61,8 @@ const SocialCard = ({
               </Typography>
             </div>
             <div className="space-y-0">
-              <p className="text-[8px] font-black uppercase tracking-[0.4em] opacity-40 group-hover:text-white">
-                established_connection_via
+              <p className="text-[8px] font-semibold uppercase tracking-[0.4em] opacity-40 group-hover:text-white">
+                established connection via
               </p>
               <p className="text-base md:text-lg font-bold font-mono tracking-tighter group-hover:italic">
                 {handle}
@@ -94,23 +94,23 @@ export default function ContactPage() {
   const socialLinks = [
     {
       title: "LinkedIn",
-      handle: "haikal-taufiq",
-      href: "https://linkedin.com/in/haikal-taufiq",
+      handle: "m taufiq karim haikal",
+      href: "https://www.linkedin.com/in/m-taufiq-karim-haikal-3050b1284",
     },
     {
       title: "GitHub",
-      handle: "haikaltfq",
-      href: "https://github.com/haikaltfq",
+      handle: "HaikalTaufiq",
+      href: "https://github.com/HaikalTaufiq",
     },
     {
       title: "Email",
-      handle: "hello@haikal.dev",
-      href: "mailto:hello@haikal.dev",
+      handle: "haikaltaufiq4@gmail.com",
+      href: "mailto:haikaltaufiq4@gmail.com",
     },
     {
       title: "Instagram",
-      handle: "@haikaltfq_",
-      href: "https://instagram.com/haikaltfq_",
+      handle: "@haikal.taufiq",
+      href: "https://instagram.com/haikal.taufiq",
     },
   ];
 
@@ -162,11 +162,8 @@ export default function ContactPage() {
                   />
                 </div>
               </SlideIn>
-              <div className="absolute top-70 -left-50 text-[16vw] font-black opacity-[0.02] select-none tracking-tight pointer-events-none -rotate-45">
+              <div className="absolute -top-10 -left-10 text-[16vw] font-black opacity-[0.02] select-none tracking-tight pointer-events-none -rotate-2">
                 CONTACT
-              </div>
-              <div className="absolute top-70 left-200 text-[16vw] font-black opacity-[0.02] select-none tracking-tight pointer-events-none ">
-                me.
               </div>
             </div>
 
@@ -175,12 +172,12 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   <div className="flex gap-1.5">
                     {[...Array(6)].map((_, i) => (
-                      <div key={i} className="w-1.5 h-1.5 bg-[#F25623]" />
+                      <div key={i} className="w-1 h-1 bg-[#F25623]" />
                     ))}
                   </div>
-                  <Typography className="text-sm font-bold leading-snug lowercase border-l-4 border-[#F25623] pl-4 italic opacity-80">
-                    "punya ide startup gila atau cuma mau ngajak ngopi di
-                    warkop? gas langsung kontak gw bjir."
+                  <Typography className="text-sm font-bold leading-snug lowercase border-l-4 border-[#F25623] pl-4  opacity-80">
+                    "Got a bold idea or just want to discuss tech over coffee?
+                    Feel free to reach out, I’m always open to new connections."
                   </Typography>
                 </div>
               </SlideIn>
@@ -201,7 +198,7 @@ export default function ContactPage() {
                     variant="h3"
                     className="text-2xl font-black lowercase mb-6 flex items-center gap-2"
                   >
-                    <span className="w-1.5 h-6 bg-[#F25623]" /> status_log
+                    <span className="w-1.5 h-6 bg-[#F25623]" /> status log
                   </Typography>
 
                   <div className="space-y-6">
@@ -234,8 +231,8 @@ export default function ContactPage() {
                     </div>
 
                     <p className="text-[10px] font-bold leading-relaxed opacity-40 uppercase italic max-w-62.5">
-                      Balesnya cepet kalo nggak lagi push rank atau debugging
-                      bug gak ngotak bjir.
+                      "Quick to respond, unless I'm deep into a coding session
+                      or solving a system bug."
                     </p>
                   </div>
                 </div>
@@ -254,8 +251,8 @@ export default function ContactPage() {
           {/* RIGHT: INTERACTIVE SOCIALS - TIGHTER GAP */}
           <div className="lg:col-span-7 flex flex-col gap-3">
             <div className="flex items-center gap-4 mb-2">
-              <Typography className="text-[10px] font-black uppercase tracking-[0.4em] opacity-30">
-                social_nodes
+              <Typography className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-30">
+                social nodes
               </Typography>
               <div className="h-px flex-1 bg-main-text/10" />
             </div>
@@ -286,8 +283,7 @@ export default function ContactPage() {
                 key={i}
                 className="text-[10px] font-black uppercase tracking-[0.5em] opacity-10"
               >
-                batam indonesia • politeknik negeri batam • high performance
-                experiences •
+                • batam • indonesia •
               </Typography>
             ))}
           </motion.div>
@@ -300,7 +296,7 @@ export default function ContactPage() {
               v1.0.4
             </div>
             <Typography className="text-[9px] font-black uppercase tracking-widest opacity-30">
-              all systems operational bjir
+              all systems operational
             </Typography>
           </div>
           <Typography className="text-[9px] font-black uppercase tracking-widest italic opacity-50">

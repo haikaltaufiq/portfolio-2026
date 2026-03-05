@@ -5,9 +5,9 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import SlideIn from "@/src/components/animation/SlideIn";
 import Typography from "@/src/components/ui/Typhography";
-
+import Image from "next/image";
+import sketchImg from "@/public/assets/Sketch.png";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
-import lineAnim from "@/src/lotties/men-white.json";
 
 /**
  * REDACTED OVERLAY COMPONENT
@@ -93,18 +93,18 @@ export default function AboutPage() {
   }, []);
 
   const skills = [
-    "React",
+    "Flutter",
+    "Laravel",
+    "Unity",
+    "Arduino",
+    "Firebase",
     "Next.js",
     "TypeScript",
-    "Node.js",
-    "Framer Motion",
     "Tailwind",
-    "Three.js",
-    "PostgreSQL",
-    "Go",
-    "Docker",
+    "Javascript",
     "Figma",
-    "Shadcn UI",
+    "SQL",
+    "Github",
   ];
 
   return (
@@ -154,9 +154,8 @@ export default function AboutPage() {
                 </div>
                 <div className="max-w-xl mt-12">
                   <Typography className="text-xl md:text-2xl font-poppins font-bold leading-tight lowercase border-l-4 border-[#F25623] pl-6 py-2">
-                    "Multimedia Engineering student at Politeknik Negeri Batam.
-                    I don't just write code; I architect digital experiences
-                    that blur the line between utility and art."
+                    "Multimedia Engineering. I build high-performance systems
+                    where technical precision meets raw digital aesthetics."
                   </Typography>
                 </div>
               </SlideIn>
@@ -179,36 +178,42 @@ export default function AboutPage() {
                       ))}
                     </div>
                     <Typography className="text-[9px] font-mono font-black uppercase tracking-widest opacity-40">
-                      Identity_Card_v1.0
+                      Identity Card v1.0
                     </Typography>
                   </div>
 
                   {/* Lottie Container */}
-                  <div className="aspect-video w-full bg-[#0d0d0d] rounded-sm mb-6 overflow-hidden flex items-center justify-center relative">
-                    <Lottie
-                      lottieRef={lottieRef}
-                      animationData={lineAnim}
-                      loop={true}
-                      autoplay
-                      className="w-full h-full scale-125 opacity-80"
+                  <div className="aspect-video w-full bg-[#0d0d0d] rounded-sm mb-6 overflow-hidden flex items-center justify-center relative border border-white/5">
+                    {/* Image Container */}
+                    <Image
+                      src={sketchImg}
+                      alt="Sketch decoration"
+                      priority
+                      // object-contain supaya gambar gak dipaksa stretch atau crop
+                      className="w-full h-full object-contain scale-110 opacity-80 mix-blend-color-dodge contrast-100 brightness-90 transition-transform duration-500 group-hover:scale-125"
                     />
-                    <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#F25623]/10 to-transparent h-1/2 w-full animate-pulse" />
+
+                    {/* Scanning Overlay Effect */}
+                    <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#F25623]/10 to-transparent h-1/2 w-full animate-pulse pointer-events-none" />
+
+                    {/* Technical Noise Texture (Optional tapi nambah vibe industrial) */}
+                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
                   </div>
 
                   <div className="space-y-2 font-mono text-[10px] uppercase tracking-wider">
                     <div className="flex justify-between">
                       <span className="opacity-50">Status:</span>
                       <span className="text-[#F25623] animate-pulse">
-                        ● Active_Unit
+                        ● Active Unit
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="opacity-50">Sector:</span>
-                      <span>Tech_Dev</span>
+                      <span>Tech Dev</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="opacity-50">Loc:</span>
-                      <span>BTM_ID_2026</span>
+                      <span>BTM ID 2026</span>
                     </div>
                   </div>
                 </div>
@@ -224,11 +229,11 @@ export default function AboutPage() {
               variant="h2"
               className="text-4xl font-black lowercase tracking-tighter"
             >
-              arsenal.
+              pipeline.
             </Typography>
             <div className="h-px flex-1 bg-main-text/10" />
             <Typography className="text-[10px] font-mono opacity-30">
-              TECH_STACK_v2
+              TECH STACK v2
             </Typography>
           </div>
 
@@ -266,22 +271,22 @@ export default function AboutPage() {
 
             <div className="space-y-2">
               <ExperienceCard
-                year="2024 - 2026"
-                role="Lead Frontend Architect"
-                company="Independent Studio"
-                desc="Deploying high-performance web systems with focus on motion design."
+                year="2025 - 2026"
+                role="Software Developer"
+                company="PT Kreatif System Indonesia - Intern"
+                desc="Architecting scalable internal systems and integrations."
               />
               <ExperienceCard
-                year="2023 - 2024"
-                role="Research Intern"
-                company="Polibatam Tech"
-                desc="Optimizing multimedia processing pipelines for web-based tools."
+                year="2024 - 2025"
+                role="Freelance Programmer"
+                company="Independent Contractor"
+                desc="Providing bespoke digital product development. Prioritizing technical precision and seamless user experiences."
               />
               <ExperienceCard
-                year="2022 - 2023"
-                role="Creative Developer"
-                company="Digital Lab"
-                desc="Experimental UI development using Three.js and WebGL."
+                year="2022 - 2026"
+                role="Vocational Student"
+                company="Batam State polytechnic"
+                desc="Engaging in industry-standard Project Based Learning. Delivering real-world digital solutions through cross-functional team collaboration."
               />
             </div>
           </div>
@@ -291,7 +296,7 @@ export default function AboutPage() {
               {/* Technical Indicator */}
               <div className="border-2 border-dashed border-main-text/20 p-8 flex flex-col items-center group hover:border-[#F25623]/40 transition-colors">
                 <div className="w-full flex justify-between text-[8px] font-mono mb-4 opacity-50">
-                  <span>CPU_LOAD: 12%</span>
+                  <span>CPU LOAD: 12%</span>
                   <span>TEMP: OPTIMAL</span>
                 </div>
                 <div className="w-full h-12 bg-main-text/5 relative overflow-hidden">
@@ -309,7 +314,7 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <Typography className="mt-6 text-[10px] font-mono font-bold tracking-[0.5em] opacity-30 group-hover:opacity-100 transition-opacity">
-                  SYSTEM_ACTIVE
+                  SYSTEM ACTIVE
                 </Typography>
               </div>
             </div>

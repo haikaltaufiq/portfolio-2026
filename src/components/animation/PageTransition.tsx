@@ -41,7 +41,7 @@ const pageVariants: Variants = {
     transition: {
       duration: 0.3,
       ease: "easeOut",
-      delay: 0.5, // Muncul pas balok lagi nutup layar
+      delay: 0.5,
     },
   },
   exit: {
@@ -65,7 +65,6 @@ export default function PageTransition({
   return (
     <AnimatePresence mode="wait">
       <motion.div key={routeKey} className="relative w-full min-h-screen">
-        {/* OVERLAY: Fixed diluar flow content biar gak kena unmount duluan */}
         <div className="fixed inset-0 pointer-events-none z-9999 flex">
           {[...Array(nbOfBars)].map((_, i) => (
             <motion.div
