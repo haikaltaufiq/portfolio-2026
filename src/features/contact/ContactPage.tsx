@@ -116,33 +116,18 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-transparent text-main-text pt-24 pb-10 overflow-hidden selection:bg-[#F25623] selection:text-white relative">
-      {/* BACKGROUND ELEMENTS - FIXED & FILLING */}
       <div className="fixed inset-0 -z-20 bg-main-bg" />
       <div className="fixed inset-0 -z-10 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px]" />
       <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-      {/* DECORATIVE FLOATING TEXT */}
       <div className="fixed top-20 right-[-5%] rotate-90 origin-right opacity-[0.02] pointer-events-none select-none">
         <Typography className="text-[15vh] font-black tracking-tighter uppercase">
           Contact System v1.0
         </Typography>
       </div>
-      <div className="absolute bottom-10 left-0 w-full overflow-hidden opacity-5 pointer-events-none hidden md:block">
-        <motion.div
-          animate={{ x: [0, -1000] }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="flex gap-20 whitespace-nowrap text-[12vw] font-black lowercase leading-none"
-        >
-          <span>
-            available for new opportunities • let's build the future •{" "}
-          </span>
-          <span>
-            available for new opportunities • let's build the future •{" "}
-          </span>
-        </motion.div>
-      </div>
+
       <div className="mx-auto max-w-6xl px-6 relative">
-        {/* SECTION 1: HEADER - COMPACTED */}
+        {/* HEADER */}
         <section className="relative mb-16">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
             <div className="relative">
@@ -175,7 +160,7 @@ export default function ContactPage() {
                       <div key={i} className="w-1 h-1 bg-[#F25623]" />
                     ))}
                   </div>
-                  <Typography className="text-sm font-bold leading-snug lowercase border-l-4 border-[#F25623] pl-4  opacity-80">
+                  <Typography className="text-sm font-bold leading-snug lowercase border-l-4 border-[#F25623] pl-4 opacity-80">
                     "Got a bold idea or just want to discuss tech over coffee?
                     Feel free to reach out, I’m always open to new connections."
                   </Typography>
@@ -185,14 +170,65 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* SECTION 2: THE SYSTEM GRID - REBALANCED */}
+        {/* SYSTEM GRID */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* LEFT: STATUS & SYSTEM INFO */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* LEFT: STATUS LOG & FORM */}
+          <div className="lg:col-span-5 space-y-10.5">
+            <Typography className="text-sm font-bold leading-snug lowercase border-b pb-4 border-main-text/20  opacity-80">
+              "Have a vision to build or a system to scale? I'm ready to turn
+              complex ideas into functional reality. Let’s connect and build
+              something impactful."
+            </Typography>
+
+            {/* MESSAGE FORM */}
+            <SlideIn delay={0.3}>
+              <form className="space-y-6">
+                <div className="relative">
+                  <Typography className="text-[9px] font-black uppercase tracking-[0.4em] text-[#F25623] mb-2">
+                    01 // Identification (Email)
+                  </Typography>
+                  <input
+                    type="email"
+                    placeholder="user@system.com"
+                    className="w-full bg-transparent border-b border-main-text/20 py-3 outline-none focus:border-[#F25623] transition-colors font-mono text-xs uppercase placeholder:opacity-20"
+                  />
+                </div>
+
+                <div className="relative">
+                  <Typography className="text-[9px] font-black uppercase tracking-[0.4em] text-[#F25623] mb-2">
+                    02 // Transmission (Message)
+                  </Typography>
+                  <textarea
+                    rows={4}
+                    placeholder="enter data envelope..."
+                    className="w-full bg-transparent border-b border-main-text/20 py-3 outline-none focus:border-[#F25623] transition-colors font-mono text-xs uppercase placeholder:opacity-20 resize-none"
+                  />
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-4 bg-[#F25623] text-white font-black uppercase text-[10px] tracking-[0.5em] flex items-center justify-center gap-3 group"
+                >
+                  Execute Transmission
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    className="group-hover:translate-x-1 transition-transform"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </motion.button>
+              </form>
+            </SlideIn>
+
             <SlideIn>
               <div className="group relative p-8 bg-main-text text-main-bg overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#F25623]/10 to-transparent h-20 w-full animate-scan z-0" />
-
                 <div className="relative z-10">
                   <Typography
                     variant="h3"
@@ -216,7 +252,6 @@ export default function ContactPage() {
                         </p>
                       </div>
                     </div>
-
                     <div className="p-4 border border-main-bg/10 bg-main-bg/5 backdrop-blur-sm">
                       <p className="text-[10px] font-mono leading-relaxed lowercase">
                         <span className="text-[#F25623]">Location:</span> Batam,
@@ -224,31 +259,15 @@ export default function ContactPage() {
                         <br />
                         <span className="text-[#F25623]">Latency:</span> Low
                         latency ideas
-                        <br />
-                        <span className="text-[#F25623]">Mood:</span> Coffee &
-                        Code
                       </p>
                     </div>
-
-                    <p className="text-[10px] font-bold leading-relaxed opacity-40 uppercase italic max-w-62.5">
-                      "Quick to respond, unless I'm deep into a coding session
-                      or solving a system bug."
-                    </p>
                   </div>
                 </div>
               </div>
             </SlideIn>
-
-            {/* DECORATIVE CROSSES/DASHES TO FILL SPACE */}
-            <div className="flex justify-between px-2 opacity-20 font-mono text-xs select-none">
-              <span>+</span>
-              <span>+</span>
-              <span>+</span>
-              <span>+</span>
-            </div>
           </div>
 
-          {/* RIGHT: INTERACTIVE SOCIALS - TIGHTER GAP */}
+          {/* RIGHT: SOCIAL NODES */}
           <div className="lg:col-span-7 flex flex-col gap-3">
             <div className="flex items-center gap-4 mb-2">
               <Typography className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-30">
@@ -270,7 +289,7 @@ export default function ContactPage() {
         </section>
       </div>
 
-      {/* SECTION 3: FOOTER - ADJUSTED MARGIN */}
+      {/* FOOTER */}
       <footer className="mt-24">
         <div className="relative border-y border-main-text/20 py-6 overflow-hidden bg-main-text/2">
           <motion.div
@@ -288,8 +307,6 @@ export default function ContactPage() {
             ))}
           </motion.div>
         </div>
-        {/* Side Marquee for that "Industrial" feel */}
-
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center py-6 gap-4">
           <div className="flex items-center gap-3">
             <div className="px-2 py-0.5 border border-main-text/30 font-black text-[9px] uppercase">
