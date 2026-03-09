@@ -23,29 +23,19 @@ export const infoList = [
     title: "company profile",
     overlayText: "dummy data",
     descriptions: [
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati.",
-      "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.",
+      "A high-performance digital identity engineered with a modern interface to amplify brand authority and market presence.",
+      "Engineered with fluid layouts and micro-interactions to ensure seamless responsiveness across all high-resolution devices.",
     ],
-    skills: ["TypeScript", "Node.js"],
+    skills: ["TypeScript", "Next.js"],
   },
   {
     id: "info-3",
     title: "customer loyalty",
     overlayText: "dummy data",
     descriptions: [
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati.",
-      "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.",
+      "A data-driven loyalty ecosystem designed to maximize customer lifetime value through automated point accumulation and tiered rewards.",
+      "Features a proprietary ranking engine that tracks purchase frequency and volume to deliver personalized incentives and VIP privileges.",
     ],
-    skills: ["TypeScript", "Node.js"],
-  },
-  {
-    id: "info-4",
-    title: "automatic fish feeder",
-    overlayText: "dummy data",
-    descriptions: [
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati.",
-      "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.",
-    ],
-    skills: ["TypeScript", "Node.js"],
+    skills: ["Laravel", "Tailwind"],
   },
 ];

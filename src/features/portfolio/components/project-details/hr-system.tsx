@@ -4,6 +4,7 @@ import { ProjectDetail } from "@/src/data/project";
 import Typography from "@/src/components/ui/Typhography";
 import { motion } from "framer-motion";
 import SlideIn from "@/src/components/animation/SlideIn";
+import { useEffect, useRef } from "react";
 
 type HrSystemDetailProps = {
   project: ProjectDetail;
@@ -41,20 +42,33 @@ const MODULES = [
     title: "Smart Reminder",
     detail: "Automated notification for contracts & events",
   },
-];
-
-const ACCESS_MATRIX = [
-  { role: "Admin", access: "Full CRUD + system configuration" },
-  { role: "Manager", access: "Team approval & department analytics" },
-  { role: "Employee", access: "Self-service requests & personal tracking" },
+  {
+    id: "M8",
+    title: "Role Base Access",
+    detail: "Role based access for each role",
+  },
 ];
 
 export default function HrSystemDetail({ project }: HrSystemDetailProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const mobileVidRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 3.0;
+    }
+    if (mobileVidRef.current) {
+      mobileVidRef.current.playbackRate = 4.0;
+    }
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto space-y-32 pb-40 px-4">
       {/* SECTION 1: HERO & STATS */}
       <SlideIn>
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-16">
+          <div className="absolute -top-10 -left-10 text-[16vw] font-black opacity-[0.02] select-none tracking-tight pointer-events-none -rotate-2">
+            HUMAN RESOURCE INFORMATION SYSTEM
+          </div>
           <div className="lg:col-span-5 space-y-6">
             <div className="inline-block px-3 py-1 border border-[#F25623] text-[#F25623] text-[10px] font-black uppercase tracking-widest">
               Internal System [PT KSI]
@@ -77,7 +91,7 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
             {[
               { label: "Module Count", value: "07" },
               { label: "Auth Levels", value: "03" },
-              { label: "Status", value: "Deployed", isText: true },
+              { label: "Status", value: "PRIVATE DEPLOYMENT", isText: true },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -128,119 +142,9 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
         </div>
       </section>
 
-      {/* SECTION 4: SHOWCASE (WEB & MOBILE) */}
-      <section className="space-y-24">
-        {/* WEB SHOWCASE */}
-        <div className="space-y-8">
-          <div className="flex justify-between items-end border-b border-main-text/10 pb-6">
-            <Typography variant="h3" className="text-3xl font-black lowercase">
-              Admin Dashboard
-            </Typography>
-            <span className="text-[10px] font-mono opacity-40 uppercase tracking-[0.3em]">
-              Desktop Interface v1.0
-            </span>
-          </div>
-          <div className="relative aspect-video w-full bg-[#1a1a1a] border border-main-text/20 overflow-hidden group">
-            <div className="absolute inset-0 flex items-center justify-center font-mono text-main-text/20 text-xl tracking-widest">
-              [ WEB_DASHBOARD_SCREENSHOT ]
-            </div>
-            <div className="absolute top-4 left-4 z-10 bg-main-text text-main-bg px-3 py-1 text-[9px] font-black uppercase tracking-widest">
-              Main Control Center
-            </div>
-          </div>
-        </div>
-
-        {/* MOBILE SHOWCASE */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          <div className="lg:col-span-5 space-y-6">
-            <Typography
-              variant="h3"
-              className="text-4xl font-black lowercase leading-none"
-            >
-              Mobile <br /> <span className="text-[#F25623]">Mobility.</span>
-            </Typography>
-            <p className="text-sm opacity-60 leading-relaxed font-medium italic">
-              Focused on field employee accessibility, featuring low-latency
-              attendance check-ins and real-time push notifications for task
-              assignments.
-            </p>
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="border-l-2 border-[#F25623] pl-4">
-                <p className="text-[10px] font-black uppercase">Tracking</p>
-                <p className="text-[11px] opacity-50 font-mono">
-                  GPS & Geofencing
-                </p>
-              </div>
-              <div className="border-l-2 border-[#F25623] pl-4">
-                <p className="text-[10px] font-black uppercase">Payroll</p>
-                <p className="text-[11px] opacity-50 font-mono">
-                  E-Slip Access
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="lg:col-span-7 grid grid-cols-2 gap-6">
-            <div className="aspect-9/16 bg-[#1a1a1a] border border-main-text/20 relative group overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center font-mono text-main-text/10 text-xs rotate-90 whitespace-nowrap">
-                MOBILE_APP_AUTH
-              </div>
-              <div className="absolute bottom-4 left-4 bg-[#F25623] text-white px-2 py-1 text-[8px] font-black uppercase">
-                Auth & Tracking
-              </div>
-            </div>
-            <div className="aspect-9/16 bg-[#1a1a1a] border border-main-text/20 relative group overflow-hidden translate-y-12">
-              <div className="absolute inset-0 flex items-center justify-center font-mono text-main-text/10 text-xs rotate-90 whitespace-nowrap">
-                MOBILE_APP_DASHBOARD
-              </div>
-              <div className="absolute bottom-4 left-4 bg-[#F25623] text-white px-2 py-1 text-[8px] font-black uppercase">
-                Employee Self-Service
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: ACCESS MATRIX & RECAP */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 pt-16">
-        <div className="space-y-8">
-          <Typography className="text-sm font-black uppercase tracking-[0.3em] text-[#F25623]">
-            // Access Rights Matrix
-          </Typography>
-          <div className="divide-y divide-main-text/10 border-y border-main-text/10">
-            {ACCESS_MATRIX.map((entry) => (
-              <div
-                key={entry.role}
-                className="flex justify-between items-center py-6 group hover:px-4 transition-all"
-              >
-                <span className="text-xs font-black uppercase tracking-widest text-[#F25623]">
-                  {entry.role}
-                </span>
-                <span className="text-xs opacity-60 font-mono text-right max-w-50">
-                  {entry.access}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-8">
-          <Typography className="text-sm font-black uppercase tracking-[0.3em] text-[#F25623]">
-            // Project Summary
-          </Typography>
-          <div className="space-y-4">
-            {project.content.map((paragraph, index) => (
-              <p
-                key={index}
-                className="text-sm leading-relaxed opacity-60 font-medium"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
       {/* SECTION 2: ACADEMIC VALIDATION (SINTA 5) */}
-      <section className="relative py-20 border-y border-main-text/10 bg-main-text/2">
+
+      <section className="relative py-10 border-y border-main-text/10 bg-main-text/2">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start px-10">
           <div className="lg:col-span-7 space-y-6">
             <div className="flex items-center gap-3">
@@ -323,6 +227,143 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
           </div>
         </div>
       </section>
+
+      {/* SECTION 4: SHOWCASE (WEB & MOBILE) */}
+      <section className="space-y-24">
+        {/* WEB SHOWCASE */}
+        <div className="space-y-8">
+          <div className="flex justify-between items-end border-b border-main-text/10 pb-6">
+            <Typography variant="h3" className="text-3xl font-black lowercase">
+              preview
+            </Typography>
+            <span className="text-[10px] font-mono opacity-40 uppercase tracking-[0.3em]">
+              Desktop Interface v1.0
+            </span>
+          </div>
+
+          <div className="relative aspect-video w-full bg-[#1a1a1a] border border-main-text/20 overflow-hidden group">
+            <video
+              ref={videoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out z-0"
+            >
+              <source src="/assets/hr/demo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Overlay Gradient */}
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent pointer-events-none z-10" />
+
+            <div className="absolute top-4 left-4 z-20 bg-main-text text-main-bg px-3 py-1 text-[9px] font-black uppercase tracking-widest">
+              Main Control Center
+            </div>
+          </div>
+        </div>
+
+        {/* MOBILE SHOWCASE */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-5 space-y-8">
+            <div className="space-y-4">
+              <Typography
+                variant="h3"
+                className="text-5xl font-black lowercase leading-[0.8] tracking-tighter"
+              >
+                Mobile <br /> <span className="text-[#F25623]">Mobility.</span>
+              </Typography>
+              <div className="h-1 w-20 bg-[#F25623]" /> {/* Accent line */}
+            </div>
+
+            <p className="text-sm opacity-60 leading-relaxed font-medium italic max-w-md">
+              Focused on field employee accessibility, featuring low-latency
+              attendance check-ins and real-time push notifications for task
+              assignments.
+            </p>
+
+            <div className="grid grid-cols-2 gap-8 pt-4">
+              <div className="border-l-4 border-[#F25623] pl-6 py-2 bg-main-text/5">
+                <p className="text-[10px] font-black uppercase tracking-widest text-[#F25623]">
+                  Tracking
+                </p>
+                <p className="text-xs font-mono mt-1 opacity-80">
+                  GPS & Geofencing
+                </p>
+              </div>
+              <div className="border-l-4 border-main-text/20 pl-6 py-2">
+                <p className="text-[10px] font-black uppercase tracking-widest">
+                  Payroll
+                </p>
+                <p className="text-xs font-mono mt-1 opacity-80">
+                  E-Slip Access
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 relative flex justify-center lg:justify-end items-center pr-8">
+            {/* BACKGROUND DECORATION (Brutalist Grid) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[80%] border border-main-text/5 pointer-events-none -rotate-3 z-0" />
+
+            {/* SLOT 1: VIDEO MOBILE (Auth) */}
+            <div className="lg:col-span-7 relative flex justify-center lg:justify-end items-center pr-12 h-150">
+              {/* SLOT 1: LANDING PAGE SS (Sekarang di Belakang/Atas) */}
+              <div className="relative z-20 group">
+                {/* Offset Border Decoration */}
+                <div className="absolute inset-0 border-2 border-main-text translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500" />
+
+                <div className="w-56 lg:w-64 aspect-9/19 bg-[#1a1a1a] border-4 border-main-text relative overflow-hidden shadow-2xl">
+                  <img
+                    src="/assets/hr/mobile-landing.png"
+                    alt="Mobile Landing"
+                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  />
+
+                  <div className="absolute inset-0 z-10 pointer-events-none opacity-40">
+                    <div className="absolute inset-0 bg-scanlines animate-scan" />
+                    <div className="absolute inset-0 bg-noise opacity-20" />
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 z-30 bg-main-text text-main-bg px-2 py-1 text-[9px] font-black uppercase">
+                    Landing Page
+                  </div>
+                </div>
+              </div>
+
+              {/* SLOT 2: VIDEO MOBILE (Sekarang di Depan/Bawah) */}
+              <div className="relative z-30 -ml-24 mt-40 group">
+                {/* Offset Border Decoration */}
+                <div className="absolute inset-0 border-2 border-[#F25623] translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500" />
+
+                <div className="w-56 lg:w-64 aspect-9/19 bg-[#1a1a1a] border-4 border-main-text relative overflow-hidden shadow-2xl">
+                  <video
+                    ref={mobileVidRef}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  >
+                    <source src="/assets/hr/vid-mobile.mp4" type="video/mp4" />
+                  </video>
+
+                  <div className="absolute inset-0 z-10 pointer-events-none opacity-40">
+                    <div className="absolute inset-0 bg-scanlines animate-scan" />
+                    <div className="absolute inset-0 bg-noise opacity-20" />
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 z-30 bg-[#F25623] text-white px-2 py-1 text-[9px] font-black uppercase">
+                    Mobile Preview
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="pt-24 border-t border-main-text/10 flex flex-col md:flex-row justify-between gap-8 opacity-40">
         <div className="font-mono text-[9px] uppercase tracking-widest space-y-1">

@@ -28,7 +28,7 @@ export default function ProjectCard({
         <motion.div
           whileHover="hover"
           initial="initial"
-          className="group relative bg-[#E6D5B8] text-black p-6 md:p-8 overflow-hidden border-2 border-black hover:border-[#F25623] transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_#F25623]"
+          className="group relative bg-[#E6D5B8] text-black p-6 md:p-8 overflow-hidden border-2 border-black hover:border-[#F25623] transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_#F25623] h-full flex flex-col"
         >
           {/* BG DECORATION */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-5 transition-opacity duration-500 overflow-hidden pointer-events-none select-none z-0">
@@ -76,7 +76,7 @@ export default function ProjectCard({
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-[#F25623] animate-pulse" />
                     <span className="text-[10px] font-mono font-black tracking-widest uppercase text-black/50">
-                      REF: 0{index + 1} // BUILD_V1.0
+                      REF: 0{index + 1} {"// BUILD_V1.0"}
                     </span>
                   </div>
                   <Typography
@@ -87,7 +87,7 @@ export default function ProjectCard({
                   </Typography>
                 </div>
 
-                <p className="max-w-md text-[13px] font-mono leading-tight font-bold opacity-80 uppercase italic">
+                <p className="max-w-md text-[13px] font-mono leading-tight font-semibold opacity-70  ">
                   {description}
                 </p>
               </div>

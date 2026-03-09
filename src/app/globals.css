@@ -15,6 +15,7 @@
 
 ::selection {
   background-color: var(--color-brand-orange);
+  color: #ffffff;
 }
 
 ::-moz-selection {

@@ -254,7 +254,7 @@ export default function AboutPage() {
         </section>
 
         {/* 4. TRACK RECORD & PHILOSOPHY */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 relative">
+        <section className=" gap-10 relative">
           <div className="absolute -top-24 -left-10 text-[17vw] font-black opacity-[0.02] select-none pointer-events-none -rotate-2">
             HISTORY
           </div>
@@ -274,51 +274,22 @@ export default function AboutPage() {
                 year="2025 - 2026"
                 role="Software Developer"
                 company="PT Kreatif System Indonesia - Intern"
-                desc="Architecting scalable internal systems and integrations."
+                desc="Architecting scalable internal ecosystems and cross-platform integrations—from streamlining HR workflows and customer loyalty engines to crafting high-performance corporate web experiences."
               />
               <ExperienceCard
                 year="2024 - 2025"
                 role="Freelance Programmer"
                 company="Independent Contractor"
-                desc="Providing bespoke digital product development. Prioritizing technical precision and seamless user experiences."
+                desc="Freelance Software Engineer specializing in end-to-end digital solutions. I design and build high-performance websites, mobile applications, and integrated IoT systems tailored to business needs"
               />
               <ExperienceCard
                 year="2022 - 2026"
                 role="Vocational Student"
                 company="Batam State polytechnic"
-                desc="Engaging in industry-standard Project Based Learning. Delivering real-world digital solutions through cross-functional team collaboration."
+                desc="Vocational-trained developer with a focus on industry-standard Project-Based Learning. solving real-world problems through collaborative engineering—delivering digital solutions that meet professional benchmarks."
               />
             </div>
           </div>
-
-          <aside className="lg:col-span-4">
-            <div className="sticky top-32 space-y-8">
-              {/* Technical Indicator */}
-              <div className="border-2 border-dashed border-main-text/20 p-8 flex flex-col items-center group hover:border-[#F25623]/40 transition-colors">
-                <div className="w-full flex justify-between text-[8px] font-mono mb-4 opacity-50">
-                  <span>CPU LOAD: 12%</span>
-                  <span>TEMP: OPTIMAL</span>
-                </div>
-                <div className="w-full h-12 bg-main-text/5 relative overflow-hidden">
-                  <motion.div
-                    animate={{ x: ["-100%", "200%"] }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="absolute inset-0 w-32 bg-[#F25623]/10 skew-x-12"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[90%] h-px bg-main-text/10" />
-                  </div>
-                </div>
-                <Typography className="mt-6 text-[10px] font-mono font-bold tracking-[0.5em] opacity-30 group-hover:opacity-100 transition-opacity">
-                  SYSTEM ACTIVE
-                </Typography>
-              </div>
-            </div>
-          </aside>
         </section>
       </div>
     </main>

@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 import ScrollSvg from "../components/animation/ScrollSvg";
 import Navbar from "../components/layouts/Navbar";
-import AboutSection from "../components/sections/about/AboutSection";
-import ContactSection from "../components/sections/contact/ContactSection";
-import HeroSection from "../components/sections/hero/HeroSection";
-import ProjectsSection from "../components/sections/project/ProjectSection";
+import AboutSection from "../components/sections/AboutSection";
+import ContactSection from "../components/sections/ContactSection";
+import HeroSection from "../components/sections/HeroSection";
+import ProjectsSection from "../components/sections/ProjectSection";
 
 export default function HomePage() {
   return (
