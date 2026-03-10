@@ -1,5 +1,8 @@
 # Cloudflare Pages configuration for Next.js
-# This file is for Cloudflare Pages deployment
+name = "portofolio-website"
+
+# Build output directory for Cloudflare Pages
+pages_build_output_dir = ".next"
 
 # Enable caching for Pages builds
 pages_build_caching = true

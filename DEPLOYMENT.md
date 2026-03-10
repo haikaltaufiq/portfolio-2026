@@ -18,22 +18,30 @@ The opennextjs/cloudflare package (v1.17.1) has a validation bug that prevents d
 
 Cloudflare Pages will automatically detect Next.js and handle everything. No additional configuration needed!
 
-## Alternative: CLI Deployment (Advanced)
+## Alternative: CLI Deployment (Works Now!)
 
 If you prefer to deploy from the command line:
 
 ```bash
-# Build the project locally
-npm run build
+# 1. Authenticate with Cloudflare
+wrangler login
 
-# Deploy to Cloudflare Pages using Wrangler
-wrangler pages deploy .next
+# 2. Deploy using the configured wrangler.toml
+npm run deploy
 ```
 
-**Note**: You must have `wrangler` authenticated first:
+This will:
 
-```bash
-wrangler login
+- Build Next.js project to `.next` directory
+- Deploy to Cloudflare Pages with proper configuration
+
+**Configuration in `wrangler.toml`:**
+
+```toml
+name = "portofolio-website"
+pages_build_output_dir = ".next"
+pages_build_caching = true
+compatibility_flags = ["nodejs_compat"]
 ```
 
 ## Project Build Status ✅
@@ -62,6 +70,29 @@ wrangler login
 
 ## Next Steps
 
-1. **Recommended**: Use GitHub Integration (Steps 1-6 above)
-2. Push to GitHub and watch automatic deployment
-3. Your portfolio will be live on Cloudflare Pages!
+**Choose one deployment method:**
+
+### Method 1: GitHub Integration (Recommended - Most Automatic) ⭐
+
+1. Push to GitHub
+2. Cloudflare Dashboard → Pages → Connect Git repository
+3. Auto-detects Next.js, uses defaults
+4. Automatic deploys on every push
+
+### Method 2: Wrangler CLI (Local Control)
+
+```bash
+wrangler login
+npm run deploy
+```
+
+Deploys immediately to your configured Cloudflare project.
+
+### Method 3: Manual Build + Deploy
+
+```bash
+npm run build
+wrangler pages deploy .next
+```
+
+All methods will deploy to the same project. Choose based on your workflow preference!
