@@ -1,0 +1,24 @@
+name = "portofolio-website"
+type = "javascript"
+account_id = ""
+workers_dev = true
+routes = []
+zone_id = ""
+
+[env.production]
+name = "portofolio-website-prod"
+workers_dev = false
+routes = [
+  {
+    pattern = "example.com/*",
+    zone_id = ""
+  }
+]
+
+[build]
+command = "npm run build"
+cwd = "./"
+watch_paths = ["src/**/*.ts", "src/**/*.tsx"]
+
+[build.upload]
+format = "service-worker"
