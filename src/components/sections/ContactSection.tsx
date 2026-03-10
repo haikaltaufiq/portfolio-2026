@@ -77,6 +77,7 @@ export default function ContactSection() {
                     </label>
                     <input
                       type="email"
+                      suppressHydrationWarning
                       placeholder="someone@example.com"
                       className="w-full bg-transparent border-b-2 border-main-text/10 py-4 outline-none focus:border-[#F25623] transition-colors duration-300 font-mono text-sm"
                     />

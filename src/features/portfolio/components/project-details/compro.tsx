@@ -180,13 +180,13 @@ export default function ComproDetail({ project }: ComproDetailProps) {
                   onClick={prevSlide}
                   className="flex-1 md:flex-none px-6 py-3 border border-main-text/20 hover:bg-main-text hover:text-main-bg transition-all font-mono text-[10px] font-bold tracking-tighter"
                 >
-                  PREV_NODE
+                  PREVIOUS
                 </button>
                 <button
                   onClick={nextSlide}
                   className="flex-1 md:flex-none px-6 py-3 border border-main-text/20 hover:bg-main-text hover:text-main-bg transition-all font-mono text-[10px] font-bold tracking-tighter"
                 >
-                  NEXT_NODE
+                  NEXT
                 </button>
               </div>
             </div>

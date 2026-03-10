@@ -35,12 +35,11 @@ export default function ProjectCard({
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    // Kita arahin tarikan magnetic-nya ke area tombol (bottom right)
     const isNearButton =
       e.clientX > rect.right - 150 && e.clientY > rect.bottom - 150;
 
     if (isNearButton) {
-      mouseX.set(e.clientX - (rect.right - 48)); // 48 is roughly center of 16rem button
+      mouseX.set(e.clientX - (rect.right - 48));
       mouseY.set(e.clientY - (rect.bottom - 48));
     } else {
       mouseX.set(0);

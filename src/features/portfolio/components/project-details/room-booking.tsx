@@ -1,236 +1,293 @@
 "use client";
 
+import { useState } from "react";
 import { ProjectDetail } from "@/src/data/project";
 import Typography from "@/src/components/ui/Typhography";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import SlideIn from "@/src/components/animation/SlideIn";
+import Image from "next/image";
 
 type RoomBookingDetailProps = {
   project: ProjectDetail;
 };
 
-const SYSTEM_CAPABILITIES = [
-  {
-    label: "Conflict_Check",
-    status: "Real-time",
-    detail: "Automated double-booking prevention logic",
-  },
-  {
-    label: "Resource_Mgmt",
-    status: "Active",
-    detail: "Equipment & capacity tracking per room",
-  },
-  {
-    label: "User_Roles",
-    status: "Admin/User",
-    detail: "Hierarchical booking approval workflow",
-  },
-  {
-    label: "Analytics",
-    status: "Enabled",
-    detail: "Usage frequency & peak hour reporting",
-  },
-];
+const RedactedOverlay = ({
+  text,
+  className = "",
+}: {
+  text: string;
+  className?: string;
+}) => (
+  <Typography
+    className={`absolute font-redacted text-[#F25623] opacity-30 mix-blend-difference pointer-events-none tracking-normal whitespace-nowrap z-0 ${className}`}
+  >
+    {text}
+  </Typography>
+);
 
 export default function RoomBookingDetail({ project }: RoomBookingDetailProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Asset sinkron sesuai image_874166.png bjir
+  const screenshots = [
+    "/assets/room-booking/dashboard.png",
+    "/assets/room-booking/apply-room.png",
+    "/assets/room-booking/apply-status.png",
+    "/assets/room-booking/data-user.png",
+    "/assets/room-booking/manage-room.png",
+    "/assets/room-booking/reports.png",
+    "/assets/room-booking/room-list.png",
+  ];
+
+  const stats = [
+    { label: "Query_Lat", before: "120ms", after: "18ms", value: 95 },
+    { label: "Sync_Reliability", before: "88%", after: "100%", value: 100 },
+    { label: "Conflict_Res", before: "Manual", after: "Auto", value: 92 },
+    { label: "LCP_Speed", before: "2.4s", after: "0.8s", value: 98 },
+  ];
+
+  const nextSlide = () =>
+    setCurrentIndex((prev) => (prev + 1) % screenshots.length);
+  const prevSlide = () =>
+    setCurrentIndex(
+      (prev) => (prev - 1 + screenshots.length) % screenshots.length,
+    );
+
   return (
-    <main className="min-h-screen bg-transparent text-main-text pt-24 pb-10 overflow-hidden selection:bg-[#F25623] selection:text-white relative">
+    <main className="min-h-screen bg-transparent text-main-text pt-24 pb-10 overflow-x-hidden selection:bg-[#F25623] selection:text-white relative">
+      {/* Background Elements - Conserved dari theme kreasii */}
       <div className="fixed inset-0 -z-20 bg-main-bg" />
-      <div className="fixed inset-0 -z-10 opacity-[0.02] bg-[url('/blueprint-grid.svg')] bg-center bg-fixed" />
+      <div className="fixed inset-0 -z-10 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px]" />
+      <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       <div className="mx-auto max-w-6xl px-6 relative">
-        {/* SECTION 1: HEADER - OPERATIONAL DASHBOARD STYLE */}
+        {/* HEADER SECTION */}
         <section className="relative mb-32">
-          <SlideIn direction="up">
-            <div className="flex flex-col space-y-4">
-              <div className="flex items-center gap-4">
-                <span className="text-[10px] font-mono border-l-4 border-[#F25623] pl-2 opacity-50 uppercase tracking-[0.2em]">
-                  Resource_Management_System_v2
-                </span>
-                <div className="h-px flex-1 bg-main-text/10" />
-              </div>
-              <Typography
-                variant="h1"
-                className="font-poppins font-black text-[10vw] md:text-[8vw] leading-[0.85] lowercase tracking-tighter"
-              >
-                room <span className="text-[#F25623]">booking</span> <br />
-                central.
-              </Typography>
-            </div>
-          </SlideIn>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 border-t-2 border-main-text pt-8">
-            <p className="text-xs font-bold leading-relaxed opacity-60 max-w-xs lowercase italic">
-              "Eliminating administrative friction through a centralized
-              scheduling engine. Optimized for high-traffic office
-              environments."
-            </p>
-            <div className="md:col-span-2 flex justify-end gap-12">
-              <div className="text-right">
-                <p className="text-[10px] font-black uppercase opacity-30">
-                  Stack
-                </p>
-                <p className="text-sm font-bold">Next.js + Supabase</p>
-              </div>
-              <div className="text-right">
-                <p className="text-[10px] font-black uppercase opacity-30">
-                  Deploy
-                </p>
-                <p className="text-sm font-bold">Vercel Edge</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 2: STATUS MONITORING (GRID STYLE) */}
-        <section className="mb-40 space-y-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {SYSTEM_CAPABILITIES.map((cap, i) => (
-              <div
-                key={i}
-                className="group p-6 border border-main-text/10 bg-main-text/2 hover:bg-[#F25623] transition-all duration-500"
-              >
-                <div className="flex justify-between items-start mb-8">
-                  <span className="text-[9px] font-mono group-hover:text-white/60 uppercase">
-                    [{cap.label}]
-                  </span>
-                  <span className="px-1.5 py-0.5 bg-[#F25623] group-hover:bg-white group-hover:text-[#F25623] text-white text-[8px] font-black uppercase">
-                    {cap.status}
-                  </span>
-                </div>
-                <p className="text-[11px] font-bold opacity-50 group-hover:text-white group-hover:opacity-100 uppercase tracking-wider">
-                  {cap.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* SECTION 3: INTERFACE PREVIEW - CALENDAR LOGIC */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-40">
-          <div className="lg:col-span-7 relative">
-            <div className="absolute -top-6 -right-6 text-[12vw] font-black opacity-[0.03] select-none pointer-events-none">
-              RESERVE
-            </div>
-
-            <div className="relative aspect-video bg-[#0d0d0d] border border-main-text/20 overflow-hidden shadow-2xl group">
-              {/* Mock UI: Scheduling Grid */}
-              <div className="absolute inset-0 p-8 flex flex-col gap-4">
-                <div className="flex gap-2">
-                  {[...Array(4)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="h-8 w-24 border border-white/10 bg-white/5"
-                    />
-                  ))}
-                </div>
-                <div className="flex-1 border border-white/10 relative overflow-hidden">
-                  <div className="absolute top-0 left-1/4 bottom-0 w-px bg-[#F25623]/40" />
-                  <div className="absolute top-1/2 left-1/4 right-10 h-10 bg-[#F25623] opacity-80 flex items-center px-4 text-[10px] font-black text-white">
-                    OCCUPIED: Sprint Planning
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-scanlines opacity-[0.05] pointer-events-none" />
-            </div>
-            <div className="mt-4 flex justify-between text-[9px] font-mono opacity-40">
-              <span>UI_MODE: DARK_DASHBOARD</span>
-              <span>REF_ID: ROOM_BOOK_001</span>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 space-y-8">
-            <Typography
-              variant="h2"
-              className="text-5xl font-black lowercase tracking-tighter leading-none"
-            >
-              Frictionless <br />{" "}
-              <span className="text-[#F25623]">Scheduling.</span>
-            </Typography>
-            <p className="text-sm font-medium opacity-70 leading-relaxed">
-              Kita fokus di **Conflict Prevention**. Gak boleh ada dua orang
-              booking ruangan yang sama di detik yang sama. Sistem pake
-              *pessimistic locking* di level database buat mastiin integritas
-              data jadwal bjir.
-            </p>
-            <div className="pt-6 space-y-4">
-              <div className="h-px w-full bg-main-text/10" />
-              <div className="flex justify-between items-center font-mono text-[10px]">
-                <span className="opacity-40 uppercase">Sync Speed</span>
-                <span className="text-[#F25623] font-black">FAST_ASYNC</span>
-              </div>
-              <div className="flex justify-between items-center font-mono text-[10px]">
-                <span className="opacity-40 uppercase">Integration</span>
-                <span className="text-[#F25623] font-black">
-                  GOOGLE_CAL_READY
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 4: DATABASE & REASONING */}
-        <section className="border-t border-main-text/10 pt-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            <div className="space-y-8">
-              <Typography className="text-xs font-black uppercase tracking-widest opacity-30">
-                // implementation_logic
-              </Typography>
-              <div className="space-y-6 text-sm font-medium opacity-70 leading-relaxed">
-                {project.content.map((p, i) => (
-                  <p
-                    key={i}
-                    className="border-l-2 border-main-text/10 pl-6 hover:border-[#F25623] transition-colors"
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
+            <div className="relative">
+              <SlideIn direction="up">
+                <div className="relative z-10">
+                  <Typography
+                    variant="h1"
+                    className="font-poppins font-black text-[10vw] md:text-[8vw] leading-[0.8] lowercase tracking-tighter"
                   >
-                    {p}
-                  </p>
-                ))}
-              </div>
+                    room <span className="text-[#F25623]">booking.</span> <br />
+                    centralized.
+                  </Typography>
+                  <RedactedOverlay
+                    text="STATUS: DEPLOYED_STABLE_V2"
+                    className="text-[3vw] -top-8 left-[15%] opacity-20 rotate-2"
+                  />
+                </div>
+              </SlideIn>
             </div>
 
-            <div className="relative aspect-square md:aspect-video lg:aspect-square bg-main-text text-main-bg p-10 flex flex-col justify-between">
-              <div className="space-y-6">
-                <div className="flex gap-1">
-                  {[...Array(8)].map((_, i) => (
-                    <div key={i} className="w-1.5 h-6 bg-main-bg/20" />
-                  ))}
+            <div className="md:w-80 mt-12">
+              <SlideIn delay={0.2}>
+                <div className="space-y-6">
+                  <div className="flex gap-1.5">
+                    {[...Array(6)].map((_, i) => (
+                      <div key={i} className="w-1.5 h-1.5 bg-[#F25623]" />
+                    ))}
+                  </div>
+                  <Typography className="text-sm font-bold leading-snug lowercase border-l-4 border-[#F25623] pl-4 opacity-80">
+                    "Eliminating administrative friction with a hardened
+                    scheduling engine. Built for concurrency, optimized for
+                    zero-conflict booking bjir."
+                  </Typography>
                 </div>
-                <Typography className="text-2xl font-black uppercase tracking-tighter leading-none">
-                  Schema <br /> Optimization.
-                </Typography>
-                <p className="text-[10px] font-bold opacity-60 uppercase leading-loose">
-                  Relasi antara User, Room, dan Booking di-optimize lewat
-                  indexing yang tepat. Query kenceng, user seneng, admin tenang
-                  bjir.
-                </p>
-              </div>
+              </SlideIn>
+            </div>
+          </div>
+        </section>
 
-              <div className="space-y-2">
-                <div className="h-px w-full bg-main-bg/20" />
-                <p className="text-[9px] font-mono opacity-40">
-                  © 2026 // ROOM_ENGINE_CORE
+        {/* METRICS SECTION */}
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-40">
+          {stats.map((stat, i) => (
+            <SlideIn key={stat.label} delay={i * 0.1}>
+              <div className="group relative p-6 border border-main-text/20 bg-main-text/2 hover:border-[#F25623]/50 transition-all duration-500">
+                <span className="text-[9px] font-mono opacity-40 uppercase tracking-widest block mb-4">
+                  {stat.label}
+                </span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl md:text-3xl font-black tracking-tighter text-[#00CC66]">
+                    {stat.after}
+                  </span>
+                  <span className="text-[10px] opacity-30 font-mono line-through">
+                    {stat.before}
+                  </span>
+                </div>
+                <div className="mt-4 h-0.5 w-full bg-main-text/10 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${stat.value}%` }}
+                    transition={{ duration: 1.5, ease: "circOut" }}
+                    className="h-full bg-[#00CC66]"
+                  />
+                </div>
+              </div>
+            </SlideIn>
+          ))}
+        </section>
+
+        {/* CAROUSEL SECTION */}
+        <section className="mb-40">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
+            <div className="space-y-2">
+              <Typography className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F25623]">
+                resource_visual_check
+              </Typography>
+              <Typography
+                variant="h2"
+                className="text-4xl md:text-5xl font-black lowercase tracking-tighter"
+              >
+                system{" "}
+                <span className="italic underline decoration-[#F25623]/30">
+                  interface.
+                </span>
+              </Typography>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={prevSlide}
+                className="px-6 py-3 border border-main-text/20 hover:bg-main-text hover:text-main-bg transition-all font-mono text-[10px] font-bold tracking-tighter"
+              >
+                PREV
+              </button>
+              <button
+                onClick={nextSlide}
+                className="px-6 py-3 border border-main-text/20 hover:bg-main-text hover:text-main-bg transition-all font-mono text-[10px] font-bold tracking-tighter"
+              >
+                NEXT
+              </button>
+            </div>
+          </div>
+
+          <div className="relative w-full h-100 md:h-162.5 bg-[#0a0a0a] border border-main-text/10 overflow-hidden group shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)]">
+            {/* Browser Header */}
+            <div className="absolute top-0 left-0 w-full p-4 flex justify-between items-center z-20 bg-main-bg/80 backdrop-blur-md border-b border-main-text/5">
+              <div className="flex gap-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#F25623]/40" />
+                <div className="w-2.5 h-2.5 rounded-full bg-main-text/10" />
+                <div className="w-2.5 h-2.5 rounded-full bg-main-text/10" />
+              </div>
+              <Typography className="text-[10px] font-mono opacity-50 tracking-widest uppercase truncate max-w-50">
+                {screenshots[currentIndex]?.split("/").pop()}
+              </Typography>
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, filter: "blur(10px)", scale: 1.05 }}
+                animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+                exit={{ opacity: 0, filter: "blur(10px)", scale: 0.95 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="relative w-full h-full pt-12"
+              >
+                <div className="w-full h-full overflow-y-auto custom-scrollbar">
+                  <Image
+                    src={screenshots[currentIndex]}
+                    alt="Room Booking Preview"
+                    width={1920}
+                    height={1080}
+                    className="w-full h-auto object-cover object-top"
+                    priority
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="absolute bottom-6 right-6 z-20">
+              <div className="px-3 py-1 bg-[#F25623] text-white font-mono text-[9px] font-bold">
+                {currentIndex + 1} / {screenshots.length}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* TECHNICAL DETAILS */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-main-text/10 pt-20">
+          <div className="lg:col-span-7 space-y-8">
+            <Typography className="text-[10px] font-black uppercase tracking-[0.4em] opacity-30">
+              // execution_protocol
+            </Typography>
+            <div className="space-y-6">
+              {project.content.map((p, i) => (
+                <p
+                  key={i}
+                  className="text-sm font-medium opacity-70 leading-relaxed border-l-2 border-[#F25623]/20 pl-6 hover:border-[#F25623] transition-colors"
+                >
+                  {p}
                 </p>
+              ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="bg-main-text text-main-bg p-8 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#F25623]/10 to-transparent h-24 w-full animate-scan" />
+              <Typography className="text-2xl font-black lowercase mb-8 relative z-10">
+                system <br /> <span className="text-[#F25623]">specs.</span>
+              </Typography>
+              <div className="space-y-4 font-mono text-[10px] font-bold uppercase relative z-10">
+                <div className="flex justify-between border-b border-main-bg/10 pb-2">
+                  <span className="opacity-40">stack</span>
+                  <span>next.js / supabase</span>
+                </div>
+                <div className="flex justify-between border-b border-main-bg/10 pb-2">
+                  <span className="opacity-40">concurrency</span>
+                  <span>pessimistic_lock</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="opacity-40">infra</span>
+                  <span className="text-[#00CC66]">vercel_edge</span>
+                </div>
               </div>
             </div>
           </div>
         </section>
       </div>
 
-      <footer className="mt-40 border-t border-main-text/10 py-12">
-        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center opacity-20">
-          <span className="text-[9px] font-black uppercase tracking-[0.5em]">
-            SYSTEM_END
-          </span>
+      <footer className="mt-40 border-t border-main-text/10 py-10 bg-main-text/2">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <Typography className="text-[9px] font-black uppercase tracking-[0.3em] opacity-30 italic">
+            © 2026 — RESOURCE_CORE // SYSTEM_OVERHAUL
+          </Typography>
           <div className="flex gap-4">
-            {[...Array(3)].map((_, i) => (
-              <div
-                key={i}
-                className="w-2 h-2 border border-main-text rotate-45"
-              />
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="w-1.5 h-1.5 bg-[#F25623] opacity-20" />
             ))}
           </div>
         </div>
       </footer>
+
+      <style jsx global>{`
+        @keyframes scan {
+          0% {
+            transform: translateY(-100%);
+          }
+          100% {
+            transform: translateY(400%);
+          }
+        }
+        .animate-scan {
+          animation: scan 4s linear infinite;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(242, 86, 35, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #f25623;
+        }
+      `}</style>
     </main>
   );
 }

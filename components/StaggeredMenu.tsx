@@ -206,6 +206,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           <div className="font-black text-sm tracking-tighter uppercase  text-white mix-blend-difference"></div>
           <button
             onClick={toggleMenu}
+            suppressHydrationWarning
             className="group flex items-center gap-4 outline-none text-white cursor-pointer pointer-events-auto"
           >
             <div className="h-5 overflow-hidden font-black uppercase text-xs tracking-widest text-right">

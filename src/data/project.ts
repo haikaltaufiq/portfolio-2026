@@ -74,7 +74,7 @@ const projectEntries: ProjectDetail[] = [
       "Website profil perusahaan dengan fokus storytelling brand dan performa.",
     description:
       "A high-performance company profile site with editorial layout, responsive interactions, and CMS-ready content blocks.",
-    tags: ["React", "Tailwind", "Framer Motion"],
+    tags: ["React", "Next.js", "Tailwind CSS"],
     tech: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
     content: [
       "Hasil akhirnya adalah website yang jauh lebih cepat dan konsisten, dengan identitas visual yang lebih tajam dibanding versi sebelumnya.",
@@ -93,7 +93,7 @@ const projectEntries: ProjectDetail[] = [
       "Aplikasi loyalty untuk point rewards, promo, dan engagement pelanggan.",
     description:
       "A mobile-first loyalty system that tracks transactions, reward points, and promotional campaigns with user-centric redemption flows.",
-    tags: ["React Native", "Firebase", "Node.js"],
+    tags: ["Laravel", "PHP", "MYSQL"],
     tech: ["React Native", "Firebase", "Node.js", "REST API"],
     content: [
       "Aplikasi ini dirancang untuk ningkatin repeat order lewat sistem poin dan kupon yang gampang dipakai user. Prioritasnya ada di kecepatan check-point dan claim reward.",
@@ -153,7 +153,7 @@ const projectEntries: ProjectDetail[] = [
       "An internal company room reservation website for managing meeting schedules and booking.",
     description:
       "A mobile-first loyalty system that tracks transactions, reward points, and promotional campaigns with user-centric redemption flows.",
-    tags: ["Laravel", "MySQL"],
+    tags: ["Laravel", "PHP", "MySQL"],
     tech: ["Laravel", "MySQL"],
     content: [
       "Dampaknya cukup terasa di retention karena user jadi punya alasan balik transaksi dan semua histori reward bisa dipantau langsung dari aplikasi.",
@@ -172,7 +172,7 @@ const projectEntries: ProjectDetail[] = [
       "A simple crud web for managing waste payment in residential areas.",
     description:
       "A mobile-first loyalty system that tracks transactions, reward points, and promotional campaigns with user-centric redemption flows.",
-    tags: ["Laravel", "MySQL"],
+    tags: ["Laravel", "PHP", "MySQL"],
     tech: ["Laravel", "MySQL"],
     content: [
       "Dampaknya cukup terasa di retention karena user jadi punya alasan balik transaksi dan semua histori reward bisa dipantau langsung dari aplikasi.",
