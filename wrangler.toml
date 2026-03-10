@@ -1,24 +1,10 @@
-name = "portofolio-website"
-type = "javascript"
-account_id = ""
-workers_dev = true
-routes = []
-zone_id = ""
+# Cloudflare Pages configuration for Next.js
+# This file is for Cloudflare Pages deployment
 
-[env.production]
-name = "portofolio-website-prod"
-workers_dev = false
-routes = [
-  {
-    pattern = "example.com/*",
-    zone_id = ""
-  }
+# Enable caching for Pages builds
+pages_build_caching = true
+
+# Compatibility for Node.js features
+compatibility_flags = [
+  "nodejs_compat"
 ]
-
-[build]
-command = "npm run build"
-cwd = "./"
-watch_paths = ["src/**/*.ts", "src/**/*.tsx"]
-
-[build.upload]
-format = "service-worker"

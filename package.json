@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
+    "deploy": "npm run build && wrangler pages deploy .next",
+    "preview": "npm run build"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
