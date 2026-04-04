@@ -175,7 +175,7 @@ export default function HeroSection() {
       {/* 4. Side Name (Fixed Position) */}
       <motion.div
         style={{ y: useTransform(dy, [-500, 500], [-20, 20]) }}
-        className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-5 pointer-events-none z-10 hidden lg:block"
+        className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-5 pointer-events-none z-10 lg:block"
       >
         <div className="-rotate-90 origin-center translate-x-1/2">
           <Typography className="text-8xl md:text-9xl font-black lowercase tracking-tighter whitespace-nowrap leading-none">
