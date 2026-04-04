@@ -189,7 +189,7 @@ export default function AboutPage() {
                     <span className="text-[#F25623] underline decoration-2 underline-offset-4">
                       technical precision
                     </span>{" "}
-                    meets raw digital aesthetics bjir."
+                    meets raw digital aesthetics."
                   </Typography>
                 </div>
               </SlideIn>
@@ -320,7 +320,7 @@ export default function AboutPage() {
                 year="2025 - 2026"
                 role="Software Developer"
                 company="PT Kreatif System Indonesia"
-                desc="Architecting scalable internal ecosystems and cross-platform integrations—from streamlining HR workflows and customer loyalty engines to crafting high-performance corporate web experiences bjir."
+                desc="Architecting scalable internal ecosystems and cross-platform integrations—from streamlining HR workflows and customer loyalty engines to crafting high-performance corporate web experiences."
               />
               <ExperienceCard
                 year="2024 - 2025"

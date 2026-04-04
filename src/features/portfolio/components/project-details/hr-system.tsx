@@ -206,7 +206,7 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
 
           <div className="lg:col-span-5 flex lg:justify-end lg:sticky lg:top-24">
             <motion.a
-              href="https://jurnal.polibatam.ac.id/index.php/JAMN/article/view/12101/3310" // Ganti link aslinya di sini bjir
+              href="https://jurnal.polibatam.ac.id/index.php/JAMN/article/view/12101/3310" // Ganti link aslinya di sini
               target="_blank"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

@@ -6,6 +6,7 @@ import AboutSection from "../components/sections/AboutSection";
 import ContactSection from "../components/sections/ContactSection";
 import HeroSection from "../components/sections/HeroSection";
 import ProjectsSection from "../components/sections/ProjectSection";
+import TrackRecord from "../components/sections/TrackRecord";
 
 export default function HomePage() {
   return (
@@ -17,7 +18,7 @@ export default function HomePage() {
         <div className="relative z-10">
           <HeroSection />
           <AboutSection />
-
+          <TrackRecord />
           <ProjectsSection />
           <ContactSection />
         </div>

@@ -148,7 +148,6 @@ export default function ComproDetail({ project }: ComproDetailProps) {
             </div>
 
             <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">
-              {/* Button View Website - Gaya Industrial bjir */}
               <a
                 href="https://company-profile-ksi.vercel.app/"
                 target="_blank"

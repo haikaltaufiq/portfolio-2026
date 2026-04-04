@@ -146,9 +146,9 @@ export default function GarbagePaymentDetail({
             </div>
 
             <p className="text-sm font-medium opacity-70 leading-relaxed">
-              Di proyek ini gua gak neko-neko bjir. Fokus utamanya adalah
-              **Input Accuracy** sama **Filter Data**. Admin komplek bisa cek
-              siapa aja yang belum bayar dalam hitungan detik.
+              Di proyek ini gua gak neko-neko. Fokus utamanya adalah **Input
+              Accuracy** sama **Filter Data**. Admin komplek bisa cek siapa aja
+              yang belum bayar dalam hitungan detik.
             </p>
 
             <ul className="space-y-3">
@@ -197,8 +197,7 @@ export default function GarbagePaymentDetail({
               </Typography>
               <p className="text-[10px] font-bold opacity-50 uppercase leading-relaxed max-w-70">
                 Database dirancang minimalis buat ngurangin overhead. Relasi
-                simpel antara warga dan transaksi biar query-nya secepat kilat
-                bjir.
+                simpel antara warga dan transaksi biar query-nya secepat kilat .
               </p>
             </div>
           </div>

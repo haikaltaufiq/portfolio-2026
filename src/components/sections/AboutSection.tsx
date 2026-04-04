@@ -9,8 +9,7 @@ import lineAnim from "../../lotties/men-white.json";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
-// --- Sub-Components ---
-
+// --- Sub-Components (Tetep Sama) ---
 const RedactedOverlay = ({
   text,
   className = "",
@@ -51,17 +50,12 @@ const MarqueeText = ({
       ))}
     </div>
   );
-
   return (
     <div className="relative w-full overflow-hidden border-y-2 border-main-text bg-main-text text-main-bg -rotate-1 select-none group my-20">
       <motion.div
         className="flex w-max"
         animate={{ x: ["0%", "-50%"] }}
-        transition={{
-          duration: speed,
-          repeat: Infinity,
-          ease: "linear",
-        }}
+        transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
       >
         {marqueeContent}
         {marqueeContent}
@@ -71,12 +65,10 @@ const MarqueeText = ({
 };
 
 // --- Main Component ---
-
 export default function AboutSection() {
   const lottieRef = useRef<any>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Mouse tilt effect for Identity Card
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const mouseXSpring = useSpring(x);
@@ -87,12 +79,8 @@ export default function AboutSection() {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
     x.set(xPct);
     y.set(yPct);
   };
@@ -103,9 +91,7 @@ export default function AboutSection() {
   };
 
   useEffect(() => {
-    if (lottieRef.current) {
-      lottieRef.current.setSpeed(0.5);
-    }
+    if (lottieRef.current) lottieRef.current.setSpeed(0.5);
   }, []);
 
   return (
@@ -122,9 +108,93 @@ export default function AboutSection() {
           </Typography>
         </motion.div>
 
+        {/* Grid Container */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-start relative z-10">
-          <div className="md:col-span-7">
+          {/* RIGHT COLUMN (About Text) - Sekarang ditaruh di atas secara kode, tapi diatur ordernya */}
+          <div className="md:col-span-5 flex flex-col gap-12 pt-4 order-first md:order-last">
             <SlideIn delay={0.2}>
+              <div className="relative group cursor-default">
+                <div className="relative inline-block">
+                  <Typography
+                    variant="h2"
+                    className="font-poppins font-black text-4xl lowercase relative z-10 transition-transform group-hover:translate-x-2"
+                  >
+                    about me.
+                  </Typography>
+                  <RedactedOverlay
+                    text="tanya aja"
+                    className="text-[50px] -top-3 left-0"
+                  />
+                </div>
+                <div className="mt-6 space-y-4">
+                  <p className="text-main-text opacity-70 text-[14px] leading-relaxed font-medium">
+                    I combine technical skills in front-end and back-end
+                    development with a creative approach to multimedia
+                    solutions.
+                  </p>
+                  <motion.div
+                    whileInView={{ scaleX: [0, 1] }}
+                    className="w-12 h-0.5 bg-[#F25623] origin-left"
+                  />
+                </div>
+              </div>
+            </SlideIn>
+
+            <SlideIn delay={0.4}>
+              <motion.div
+                whileHover={{ backgroundColor: "rgba(242, 86, 35, 0.08)" }}
+                className="relative border-2 border-main-text/10 bg-main-text/5 p-8 group hover:border-[#F25623]/30 transition-all duration-500"
+              >
+                <div className="absolute top-0 right-0 p-2 text-[8px] font-mono opacity-20 uppercase tracking-tighter group-hover:opacity-100 transition-opacity">
+                  File Ref: HT 009 // {new Date().getFullYear()}
+                </div>
+                <div className="relative inline-block mb-8">
+                  <Typography
+                    variant="h2"
+                    className="font-poppins font-black text-3xl lowercase leading-none z-10 relative"
+                  >
+                    interested in
+                  </Typography>
+                  <RedactedOverlay
+                    text="coding mampus"
+                    className="text-[30px] top-0 left-0"
+                  />
+                </div>
+                <div className="space-y-6 relative">
+                  <div className="relative">
+                    <p className="text-main-text opacity-80 text-[13px] leading-relaxed font-mono group-hover:text-white transition-colors">
+                      {">"} fullstack architecture <br />
+                      {">"} interactive ui experiences <br />
+                      {">"} mobile system integration
+                    </p>
+                    <RedactedOverlay
+                      text="error itu seni"
+                      className="text-[20px] -top-2 left-0 opacity-10 group-hover:opacity-20"
+                    />
+                  </div>
+                  <p className="text-main-text/50 text-[11px] uppercase tracking-widest font-semibold leading-tight group-hover:text-[#F25623] transition-colors">
+                    "Driven by continuous learning and the chaos of innovation."
+                  </p>
+                </div>
+                <motion.a
+                  href="/about"
+                  whileHover={{ x: 10 }}
+                  className="mt-5 flex items-center gap-3 text-main-text group/btn w-fit"
+                >
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] group-hover/btn:text-[#F25623] transition-colors">
+                    access full bio
+                  </span>
+                  <div className="w-8 h-8 rounded-full border border-main-text/30 flex items-center justify-center text-[10px] group-hover/btn:bg-[#F25623] group-hover/btn:border-[#F25623] transition-all">
+                    →
+                  </div>
+                </motion.a>
+              </motion.div>
+            </SlideIn>
+          </div>
+
+          {/* LEFT COLUMN (Identity Card) */}
+          <div className="md:col-span-7 order-last md:order-first">
+            <SlideIn delay={0.6}>
               <motion.div
                 ref={cardRef}
                 onMouseMove={handleMouseMove}
@@ -132,14 +202,11 @@ export default function AboutSection() {
                 style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
                 className="relative group cursor-crosshair"
               >
-                {/* Corner Accents with Glow */}
                 <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-[#F25623] z-20 transition-all group-hover:-top-4 group-hover:-left-4" />
                 <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-[#F25623] z-20 transition-all group-hover:-bottom-4 group-hover:-right-4" />
 
                 <div className="bg-main-text rounded-sm p-5 text-black relative overflow-hidden shadow-2xl">
-                  {/* Digital Scanline Effect */}
                   <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.05)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] z-10 bg-size-[100%_2px,3px_100%] pointer-events-none" />
-
                   <div className="flex justify-between items-center mb-4 border-b border-black/10 pb-2">
                     <div className="flex gap-1.5">
                       {[...Array(3)].map((_, i) => (
@@ -175,7 +242,7 @@ export default function AboutSection() {
                     <motion.div whileHover={{ x: 5 }}>
                       <Typography
                         variant="h2"
-                        className="font-poppins font-black text-5xl tracking-tighter lowercase leading-none"
+                        className="font-poppins font-black text-4xl md:text-5xl tracking-tighter lowercase leading-none"
                       >
                         haikal taufiq.
                       </Typography>
@@ -221,93 +288,8 @@ export default function AboutSection() {
               </motion.div>
             </SlideIn>
           </div>
-
-          <div className="md:col-span-5 flex flex-col gap-12 pt-4">
-            <SlideIn delay={0.4}>
-              <div className="relative group cursor-default">
-                <div className="relative inline-block">
-                  <Typography
-                    variant="h2"
-                    className="font-poppins font-black text-4xl lowercase relative z-10 transition-transform group-hover:translate-x-2"
-                  >
-                    about me.
-                  </Typography>
-                  <RedactedOverlay
-                    text="tanya aja"
-                    className="text-[50px] -top-3 left-0"
-                  />
-                </div>
-                <div className="mt-6 space-y-4">
-                  <p className="text-main-text opacity-70 text-[14px] leading-relaxed font-medium">
-                    I combine technical skills in front-end and back-end
-                    development with a creative approach to multimedia
-                    solutions.
-                  </p>
-                  <motion.div
-                    whileInView={{ scaleX: [0, 1] }}
-                    className="w-12 h-0.5 bg-[#F25623] origin-left"
-                  />
-                </div>
-              </div>
-            </SlideIn>
-
-            <SlideIn delay={0.6}>
-              <motion.div
-                whileHover={{ backgroundColor: "rgba(242, 86, 35, 0.08)" }}
-                className="relative border-2 border-main-text/10 bg-main-text/5 p-8 group hover:border-[#F25623]/30 transition-all duration-500"
-              >
-                <div className="absolute top-0 right-0 p-2 text-[8px] font-mono opacity-20 uppercase tracking-tighter group-hover:opacity-100 transition-opacity">
-                  File Ref: HT 009 // {new Date().getFullYear()}
-                </div>
-
-                <div className="relative inline-block mb-8">
-                  <Typography
-                    variant="h2"
-                    className="font-poppins font-black text-3xl lowercase leading-none z-10 relative"
-                  >
-                    interested in
-                  </Typography>
-                  <RedactedOverlay
-                    text="coding mampus"
-                    className="text-[30px] top-0 left-0"
-                  />
-                </div>
-
-                <div className="space-y-6 relative">
-                  <div className="relative">
-                    <p className="text-main-text opacity-80 text-[13px] leading-relaxed font-mono group-hover:text-white transition-colors">
-                      {">"} fullstack architecture <br />
-                      {">"} interactive ui experiences <br />
-                      {">"} mobile system integration
-                    </p>
-                    <RedactedOverlay
-                      text="error itu seni"
-                      className="text-[20px] -top-2 left-0 opacity-10 group-hover:opacity-20"
-                    />
-                  </div>
-                  <p className="text-main-text/50 text-[11px] uppercase tracking-widest font-semibold leading-tight group-hover:text-[#F25623] transition-colors">
-                    "Driven by continuous learning and the chaos of innovation."
-                  </p>
-                </div>
-
-                <motion.a
-                  href="/about"
-                  whileHover={{ x: 10 }}
-                  className="mt-5 flex items-center gap-3 text-main-text group/btn w-fit"
-                >
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] group-hover/btn:text-[#F25623] transition-colors">
-                    access full bio
-                  </span>
-                  <div className="w-8 h-8 rounded-full border border-main-text/30 flex items-center justify-center text-[10px] group-hover/btn:bg-[#F25623] group-hover/btn:border-[#F25623] transition-all">
-                    →
-                  </div>
-                </motion.a>
-              </motion.div>
-            </SlideIn>
-          </div>
         </div>
       </div>
-
       <MarqueeText text="SYSTEM ONLINE ~ STABLE BUILD 2026 ~ MULTIMEDIA ENGINEERING" />
     </section>
   );

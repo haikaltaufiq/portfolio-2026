@@ -28,7 +28,7 @@ const RedactedOverlay = ({
 export default function RoomBookingDetail({ project }: RoomBookingDetailProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Asset sinkron sesuai image_874166.png bjir
+  // Asset sinkron sesuai image_874166.png
   const screenshots = [
     "/assets/room-booking/dashboard.png",
     "/assets/room-booking/apply-room.png",
@@ -93,7 +93,7 @@ export default function RoomBookingDetail({ project }: RoomBookingDetailProps) {
                   <Typography className="text-sm font-bold leading-snug lowercase border-l-4 border-[#F25623] pl-4 opacity-80">
                     "Eliminating administrative friction with a hardened
                     scheduling engine. Built for concurrency, optimized for
-                    zero-conflict booking bjir."
+                    zero-conflict booking."
                   </Typography>
                 </div>
               </SlideIn>

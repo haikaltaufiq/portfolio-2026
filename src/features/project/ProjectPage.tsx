@@ -282,7 +282,7 @@ export default function ProjectsPage() {
                       NOT FOUND
                     </Typography>
                     <Typography className="text-sm font-bold opacity-30 italic lowercase">
-                      catatan tidak ditemukan dalam database bjir.
+                      catatan tidak ditemukan dalam database .
                     </Typography>
                   </div>
                 )}

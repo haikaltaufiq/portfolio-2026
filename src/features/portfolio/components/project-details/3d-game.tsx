@@ -51,7 +51,7 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
 
   return (
     <main className="min-h-screen bg-transparent text-main-text pt-24 pb-10 overflow-x-hidden selection:bg-[#F25623] selection:text-white relative">
-      {/* Background Elements - Biar seirama sama Compro bjir */}
+      {/* Background Elements - Biar seirama sama Compro */}
       <div className="fixed inset-0 -z-20 bg-main-bg" />
       <div className="fixed inset-0 -z-10 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px]" />
       <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
@@ -151,7 +151,7 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
                 system_objective
               </div>
               <p className="text-white text-xl font-black tracking-tighter drop-shadow-lg lowercase">
-                Integrasi Serial Port Arduino Uno &lt;&gt; Unity Logic bjir.
+                Integrasi Serial Port Arduino Uno &lt;&gt; Unity Logic.
               </p>
             </div>
           </div>
@@ -205,7 +205,7 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
             {galleryImages.map((img, i) => (
               <SlideIn key={i} delay={i * 0.1}>
                 <div className="group relative aspect-video border border-main-text/10 bg-[#0a0a0a] overflow-hidden p-6 flex items-center justify-center">
-                  {/* Blur background buat ngisi area kosong biar gak kepotong bjir */}
+                  {/* Blur background buat ngisi area kosong biar gak kepotong */}
                   <Image
                     src={img.src}
                     alt=""

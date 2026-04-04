@@ -11,7 +11,6 @@ type CustomerDetailProps = {
   project: ProjectDetail;
 };
 
-// Data gambar dari screenshot lo, sesuaikan path-nya bjir
 const PROJECT_GALLERY = [
   {
     id: 1,
@@ -127,7 +126,7 @@ export default function CustomerDetail({ project }: CustomerDetailProps) {
             <p className="text-lg opacity-60 leading-relaxed max-w-xl font-medium border-l-4 border-[#F25623] pl-6 py-2">
               Visualizing the architecture of high-performance ecosystems. From
               automated IoT feeders to enterprise-grade resource management
-              systems bjir.
+              systems.
             </p>
           </div>
 
@@ -311,11 +310,11 @@ export default function CustomerDetail({ project }: CustomerDetailProps) {
         >
           <span>
             analyze • build • deploy • iterate • scale • optimize • analyze •
-            build • deploy • iterate • scale • optimize bjir •{" "}
+            build • deploy • iterate • scale • optimize •{" "}
           </span>
           <span>
             analyze • build • deploy • iterate • scale • optimize • analyze •
-            build • deploy • iterate • scale • optimize bjir •{" "}
+            build • deploy • iterate • scale • optimize •{" "}
           </span>
         </motion.div>
       </footer>
