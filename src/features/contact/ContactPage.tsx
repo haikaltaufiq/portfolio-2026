@@ -2,10 +2,12 @@
 
 import SlideIn from "@/src/components/animation/SlideIn";
 import Typography from "@/src/components/ui/Typhography";
-import React from "react";
+import {
+  CONTACT_EMAIL_MAX_LENGTH,
+  CONTACT_MESSAGE_MAX_LENGTH,
+} from "@/src/lib/contact";
+import { useContactForm } from "@/src/features/contact/useContactForm";
 import { motion } from "framer-motion";
-
-// --- SUB-COMPONENTS ---
 
 const RedactedOverlay = ({
   text,
@@ -15,7 +17,7 @@ const RedactedOverlay = ({
   className?: string;
 }) => (
   <Typography
-    className={`absolute font-redacted text-[#F25623] opacity-30 mix-blend-difference pointer-events-none tracking-normal whitespace-nowrap z-0 ${className}`}
+    className={`pointer-events-none absolute z-0 font-redacted tracking-normal whitespace-nowrap text-[#F25623] opacity-30 mix-blend-difference ${className}`}
   >
     {text}
   </Typography>
@@ -39,15 +41,15 @@ const SocialCard = ({
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ x: 10, backgroundColor: "#F25623", color: "#fff" }}
-        className="group relative block border border-main-text/30 p-6 md:p-8 transition-all duration-300"
+        className="group relative block border border-main-text/30 p-6 transition-all duration-300 md:p-8"
       >
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-10 transition-opacity overflow-hidden pointer-events-none">
-          <span className="text-6xl font-black italic uppercase tracking-tighter whitespace-nowrap">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden opacity-0 transition-opacity group-hover:opacity-10">
+          <span className="whitespace-nowrap text-6xl font-black tracking-tighter italic uppercase">
             {title} {title} {title}
           </span>
         </div>
 
-        <div className="relative z-10 flex justify-between items-center">
+        <div className="relative z-10 flex items-center justify-between">
           <div className="space-y-2">
             <div className="flex items-center gap-3">
               <span className="text-[10px] font-black opacity-30 group-hover:opacity-100">
@@ -55,22 +57,22 @@ const SocialCard = ({
               </span>
               <Typography
                 variant="h2"
-                className="text-3xl md:text-4xl font-black lowercase tracking-tighter leading-none"
+                className="text-3xl leading-none font-black tracking-tighter lowercase md:text-4xl"
               >
                 {title}.
               </Typography>
             </div>
             <div className="space-y-0">
-              <p className="text-[8px] font-semibold uppercase tracking-[0.4em] opacity-40 group-hover:text-white">
+              <p className="text-[8px] font-semibold tracking-[0.4em] opacity-40 uppercase group-hover:text-white">
                 established connection via
               </p>
-              <p className="text-base md:text-lg font-bold font-mono tracking-tighter group-hover:italic">
+              <p className="text-base font-bold tracking-tighter font-mono group-hover:italic md:text-lg">
                 {handle}
               </p>
             </div>
           </div>
 
-          <div className="w-12 h-12 border border-main-text/30 rounded-full flex items-center justify-center group-hover:rotate-45 group-hover:border-white transition-all duration-500">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-main-text/30 transition-all duration-500 group-hover:rotate-45 group-hover:border-white">
             <svg
               width="24"
               height="24"
@@ -88,9 +90,17 @@ const SocialCard = ({
   );
 };
 
-// --- MAIN PAGE ---
-
 export default function ContactPage() {
+  const { form, status, feedback, isSubmitting, onFieldChange, onSubmit } =
+    useContactForm();
+
+  const feedbackClassName =
+    status === "error"
+      ? "text-red-500"
+      : status === "success"
+        ? "text-green-500"
+        : "text-[#F25623]";
+
   const socialLinks = [
     {
       title: "LinkedIn",
@@ -115,27 +125,26 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-transparent text-main-text pt-24 pb-10 overflow-hidden selection:bg-[#F25623] selection:text-white relative">
+    <main className="relative min-h-screen overflow-hidden bg-transparent pt-24 pb-10 text-main-text selection:bg-[#F25623] selection:text-white">
       <div className="fixed inset-0 -z-20 bg-main-bg" />
-      <div className="fixed inset-0 -z-10 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px]" />
-      <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="fixed inset-0 -z-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px] opacity-[0.03]" />
+      <div className="pointer-events-none fixed top-0 left-0 -z-10 h-full w-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02]" />
 
-      <div className="fixed top-20 right-[-5%] rotate-90 origin-right opacity-[0.02] pointer-events-none select-none">
+      <div className="pointer-events-none fixed top-20 right-[-5%] origin-right rotate-90 opacity-[0.02] select-none">
         <Typography className="text-[15vh] font-black tracking-tighter uppercase">
           Contact System v1.0
         </Typography>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 relative">
-        {/* HEADER */}
+      <div className="relative mx-auto max-w-6xl px-6">
         <section className="relative mb-16">
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
+          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
             <div className="relative">
               <SlideIn direction="up">
                 <div className="relative z-10">
                   <Typography
                     variant="h1"
-                    className="font-poppins font-black text-[15vw] md:text-[10vw] leading-[0.8] lowercase tracking-tighter"
+                    className="font-poppins text-[15vw] leading-[0.8] font-black tracking-tighter lowercase md:text-[10vw]"
                   >
                     get in
                     <br />
@@ -143,26 +152,27 @@ export default function ContactPage() {
                   </Typography>
                   <RedactedOverlay
                     text="STATUS: URGENT"
-                    className="text-[4vw] -top-6 left-[30%] opacity-20 rotate-6"
+                    className="-top-6 left-[30%] rotate-6 text-[4vw] opacity-20"
                   />
                 </div>
               </SlideIn>
-              <div className="absolute -top-10 -left-10 text-[16vw] font-black opacity-[0.02] select-none tracking-tight pointer-events-none -rotate-2">
+              <div className="pointer-events-none absolute -top-10 -left-10 -rotate-2 select-none text-[16vw] font-black tracking-tight opacity-[0.02]">
                 CONTACT
               </div>
             </div>
 
-            <div className="md:w-75 mt-4">
+            <div className="mt-4 md:w-75">
               <SlideIn delay={0.2}>
                 <div className="space-y-4">
                   <div className="flex gap-1.5">
                     {[...Array(6)].map((_, i) => (
-                      <div key={i} className="w-1 h-1 bg-[#F25623]" />
+                      <div key={i} className="h-1 w-1 bg-[#F25623]" />
                     ))}
                   </div>
-                  <Typography className="text-sm font-bold leading-snug lowercase border-l-4 border-[#F25623] pl-4 opacity-80">
-                    "Got a bold idea or just want to discuss tech over coffee?
-                    Feel free to reach out, I’m always open to new connections."
+                  <Typography className="border-l-4 border-[#F25623] pl-4 text-sm leading-snug font-bold lowercase opacity-80">
+                    &ldquo;Got a bold idea or just want to discuss tech over
+                    coffee? Feel free to reach out, I&apos;m always open to new
+                    connections.&rdquo;
                   </Typography>
                 </div>
               </SlideIn>
@@ -170,47 +180,61 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* SYSTEM GRID */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* LEFT: STATUS LOG & FORM */}
-          <div className="lg:col-span-5 space-y-10.5">
-            <Typography className="text-sm font-bold leading-snug lowercase border-b pb-4 border-main-text/20  opacity-80">
-              "Have a vision to build or a system to scale? I'm ready to turn
-              complex ideas into functional reality. Let’s connect and build
-              something impactful."
+        <section className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="space-y-10.5 lg:col-span-5">
+            <Typography className="border-b border-main-text/20 pb-4 text-sm leading-snug font-bold lowercase opacity-80">
+              &ldquo;Have a vision to build or a system to scale? I&apos;m ready
+              to turn complex ideas into functional reality. Let&apos;s connect
+              and build something impactful.&rdquo;
             </Typography>
 
-            {/* MESSAGE FORM */}
             <SlideIn delay={0.3}>
-              <form className="space-y-6">
+              <form onSubmit={onSubmit} noValidate className="space-y-6">
                 <div className="relative">
-                  <Typography className="text-[9px] font-black uppercase tracking-[0.4em] text-[#F25623] mb-2">
-                    01 // Identification (Email)
+                  <Typography className="mb-2 text-[11px] font-semibold tracking-[0.4em] text-[#F25623] uppercase">
+                    YOUR EMAIL ADDRESS
                   </Typography>
                   <input
+                    name="email"
                     type="email"
                     placeholder="user@system.com"
-                    className="w-full bg-transparent border-b border-main-text/20 py-3 outline-none focus:border-[#F25623] transition-colors font-mono text-xs uppercase placeholder:opacity-20"
+                    value={form.email}
+                    onChange={onFieldChange}
+                    autoComplete="email"
+                    maxLength={CONTACT_EMAIL_MAX_LENGTH}
+                    disabled={isSubmitting}
+                    required
+                    className="w-full border-b border-main-text/20 bg-transparent py-3 font-mono text-xs  outline-none transition-colors placeholder:opacity-20 focus:border-[#F25623]"
                   />
                 </div>
 
                 <div className="relative">
-                  <Typography className="text-[9px] font-black uppercase tracking-[0.4em] text-[#F25623] mb-2">
-                    02 // Transmission (Message)
+                  <Typography className="mb-2 text-[11px] font-semibold tracking-[0.4em] text-[#F25623] uppercase">
+                    Message
                   </Typography>
                   <textarea
+                    name="message"
                     rows={4}
                     placeholder="enter data envelope..."
-                    className="w-full bg-transparent border-b border-main-text/20 py-3 outline-none focus:border-[#F25623] transition-colors font-mono text-xs uppercase placeholder:opacity-20 resize-none"
+                    value={form.message}
+                    onChange={onFieldChange}
+                    maxLength={CONTACT_MESSAGE_MAX_LENGTH}
+                    disabled={isSubmitting}
+                    required
+                    className="w-full resize-none border-b border-main-text/20 bg-transparent py-3 font-mono text-xs  outline-none transition-colors placeholder:opacity-20 focus:border-[#F25623]"
                   />
                 </div>
 
                 <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 bg-[#F25623] text-white font-black uppercase text-[10px] tracking-[0.5em] flex items-center justify-center gap-3 group"
+                  className="group flex w-full items-center justify-center gap-3 bg-[#F25623] py-4 text-[10px] font-black tracking-[0.5em] text-white uppercase disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Execute Transmission
+                  {isSubmitting
+                    ? "Sending Transmission"
+                    : "Execute Transmission"}
                   <svg
                     width="16"
                     height="16"
@@ -218,33 +242,43 @@ export default function ContactPage() {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="3"
-                    className="group-hover:translate-x-1 transition-transform"
+                    className="transition-transform group-hover:translate-x-1"
                   >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </motion.button>
+
+                {feedback ? (
+                  <p
+                    role="status"
+                    aria-live="polite"
+                    className={`text-xs font-bold tracking-[0.2em] uppercase ${feedbackClassName}`}
+                  >
+                    {feedback}
+                  </p>
+                ) : null}
               </form>
             </SlideIn>
 
             <SlideIn>
-              <div className="group relative p-8 bg-main-text text-main-bg overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#F25623]/10 to-transparent h-20 w-full animate-scan z-0" />
+              <div className="group relative overflow-hidden bg-main-text p-8 text-main-bg shadow-2xl">
+                <div className="absolute inset-0 z-0 h-20 w-full animate-scan bg-linear-to-b from-transparent via-[#F25623]/10 to-transparent" />
                 <div className="relative z-10">
                   <Typography
                     variant="h3"
-                    className="text-2xl font-black lowercase mb-6 flex items-center gap-2"
+                    className="mb-6 flex items-center gap-2 text-2xl font-black lowercase"
                   >
-                    <span className="w-1.5 h-6 bg-[#F25623]" /> status log
+                    <span className="h-6 w-1.5 bg-[#F25623]" /> status log
                   </Typography>
 
                   <div className="space-y-6">
                     <div className="flex items-center gap-3">
                       <div className="relative flex items-center justify-center">
-                        <div className="w-3 h-3 bg-[#F25623] rounded-full animate-ping absolute" />
-                        <div className="w-3 h-3 bg-[#F25623] rounded-full relative" />
+                        <div className="absolute h-3 w-3 animate-ping rounded-full bg-[#F25623]" />
+                        <div className="relative h-3 w-3 rounded-full bg-[#F25623]" />
                       </div>
                       <div>
-                        <Typography className="font-black uppercase tracking-widest text-[11px] leading-none">
+                        <Typography className="text-[11px] leading-none font-black tracking-widest uppercase">
                           Online / Available
                         </Typography>
                         <p className="text-[9px] font-bold opacity-50 uppercase">
@@ -252,8 +286,8 @@ export default function ContactPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="p-4 border border-main-bg/10 bg-main-bg/5 backdrop-blur-sm">
-                      <p className="text-[10px] font-mono leading-relaxed lowercase">
+                    <div className="border border-main-bg/10 bg-main-bg/5 p-4 backdrop-blur-sm">
+                      <p className="text-[10px] leading-relaxed font-mono lowercase">
                         <span className="text-[#F25623]">Location:</span> Batam,
                         ID
                         <br />
@@ -267,10 +301,9 @@ export default function ContactPage() {
             </SlideIn>
           </div>
 
-          {/* RIGHT: SOCIAL NODES */}
-          <div className="lg:col-span-7 flex flex-col gap-3">
-            <div className="flex items-center gap-4 mb-2">
-              <Typography className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-30">
+          <div className="flex flex-col gap-3 lg:col-span-7">
+            <div className="mb-2 flex items-center gap-4">
+              <Typography className="text-[10px] font-bold tracking-[0.4em] opacity-30 uppercase">
                 social nodes
               </Typography>
               <div className="h-px flex-1 bg-main-text/10" />
@@ -289,9 +322,8 @@ export default function ContactPage() {
         </section>
       </div>
 
-      {/* FOOTER */}
       <footer className="mt-24">
-        <div className="relative border-y border-main-text/20 py-6 overflow-hidden bg-main-text/2">
+        <div className="relative overflow-hidden border-y border-main-text/20 bg-main-text/2 py-6">
           <motion.div
             animate={{ x: [0, -1000] }}
             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
@@ -300,24 +332,24 @@ export default function ContactPage() {
             {[...Array(8)].map((_, i) => (
               <Typography
                 key={i}
-                className="text-[10px] font-black uppercase tracking-[0.5em] opacity-10"
+                className="text-[10px] font-black tracking-[0.5em] opacity-10 uppercase"
               >
-                • batam • indonesia •
+                &bull; batam &bull; indonesia &bull;
               </Typography>
             ))}
           </motion.div>
         </div>
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center py-6 gap-4">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row">
           <div className="flex items-center gap-3">
-            <div className="px-2 py-0.5 border border-main-text/30 font-black text-[9px] uppercase">
+            <div className="border border-main-text/30 px-2 py-0.5 text-[9px] font-black uppercase">
               v1.0.4
             </div>
-            <Typography className="text-[9px] font-black uppercase tracking-widest opacity-30">
+            <Typography className="text-[9px] font-black tracking-widest opacity-30 uppercase">
               all systems operational
             </Typography>
           </div>
-          <Typography className="text-[9px] font-black uppercase tracking-widest italic opacity-50">
-            © 2026 — [DESIGNED TO DISRUPT]
+          <Typography className="text-[9px] font-black tracking-widest opacity-50 italic uppercase">
+            &copy; 2026 - [DESIGNED TO DISRUPT]
           </Typography>
         </div>
       </footer>
