@@ -13,9 +13,9 @@ export const infoList = [
     title: "human resource",
     overlayText: "SINTA_5_INDEXED",
     descriptions: [
-      "This project focuses on the integrated Human Resource Information System (HRIS) for PT Kreatif System Indonesia. The system centralizes critical workforce processes—including attendance tracking, leave management, overtime, payroll, employee databases, and task distribution—into a single, unified ecosystem.",
+      "This project focuses on the integrated Human Resource Information System for PT Kreatif System Indonesia.", "The system centralizes critical workforce processes—including attendance tracking, leave management, overtime, payroll, employee databases, and task distribution—into a single, unified ecosystem.",
     ],
-    skills: ["Laravel", "Flutter", "Material Design"],
+    skills: ["Laravel", "Flutter", "SINTA 5 Indexed"],
     link: "hr-management",
   },
   {
@@ -23,19 +23,19 @@ export const infoList = [
     title: "company profile",
     overlayText: "dummy data",
     descriptions: [
-      "A high-performance digital identity engineered with a modern interface to amplify brand authority and market presence.",
-      "Engineered with fluid layouts and micro-interactions to ensure seamless responsiveness across all high-resolution devices.",
+     "Redesign and full-scale rebuild of PT Kreatif System’s digital presence, transforming it into a high-tier professional interface with a clean, minimalist aesthetic.",
+      "Integrated with Groq AI to deliver chatbot as customer support, ensuring intelligent & real-time engagement.",
     ],
-    skills: ["TypeScript", "Next.js"],
+    skills: ["TypeScript", "Next.js", "Groq"],
   },
   {
     id: "info-3",
-    title: "customer loyalty",
+    title: "Point of Sales",
     overlayText: "dummy data",
     descriptions: [
-      "A data-driven loyalty ecosystem designed to maximize customer lifetime value through automated point accumulation and tiered rewards.",
-      "Features a proprietary ranking engine that tracks purchase frequency and volume to deliver personalized incentives and VIP privileges.",
+    "Engineered a POS system for Nato PC featuring hardware compatibility matching and seamless payment gateway integration for frictionless transactions.",
+"Architected a flexible inventory ecosystem with multi-supplier synchronization and advanced configuration matching to streamline complex hardware stock management."
     ],
-    skills: ["Laravel", "Tailwind"],
+    skills: ["Laravel", "Tailwind", "Midtrans"],
   },
 ];

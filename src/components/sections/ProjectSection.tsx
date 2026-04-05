@@ -28,33 +28,33 @@ export default function ProjectsSection() {
 
       <div className="mx-auto max-w-7xl px-6">
         {/* 1. Header Section: Dramatic & Bold */}
-        <header className="relative mb-24 flex flex-col items-center md:items-start">
+        <header className="relative mb-10 md:mb-16 flex flex-col items-start">
           <SlideIn>
-            <div className="flex items-center gap-6 mb-4">
+            <div className="flex items-center gap-4 mb-4">
               <span className="h-0.5 w-12 bg-[#F25623]" />
-              <Typography className="text-[10px] font-semibold uppercase tracking-[0.8em] opacity-40">
-                prototype archive 2026
+              <Typography className="text-[8px] md:text-[10px] font-medium md:font-semibold uppercase tracking-[0.4em] md:tracking-[0.8em] opacity-40">
+                2026 archive
               </Typography>
             </div>
             <div className="relative inline-block">
               <Typography
                 variant="h1"
-                className="font-poppins font-black text-7xl md:text-[120px] leading-none lowercase tracking-tighter relative z-10"
+                className="font-poppins font-black text-5xl md:text-7xl leading-none lowercase tracking-tighter relative z-10"
               >
                 projects.
               </Typography>
               <RedactedOverlay
-                text="selected "
-                className="text-[14vw] md:text-[100px] -top-10 md:top-1 left-0 opacity-10 blur-[1px]"
+                text="select"
+                className="text-[14vw] md:text-[100px] -top-10 md:-top-9 left-0 opacity-10 blur-[1px]"
               />
             </div>
           </SlideIn>
         </header>
 
         {/* 2. Main Grid System */}
-        <div className="space-y-16 lg:space-y-20">
+        <div className="space-y-6 lg:space-y-12">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1.2fr] gap-16 lg:gap-24 items-center">
-            <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-4">
               <Typography className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F25623]">
                 system capabilities
               </Typography>
@@ -136,6 +136,7 @@ export default function ProjectsSection() {
                         description={project.description}
                         slug={project.slug}
                         image={project.image}
+                        video={project.video}
                         delay={0.1 * index}
                         index={index}
                       />
@@ -173,7 +174,7 @@ export default function ProjectsSection() {
       {/* BACKGROUND DECORATION SYSTEM */}
       <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
         {/* 1. Large Background Title (Consistent with Contact Section) */}
-        <Typography className="absolute top-10 -right-20 text-[20vw] font-black opacity-[0.02] whitespace-nowrap select-none leading-none tracking-tighter italic">
+        <Typography className="absolute top-35 md:top-10 -right-20 text-[25vw] md:text-[20vw] font-black opacity-[0.02] whitespace-nowrap select-none leading-none tracking-tighter italic">
           ARCHIVES
         </Typography>
 

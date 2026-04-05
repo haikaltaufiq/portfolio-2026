@@ -64,16 +64,18 @@ export default function HeroSection() {
 
         {/* Lat Long - Fixed Position */}
         <div className="absolute top-10 left-6 md:top-12 md:left-12 flex flex-col gap-1 opacity-20">
-          {["LAT: 1.1301° N", "LONG: 104.0542° E", "System: Operational"].map(
-            (info, i) => (
-              <Typography
-                key={i}
-                className={`text-[8px] md:text-[10px] font-mono font-black ${i === 2 ? "text-[#F25623]" : ""}`}
-              >
-                {info}
-              </Typography>
-            ),
-          )}
+          {[
+            "LAT: 1.1301° N",
+            "LONG: 104.0542° E",
+            "© 2026 - HAIKAL TAUFIQ",
+          ].map((info, i) => (
+            <Typography
+              key={i}
+              className={`text-[8px] md:text-[10px] font-mono font-black ${i === 2 ? "text-[#F25623]" : ""}`}
+            >
+              {info}
+            </Typography>
+          ))}
         </div>
 
         {/* 2026 Background - Adjusted Opacity and Size */}
@@ -175,7 +177,7 @@ export default function HeroSection() {
       {/* 4. Side Name (Fixed Position) */}
       <motion.div
         style={{ y: useTransform(dy, [-500, 500], [-20, 20]) }}
-        className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-5 pointer-events-none z-10 lg:block"
+        className="absolute right-10 md:right-13 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-5 pointer-events-none z-10 lg:block"
       >
         <div className="-rotate-90 origin-center translate-x-1/2">
           <Typography className="text-8xl md:text-9xl font-black lowercase tracking-tighter whitespace-nowrap leading-none">

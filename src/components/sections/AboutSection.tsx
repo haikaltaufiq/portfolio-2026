@@ -99,12 +99,14 @@ export default function AboutSection() {
       <div className="mx-auto max-w-6xl px-6 relative">
         {/* Floating Background Text */}
         <motion.div
-          initial={{ x: 100, opacity: 0 }}
+          initial={{ x: 50, opacity: 0 }}
           whileInView={{ x: 0, opacity: 0.03 }}
-          className="absolute top-0 right-0 select-none pointer-events-none hidden md:block"
+          // 'block' bikin dia muncul di mobile, 'md:right-10' buat posisi desktop
+          className="absolute top-10 -right-4 md:-right-45 select-none pointer-events-none z-0"
         >
-          <Typography className="text-[15vw] font-black leading-none">
-            BIOGRAPHY
+          <Typography className="text-[30vw] md:text-[12vw] font-black leading-[0.7] md:leading-[0.75] tracking-tighter flex flex-col items-end italic opacity-50 md:opacity-100">
+            <span>BIO</span>
+            <span>GRAPHY</span>
           </Typography>
         </motion.div>
 
@@ -117,13 +119,13 @@ export default function AboutSection() {
                 <div className="relative inline-block">
                   <Typography
                     variant="h2"
-                    className="font-poppins font-black text-4xl lowercase relative z-10 transition-transform group-hover:translate-x-2"
+                    className="font-poppins font-black text-5xl sm:text-5xl md:text-6xl lg:text-7xl lowercase tracking-tighter relative z-10 transition-transform group-hover:translate-x-2"
                   >
                     about me.
                   </Typography>
                   <RedactedOverlay
                     text="tanya aja"
-                    className="text-[50px] -top-3 left-0"
+                    className="text-8xl top-1 left-0"
                   />
                 </div>
                 <div className="mt-6 space-y-4">
@@ -155,10 +157,6 @@ export default function AboutSection() {
                   >
                     interested in
                   </Typography>
-                  <RedactedOverlay
-                    text="coding mampus"
-                    className="text-[30px] top-0 left-0"
-                  />
                 </div>
                 <div className="space-y-6 relative">
                   <div className="relative">
@@ -223,7 +221,7 @@ export default function AboutSection() {
                       ))}
                     </div>
                     <Typography className="text-[9px] font-bold uppercase tracking-widest opacity-40">
-                      Identity Card v1.0 // Auth: Approved
+                      Identity Card
                     </Typography>
                   </div>
 
@@ -270,13 +268,12 @@ export default function AboutSection() {
                         {
                           label: "Status",
                           value: "Active",
-                          color: "text-green-600",
                         },
                         { label: "Location", value: "BTM ID" },
                       ].map((item, idx) => (
                         <div
                           key={idx}
-                          className="flex justify-between text-[10px] font-black uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity"
+                          className="flex justify-between text-[10px] font-bold uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity"
                         >
                           <span>{item.label}:</span>
                           <span className={item.color || ""}>{item.value}</span>

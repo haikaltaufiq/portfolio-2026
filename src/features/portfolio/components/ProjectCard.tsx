@@ -11,6 +11,7 @@ interface ProjectCardProps {
   description: string;
   slug: string;
   image?: string;
+  video?: string;
   delay?: number;
   index: number;
 }
@@ -20,12 +21,12 @@ export default function ProjectCard({
   description,
   slug,
   image,
+  video,
   delay = 0.3,
   index,
 }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Magnetic effect for the action button
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springConfig = { damping: 15, stiffness: 150 };
@@ -61,10 +62,8 @@ export default function ProjectCard({
           initial="initial"
           className="group relative bg-[#E6D5B8] text-black p-6 md:p-8 overflow-hidden border-2 border-black hover:border-[#F25623] transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_#F25623] h-full flex flex-col"
         >
-          {/* 1. GRAINY OVERLAY (New) */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] bg-[url('/noise.gif')] pointer-events-none z-40" />
 
-          {/* BG DECORATION */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-5 transition-opacity duration-500 overflow-hidden pointer-events-none select-none z-0">
             <span className="text-[12rem] font-black italic uppercase tracking-tighter whitespace-nowrap rotate-[-5deg]">
               {title}
@@ -72,9 +71,23 @@ export default function ProjectCard({
           </div>
 
           <div className="relative z-10 flex flex-col h-full">
-            {/* PROJECT PREVIEW */}
             <div className="relative aspect-video bg-black overflow-hidden mb-8 border-2 border-black">
-              {image ? (
+              {video ? (
+                <div className="relative w-full h-full overflow-hidden">
+                  <video
+                    src={video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover transition-all duration-700 
+                               grayscale contrast-[1.2] brightness-[0.8]
+                               group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 group-hover:scale-110
+                               mix-blend-luminosity"
+                  />
+                  <div className="absolute inset-0 bg-[#E6D5B8] mix-blend-color opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none" />
+                </div>
+              ) : image ? (
                 <div className="relative w-full h-full overflow-hidden">
                   <Image
                     src={image}
@@ -85,16 +98,7 @@ export default function ProjectCard({
                                group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 group-hover:scale-110
                                mix-blend-luminosity"
                   />
-                  {/* Color Overlay */}
                   <div className="absolute inset-0 bg-[#E6D5B8] mix-blend-color opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none" />
-
-                  {/* 2. RGB GLITCH STRIPES (New) */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-20 pointer-events-none transition-opacity">
-                    <div className="absolute inset-0 bg-[linear-gradient(transparent_45%,#F25623_50%,transparent_55%)] bg-size-[100%_10px] animate-scan-slow" />
-                  </div>
-
-                  {/* Scanline Effect */}
-                  <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] z-20 bg-size-[100%_2px,3px_100%] pointer-events-none opacity-20" />
                 </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-black/20 font-mono text-xl font-bold italic">
@@ -102,13 +106,17 @@ export default function ProjectCard({
                 </div>
               )}
 
-              {/* Hard Accents */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 pointer-events-none transition-opacity z-20">
+                <div className="absolute inset-0 bg-[linear-gradient(transparent_45%,#F25623_50%,transparent_55%)] bg-[length:100%_10px] animate-scan-slow" />
+              </div>
+
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] z-20 bg-[length:100%_2px,3px_100%] pointer-events-none opacity-20" />
+
               <div className="absolute top-0 left-0 bg-black text-[#E6D5B8] px-2 py-1 text-[10px] font-mono font-bold z-30">
-                SCR_SHOT_{index + 1}
+                {video ? "REC_LIVE" : `SCR_SHOT_${index + 1}`}
               </div>
             </div>
 
-            {/* PROJECT INFO */}
             <div className="flex justify-between items-end gap-6 mb-4">
               <div className="space-y-4">
                 <div className="space-y-1">
@@ -131,7 +139,6 @@ export default function ProjectCard({
                 </p>
               </div>
 
-              {/* ACTION BUTTON: Magnetic & Rotated */}
               <motion.div
                 style={{ x: dx, y: dy }}
                 className="relative w-16 h-16 shrink-0 border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:bg-[#F25623] transition-colors duration-300 flex items-center justify-center"
@@ -157,7 +164,6 @@ export default function ProjectCard({
               </motion.div>
             </div>
 
-            {/* 3. STATUS BAR MARQUEE (New) */}
             <div className="mt-auto pt-4 border-t border-black/10 overflow-hidden whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
               <motion.div
                 animate={{ x: [0, -100] }}

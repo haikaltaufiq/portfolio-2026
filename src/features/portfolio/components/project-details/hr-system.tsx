@@ -66,8 +66,8 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
       {/* SECTION 1: HERO & STATS */}
       <SlideIn>
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-16">
-          <div className="absolute -top-10 -left-10 text-[16vw] font-black opacity-[0.02] select-none tracking-tight pointer-events-none -rotate-2">
-            HUMAN RESOURCE INFORMATION SYSTEM
+          <div className="absolute top-15 -left-1 text-[16vw] font-black opacity-[0.02] select-none tracking-tight leading-55 pointer-events-none -rotate-2">
+            HUMAN RESOURCE
           </div>
           <div className="lg:col-span-5 space-y-6">
             <div className="inline-block px-3 py-1 border border-[#F25623] text-[#F25623] text-[10px] font-black uppercase tracking-widest">
@@ -152,7 +152,7 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
                 SINTA 5 Indexed
               </span>
               <span className="text-[10px] font-mono opacity-50 uppercase tracking-widest">
-                // Applied Research Publication
+                - Applied Multimedia Research Publication
               </span>
             </div>
 
@@ -191,7 +191,9 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
                   </p>
                   <p className="text-xl font-black italic">
                     0.1258{" "}
-                    <span className="text-[8px] opacity-50">goals/s</span>
+                    <span className="text-[8px] font-semibold opacity-50">
+                      goals/s
+                    </span>
                   </p>
                 </div>
               </div>
@@ -199,7 +201,8 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
               <p className="italic text-xs opacity-60 pt-4 border-t border-main-text/5">
                 Results validated that consistent interface design and iterative
                 prototyping significantly enhance HRIS effectiveness and user
-                acceptance, as published in our peer-reviewed journal record.
+                acceptance, as published in polibatam peer-reviewed journal
+                record.
               </p>
             </div>
           </div>
@@ -237,7 +240,7 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
               preview
             </Typography>
             <span className="text-[10px] font-mono opacity-40 uppercase tracking-[0.3em]">
-              Desktop Interface v1.0
+              demo Application
             </span>
           </div>
 
@@ -370,8 +373,8 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
           <p>Project: HR Information System</p>
           <p>Client: PT Kreatif System Indonesia</p>
         </div>
-        <div className="text-[10px] font-black uppercase tracking-tighter">
-          Documentation // 2026.
+        <div className="text-[12px] font-semibold uppercase tracking-tighter">
+          Documentation - 2026.
         </div>
       </footer>
     </div>

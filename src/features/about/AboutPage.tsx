@@ -74,7 +74,7 @@ const ExperienceCard = ({
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-3">
             <span className="text-[11px] font-mono font-black text-[#F25623] bg-[#F25623]/10 px-2 py-0.5 rounded-sm">
-              [{year}]
+              {year}
             </span>
             <div className="h-px w-8 bg-[#F25623]/30 group-hover:w-16 group-hover:bg-[#F25623] transition-all duration-700" />
             <Typography className="text-[10px] font-mono font-black opacity-30 group-hover:opacity-100 group-hover:text-main-text uppercase tracking-[0.3em] transition-all">

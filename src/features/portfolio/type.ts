@@ -5,5 +5,6 @@ export type Project = {
   description: string;
   slug: string;
   image?: string;
+  video?: string;
   tags?: string[];
 };
