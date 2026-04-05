@@ -1,15 +1,23 @@
 "use client";
 
+import React, { useRef } from "react";
 import ProjectCard from "@/src/features/portfolio/components/ProjectCard";
 import ProjectInfoCard from "@/src/features/portfolio/components/ProjectInfoCard";
 import RedactedOverlay from "@/src/features/portfolio/components/RedactedOverlay";
 import { useProjects } from "@/src/features/portfolio/hooks/useProjects";
 import Typography from "../ui/Typhography";
 import SlideIn from "../animation/SlideIn";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function ProjectsSection() {
   const { projects, infoList } = useProjects();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
   const projectRows = Array.from(
     { length: Math.max(projects.length, infoList.length) },
     (_, index) => ({
@@ -26,8 +34,8 @@ export default function ProjectsSection() {
         <div className="absolute bottom-1/4 -right-20 w-100 h-100 bg-main-text rounded-full blur-[150px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
-        {/* 1. Header Section: Dramatic & Bold */}
+      <div className="mx-auto max-w-7xl px-6" ref={containerRef}>
+        {/* 1. Header Section */}
         <header className="relative mb-10 md:mb-16 flex flex-col items-start">
           <SlideIn>
             <div className="flex items-center gap-4 mb-4">
@@ -52,15 +60,32 @@ export default function ProjectsSection() {
         </header>
 
         {/* 2. Main Grid System */}
-        <div className="space-y-6 lg:space-y-12">
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1.2fr] gap-16 lg:gap-24 items-center">
+        <div className="relative space-y-6 lg:space-y-12">
+          {/* STICKY LINE SYSTEM */}
+          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-main-text/10 z-0">
+            <motion.div
+              style={{
+                top: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]),
+              }}
+              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+            >
+              <div className="relative">
+                <div className="w-4 h-4 bg-[#F25623] rounded-full animate-ping absolute inset-0 opacity-20" />
+                <div className="w-4 h-4 border-2 border-[#F25623] rotate-45 flex items-center justify-center bg-main-bg">
+                  <div className="w-1.5 h-1.5 bg-[#F25623]" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1.2fr] gap-16 lg:gap-24 items-center relative z-10">
             <div className="hidden md:flex items-center gap-4">
               <Typography className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F25623]">
                 system capabilities
               </Typography>
               <div className="h-px flex-1 bg-main-text/10" />
             </div>
-            <div className="hidden md:block w-px h-px bg-main-text/20" />
+            <div className="hidden md:block w-4 h-4" /> {/* Spacer for Line */}
             <div className="flex items-center gap-4">
               <div className="h-px flex-1 bg-main-text/10" />
               <Typography className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#F25623]">
@@ -77,7 +102,7 @@ export default function ProjectsSection() {
             return (
               <div
                 key={`${info?.id ?? "info-none"}-${project?.id ?? "project-none"}-${index}`}
-                className="grid grid-cols-1 md:grid-cols-[1fr_auto_1.2fr] gap-10 lg:gap-24 items-stretch"
+                className="grid grid-cols-1 md:grid-cols-[1fr_auto_1.2fr] gap-10 lg:gap-24 items-stretch relative z-10"
               >
                 <div className="relative h-full">
                   {info ? (
@@ -113,24 +138,12 @@ export default function ProjectsSection() {
                   )}
                 </div>
 
-                <div className="hidden md:flex flex-col items-center self-stretch py-8">
-                  <div className="w-px flex-1 bg-main-text/20" />
-                  <div className="relative my-4">
-                    <div className="w-4 h-4 bg-[#F25623] rounded-full animate-ping absolute inset-0 opacity-20" />
-                    <div className="w-4 h-4 border-2 border-[#F25623] rotate-45 flex items-center justify-center">
-                      <div className="w-1.5 h-1.5 bg-[#F25623]" />
-                    </div>
-                  </div>
-                  <div className="w-px flex-1 bg-main-text/20" />
-                </div>
+                {/* Center Spacer for Line */}
+                <div className="hidden md:block w-4" />
 
                 <div className="relative h-full">
                   {project ? (
                     <>
-                      <div className="absolute -left-8 md:-left-12 top-0 text-[10px] font-black opacity-20 font-mono italic">
-                        [{String(index + 1).padStart(2, "0")}]
-                      </div>
-
                       <ProjectCard
                         title={project.title}
                         description={project.description}
@@ -149,7 +162,7 @@ export default function ProjectsSection() {
             );
           })}
 
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1.2fr] gap-16 lg:gap-24 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1.2fr] gap-16 lg:gap-24 items-start relative z-10">
             <div className="p-6 border-l-2 border-[#F25623] bg-main-text/5 hidden md:block">
               <Typography className="text-[11px] font-semibold leading-relaxed opacity-40 italic">
                 &quot;Every project is a deep dive into problem solving and
@@ -157,8 +170,8 @@ export default function ProjectsSection() {
                 precision.&quot;
               </Typography>
             </div>
-            <div className="hidden md:block" />
-            <a href="/project">
+            <div className="hidden md:block w-4" />
+            <a href="/project" className="block w-full">
               <div className="p-10 border-2 border-dashed border-main-text/10 flex flex-col items-center justify-center gap-4 text-center group hover:border-[#F25623]/30 transition-colors">
                 <Typography className="text-xs font-black uppercase tracking-[0.3em] opacity-40">
                   End of Registry
@@ -171,18 +184,16 @@ export default function ProjectsSection() {
           </div>
         </div>
       </div>
+
       {/* BACKGROUND DECORATION SYSTEM */}
       <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
-        {/* 1. Large Background Title (Consistent with Contact Section) */}
         <Typography className="absolute top-35 md:top-10 -right-20 text-[25vw] md:text-[20vw] font-black opacity-[0.02] whitespace-nowrap select-none leading-none tracking-tighter italic">
           ARCHIVES
         </Typography>
 
-        {/* 2. Vertical Technical Guidelines */}
         <div className="absolute top-0 left-6 w-px h-full bg-main-text/5 hidden md:block" />
         <div className="absolute top-0 right-6 w-px h-full bg-main-text/5 hidden md:block" />
 
-        {/* Blueprint Grid Dots */}
         <div
           className="absolute inset-0 opacity-[0.05]"
           style={{
@@ -192,7 +203,6 @@ export default function ProjectsSection() {
           }}
         />
 
-        {/* 4. Animated Industrial Marquee (Slower & Subtle) */}
         <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 opacity-[0.02] rotate-12">
           <motion.div
             animate={{ x: [-1000, 0] }}
@@ -204,7 +214,6 @@ export default function ProjectsSection() {
           </motion.div>
         </div>
 
-        {/* 5. Radial Glows (Existing ones, but adjusted) */}
         <div className="absolute top-1/4 -left-20 w-125 h-125 bg-[#F25623] rounded-full blur-[180px] opacity-[0.07]" />
         <div className="absolute bottom-1/4 -right-20 w-100 h-100 bg-main-text rounded-full blur-[150px] opacity-[0.05]" />
       </div>

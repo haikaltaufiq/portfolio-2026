@@ -107,10 +107,10 @@ export default function ProjectCard({
               )}
 
               <div className="absolute inset-0 opacity-0 group-hover:opacity-20 pointer-events-none transition-opacity z-20">
-                <div className="absolute inset-0 bg-[linear-gradient(transparent_45%,#F25623_50%,transparent_55%)] bg-[length:100%_10px] animate-scan-slow" />
+                <div className="absolute inset-0 bg-[linear-gradient(transparent_45%,#F25623_50%,transparent_55%)] bg-size-[100%_10px] animate-scan-slow" />
               </div>
 
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] z-20 bg-[length:100%_2px,3px_100%] pointer-events-none opacity-20" />
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] z-20 bg-size-[100%_2px,3px_100%] pointer-events-none opacity-20" />
 
               <div className="absolute top-0 left-0 bg-black text-[#E6D5B8] px-2 py-1 text-[10px] font-mono font-bold z-30">
                 {video ? "REC_LIVE" : `SCR_SHOT_${index + 1}`}
