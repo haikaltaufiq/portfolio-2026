@@ -64,34 +64,38 @@ const ExperienceCard = ({
       onMouseLeave={() => setRotate({ x: 0, y: 0 })}
       animate={{ rotateX: rotate.x, rotateY: rotate.y }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group relative border-b border-main-text/15 py-10 transition-all duration-500 hover:bg-main-text/3 px-6 overflow-hidden perspective-1000"
+      className="group relative border-b border-main-text/15 py-8 md:py-10 transition-all duration-500 hover:bg-main-text/3 px-4 md:px-6 overflow-hidden perspective-1000"
     >
       <div className="absolute left-0 top-0 w-1.5 h-full bg-[#F25623] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]" />
 
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
-        <div className="flex-1">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-[11px] font-mono font-black text-[#F25623] bg-[#F25623]/10 px-2 py-0.5 rounded-sm">
+      {/* Wrapper Utama: Tetap flex-col di mobile tapi gap dipersempit biar gak makan tempat */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 relative z-10">
+        <div className="flex-1 min-w-0">
+          {/* Header Row: Dipaksa tetep row walau di mobile (pake flex-row) */}
+          <div className="flex flex-row items-center gap-3 mb-2 md:mb-3">
+            <span className="shrink-0 text-[10px] md:text-[11px] font-mono font-black text-[#F25623] bg-[#F25623]/10 px-2 py-0.5 rounded-sm">
               {year}
             </span>
-            <div className="h-px w-8 bg-[#F25623]/30 group-hover:w-16 group-hover:bg-[#F25623] transition-all duration-700" />
-            <Typography className="text-[10px] font-mono font-black opacity-30 group-hover:opacity-100 group-hover:text-main-text uppercase tracking-[0.3em] transition-all">
+            <div className="h-px w-6 md:w-8 bg-[#F25623]/30 group-hover:w-12 md:group-hover:w-16 group-hover:bg-[#F25623] transition-all duration-700" />
+            <Typography className="truncate text-[9px] md:text-[10px] font-mono font-black opacity-30 group-hover:opacity-100 group-hover:text-main-text uppercase tracking-[0.2em] md:tracking-[0.3em] transition-all">
               {company}
             </Typography>
           </div>
 
           <Typography
             variant="h3"
-            className="text-3xl md:text-4xl font-black lowercase leading-none tracking-tighter group-hover:translate-x-4 transition-transform duration-500"
+            className="text-2xl md:text-4xl font-black lowercase leading-none tracking-tighter group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-500"
           >
-            <span className="group-hover:text-[#F25623] transition-colors whitespace-nowrap">
+            {/* whitespace-nowrap dihapus/diatur hanya untuk desktop agar di mobile bisa wrap kalau nama role kepanjangan */}
+            <span className="group-hover:text-[#F25623] transition-colors block md:whitespace-nowrap">
               {role}.
             </span>
           </Typography>
         </div>
 
-        <div className="max-w-sm md:text-right relative">
-          <p className="text-[12px] font-mono leading-relaxed opacity-50 group-hover:opacity-100 transition-opacity duration-500">
+        {/* Desc Box: Di mobile text-left, desktop text-right */}
+        <div className="max-w-full md:max-w-sm text-left md:text-right relative mt-0">
+          <p className="text-[11px] md:text-[12px] font-mono leading-relaxed opacity-50 group-hover:opacity-100 transition-opacity duration-500">
             <span className="text-[#F25623] mr-2">//</span>
             {desc}
           </p>
@@ -100,7 +104,7 @@ const ExperienceCard = ({
 
       <RedactedOverlay
         text="LOG_RECORD_ENCRYPTED"
-        className="text-[60px] -bottom-4 -right-10 opacity-[0.03] group-hover:opacity-1 transition-all duration-700 group-hover:scale-110"
+        className="hidden md:block text-[60px] -bottom-4 -right-10 opacity-[0.03] group-hover:opacity-1 transition-all duration-700 group-hover:scale-110"
       />
     </motion.div>
   );
@@ -193,7 +197,7 @@ export default function AboutPage() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-transparent text-main-text pt-32 pb-24 overflow-x-hidden selection:bg-[#F25623] selection:text-white relative"
+      className="min-h-screen bg-transparent text-main-text pt-12 md:pt-32 pb-24 overflow-x-hidden selection:bg-[#F25623] selection:text-white relative"
     >
       {/* BACKGROUND DECORATION SYSTEM */}
       <div className="fixed inset-0 pointer-events-none -z-10">
@@ -212,7 +216,7 @@ export default function AboutPage() {
 
       <div className="mx-auto max-w-7xl px-6 relative">
         {/* 2. HERO SECTION */}
-        <section className="relative mb-64">
+        <section className="relative mb-26 md:mb-64">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             <div className="lg:col-span-8 relative">
               <SlideIn direction="up">
@@ -228,17 +232,25 @@ export default function AboutPage() {
                   </Typography>
                   <RedactedOverlay
                     text="MULTIMEDIA_ENGINEER"
-                    className="text-[12vw] -top-12 -left-4 opacity-10"
+                    className="text-[17vw] md:text-[12vw] top-7 md:-top-12 -left-4 opacity-10"
                   />
                 </div>
-                <div className="max-w-2xl mt-16 relative">
-                  <div className="absolute -left-6 top-0 bottom-0 w-1 bg-[#F25623]" />
-                  <Typography className="text-xl md:text-3xl font-poppins font-bold leading-[1.1] lowercase pl-6 tracking-tight">
-                    "I build high-performance systems where{" "}
-                    <span className="text-[#F25623] underline decoration-2 underline-offset-4">
-                      technical precision
-                    </span>{" "}
-                    meets raw digital aesthetics."
+                <div className="max-w-2xl mt-10 md:mt-20 relative">
+                  {/* Accent Line */}
+                  <div className="absolute left-2 md:-left-6 top-0 bottom-0 w-1 bg-[#F25623]" />
+
+                  <Typography className="text-xl md:text-4xl font-black leading-none lowercase pl-8 tracking-tighter mb-4">
+                    crafting{" "}
+                    <span className="text-[#F25623]">high fidelity</span> logic
+                    <br /> through industrial aesthetics.
+                  </Typography>
+
+                  <Typography className="text-sm md:text-base font-mono opacity-50 pl-8 leading-relaxed max-w-lg">
+                    [!] evolving through{" "}
+                    <span className="text-[#F25623]">multidisciplinary</span>{" "}
+                    frameworks. executing a polymorphic approach where adaptive
+                    logic meets continuous stack integration and
+                    multimedia-driven precision.
                   </Typography>
                 </div>
               </SlideIn>
@@ -263,7 +275,7 @@ export default function AboutPage() {
                       ))}
                     </div>
                     <Typography className="text-[10px] font-mono font-black uppercase tracking-[0.2em] opacity-40">
-                      CORE_IDENTITY_INIT
+                      CORE IDENTITY
                     </Typography>
                   </div>
                   <div className="aspect-square w-full bg-[#0a0a0a] rounded-sm mb-8 overflow-hidden relative">
@@ -276,9 +288,9 @@ export default function AboutPage() {
                   </div>
                   <div className="space-y-3 font-mono text-[11px] uppercase tracking-tighter">
                     {[
-                      "Status: Active_Unit",
-                      "Sector: Tech_Dev",
-                      "Loc: Batam_ID",
+                      "Status: Active",
+                      "Sector: MULTIMEDIA",
+                      "Loc: Batam ID",
                     ].map((text, i) => (
                       <div
                         key={i}
@@ -302,26 +314,23 @@ export default function AboutPage() {
         {/* 3. ARSENAL SECTION (Pipeline) */}
         <section className="mb-64 relative">
           {/* BACKGROUND TEXT - Diletakkan di luar kontainer grid biar gak kepotong */}
-          <div className="absolute -top-32 -left-20 text-[25vw] font-black opacity-[0.02] select-none pointer-events-none -rotate-2 italic uppercase z-0 tracking-tighter whitespace-nowrap">
+          <div className="absolute top-10 md:-top-32 -left-15 md:-left-20 text-[30vw] md:text-[25vw] font-black opacity-[0.02] select-none pointer-events-none -rotate-2 italic uppercase z-0 tracking-tighter whitespace-nowrap">
             STACK
           </div>
 
           <div className="relative z-10">
             <div className="flex items-end gap-6 mb-16 px-2">
               <div className="flex flex-col">
-                <span className="text-[10px] font-mono font-black text-[#F25623] mb-1.5 tracking-[0.3em] uppercase">
-                  [ pipeline_init ]
-                </span>
                 <Typography
                   variant="h2"
                   className="text-6xl md:text-7xl font-black lowercase tracking-tighter leading-none"
                 >
-                  arsenal.
+                  pipeline.
                 </Typography>
               </div>
               <div className="h-px flex-1 bg-main-text/15 mb-2.5" />
-              <Typography className="text-[10px] font-mono opacity-30 mb-1.5 tracking-widest">
-                V.2026_STABLE
+              <Typography className="hidden md:block text-[10px] font-mono opacity-30 mb-1.5 tracking-widest">
+                TECH STACK
               </Typography>
             </div>
 
@@ -339,7 +348,7 @@ export default function AboutPage() {
                   <div className="absolute top-0 left-0 w-0 h-0 border-t-2 border-l-2 border-[#F25623] group-hover:w-5 group-hover:h-5 transition-all duration-300" />
                   <div className="absolute bottom-0 right-0 w-0 h-0 border-b-2 border-r-2 border-[#F25623] group-hover:w-5 group-hover:h-5 transition-all duration-300" />
                   <span className="absolute top-5 left-5 text-[10px] font-mono opacity-20 group-hover:opacity-100 group-hover:text-[#F25623] transition-all duration-500">
-                    //0{i + 1}
+                    0{i + 1}
                   </span>
                   <span className="font-mono font-black text-[13px] md:text-sm uppercase tracking-[0.2em] relative z-10 group-hover:scale-110 transition-transform duration-500">
                     {skill}
@@ -354,12 +363,12 @@ export default function AboutPage() {
 
         {/* 4. TRACK RECORD */}
         <section className="relative mb-64">
-          <div className="absolute -top-40 -right-20 text-[25vw] font-black opacity-[0.02] select-none pointer-events-none rotate-3 italic uppercase z-0 tracking-tighter whitespace-nowrap">
+          <div className="absolute top-20 md:-top-40 -right-12 md:-right-20 text-[25vw] font-black opacity-[0.02] select-none pointer-events-none rotate-3 italic uppercase z-0 tracking-tighter whitespace-nowrap">
             HISTORY
           </div>
 
           <div className="relative z-10">
-            <div className="flex items-center gap-6 mb-20">
+            <div className="flex items-center gap-6 mb-10 md:mb-20">
               <Typography
                 variant="h2"
                 className="text-6xl font-black lowercase tracking-tighter leading-none"
@@ -373,19 +382,19 @@ export default function AboutPage() {
                 year="2025 - 2026"
                 role="Software Developer"
                 company="PT Kreatif System Indonesia"
-                desc="Architecting scalable internal ecosystems and cross-platform integrations."
+                desc="Executed an 8 month paid internship, engineering a suite of internal ecosystems: an automated HRIS, a data driven loyalty engine, and an enterprise grade corporate portal."
               />
               <ExperienceCard
                 year="2024 - 2025"
                 role="Freelance Programmer"
                 company="Independent Contractor"
-                desc="Specializing in end-to-end digital solutions and high-performance websites."
+                desc="Operated as a project-based independent engineer, delivering cross-platform solutions: from architecting website ecosystems to integrating hardware to cloud IoT systems."
               />
               <ExperienceCard
                 year="2022 - 2026"
                 role="Vocational Student"
                 company="Politeknik Negeri Batam"
-                desc="Vocational-trained developer focused on industry-standard Project-Based Learning."
+                desc="Applied Multimedia Engineering student specializing in high-impact PBL. Awarded 2nd Place at the 2024 PBL Expo and published a SINTA 5 indexed journal paper."
               />
             </div>
           </div>
@@ -434,7 +443,7 @@ export default function AboutPage() {
                       className="object-cover opacity-30 group-hover:opacity-100 transition-opacity duration-500"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-6 flex flex-col justify-end translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent p-6 flex flex-col justify-end translate-y-2 group-hover:translate-y-0 transition-all duration-500">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-1.5 h-1.5 bg-[#F25623] group-hover:animate-ping" />
                       <span className="text-[10px] text-[#F25623] font-mono font-black uppercase">

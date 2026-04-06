@@ -58,7 +58,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   onMenuOpen,
   onMenuClose,
 }) => {
-  // 1. States & Refs
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -66,10 +65,13 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const plusHRef = useRef<HTMLSpanElement | null>(null);
   const plusVRef = useRef<HTMLSpanElement | null>(null);
   const textInnerRef = useRef<HTMLDivElement | null>(null);
-  const [textLines, setTextLines] = useState<string[]>(["Menu", "Close"]);
+  const [textLines, setTextLines] = useState<string[]>([
+    "Menu",
+    "•••",
+    "Close",
+  ]);
   const busyRef = useRef(false);
 
-  // 2. Animations Logic
   const playOpen = useCallback(() => {
     if (busyRef.current) return;
     busyRef.current = true;
@@ -123,6 +125,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, []);
 
   const playClose = useCallback(() => {
+    if (busyRef.current) return;
+    busyRef.current = true;
+
     const layers = Array.from(preLayersRef.current?.children || []);
     const all = [...layers, panelRef.current];
     const offscreen = position === "left" ? -100 : 100;
@@ -139,31 +144,41 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, [position]);
 
   const toggleMenu = useCallback(() => {
+    if (busyRef.current) return;
+
     const target = !openRef.current;
     openRef.current = target;
     setOpen(target);
-    target ? (onMenuOpen?.(), playOpen()) : (onMenuClose?.(), playClose());
+
+    if (target) {
+      onMenuOpen?.();
+      playOpen();
+      gsap.to(textInnerRef.current, {
+        yPercent: -66.66,
+        duration: 0.5,
+        ease: "expo.inOut",
+      });
+    } else {
+      onMenuClose?.();
+      playClose();
+      gsap.to(textInnerRef.current, {
+        yPercent: 0,
+        duration: 0.5,
+        ease: "expo.inOut",
+      });
+    }
 
     gsap.to(plusHRef.current, { rotate: target ? 45 : 0, duration: 0.4 });
     gsap.to(plusVRef.current, { rotate: target ? -45 : 90, duration: 0.4 });
-
-    const seq = target ? ["Menu", "•••", "Close"] : ["Close", "•••", "Menu"];
-    setTextLines(seq);
-
-    gsap.fromTo(
-      textInnerRef.current,
-      { yPercent: 0 },
-      { yPercent: -66.66, duration: 0.5, ease: "expo.inOut" },
-    );
   }, [playOpen, playClose, onMenuOpen, onMenuClose]);
 
-  // 3. Effects (Must be in body, not inside callbacks)
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const offscreen = position === "left" ? -100 : 100;
       const layers = Array.from(preLayersRef.current?.children || []);
       gsap.set([panelRef.current, ...layers], { xPercent: offscreen });
       gsap.set(plusVRef.current, { rotate: 90 });
+      gsap.set(textInnerRef.current, { yPercent: 0 });
     });
     return () => ctx.revert();
   }, [position]);
@@ -172,6 +187,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     if (!open || !closeOnClickAway) return;
     const handleClickOutside = (e: MouseEvent) => {
       if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
+        const btn = document.querySelector(".sm-toggle-btn");
+        if (btn && btn.contains(e.target as Node)) return;
         toggleMenu();
       }
     };
@@ -179,7 +196,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open, closeOnClickAway, toggleMenu]);
 
-  // 4. Render
   return (
     <div
       className={`sm-scope ${isFixed ? "fixed inset-0 z-100 pointer-events-none" : "relative w-full h-full"}`}
@@ -187,7 +203,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       <div
         className={`staggered-menu-wrapper relative w-full h-full ${open ? "pointer-events-auto" : "pointer-events-none"}`}
       >
-        {/* Pre-Layers */}
         <div
           ref={preLayersRef}
           className="absolute inset-y-0 w-full md:w-137.5 pointer-events-none z-101"
@@ -203,11 +218,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         </div>
 
         <header className="absolute top-0 left-0 w-full flex justify-between items-center p-6 md:p-10 z-110">
-          <div className="font-black text-sm tracking-tighter uppercase  text-white mix-blend-difference"></div>
+          <div className="font-black text-sm tracking-tighter uppercase text-white mix-blend-difference"></div>
           <button
-            onClick={toggleMenu}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMenu();
+            }}
             suppressHydrationWarning
-            className="group flex items-center gap-4 outline-none text-white cursor-pointer pointer-events-auto"
+            className="sm-toggle-btn group flex items-center gap-4 outline-none text-white cursor-pointer pointer-events-auto"
           >
             <div className="h-5 overflow-hidden font-black uppercase text-xs tracking-widest text-right">
               <div ref={textInnerRef} className="flex flex-col">
@@ -231,7 +249,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           </button>
         </header>
 
-        {/* Panel Menu */}
         <aside
           ref={panelRef}
           className="absolute inset-y-0 w-full md:w-137.5 bg-[#0A0A0A] z-102 flex flex-col pt-12 pb-12 px-8 md:px-16 border-l border-white/5 shadow-2xl overflow-y-auto"
