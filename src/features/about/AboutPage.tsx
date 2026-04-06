@@ -68,10 +68,8 @@ const ExperienceCard = ({
     >
       <div className="absolute left-0 top-0 w-1.5 h-full bg-[#F25623] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]" />
 
-      {/* Wrapper Utama: Tetap flex-col di mobile tapi gap dipersempit biar gak makan tempat */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 relative z-10">
         <div className="flex-1 min-w-0">
-          {/* Header Row: Dipaksa tetep row walau di mobile (pake flex-row) */}
           <div className="flex flex-row items-center gap-3 mb-2 md:mb-3">
             <span className="shrink-0 text-[10px] md:text-[11px] font-mono font-black text-[#F25623] bg-[#F25623]/10 px-2 py-0.5 rounded-sm">
               {year}
@@ -86,14 +84,12 @@ const ExperienceCard = ({
             variant="h3"
             className="text-2xl md:text-4xl font-black lowercase leading-none tracking-tighter group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-500"
           >
-            {/* whitespace-nowrap dihapus/diatur hanya untuk desktop agar di mobile bisa wrap kalau nama role kepanjangan */}
             <span className="group-hover:text-[#F25623] transition-colors block md:whitespace-nowrap">
               {role}.
             </span>
           </Typography>
         </div>
 
-        {/* Desc Box: Di mobile text-left, desktop text-right */}
         <div className="max-w-full md:max-w-sm text-left md:text-right relative mt-0">
           <p className="text-[11px] md:text-[12px] font-mono leading-relaxed opacity-50 group-hover:opacity-100 transition-opacity duration-500">
             <span className="text-[#F25623] mr-2">//</span>
@@ -197,10 +193,10 @@ export default function AboutPage() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-transparent text-main-text pt-12 md:pt-32 pb-24 overflow-x-hidden selection:bg-[#F25623] selection:text-white relative"
+      className="relative min-h-screen w-full overflow-x-hidden bg-transparent pt-12 pb-24 text-main-text selection:bg-[#F25623] selection:text-white md:pt-32"
     >
       {/* BACKGROUND DECORATION SYSTEM */}
-      <div className="fixed inset-0 pointer-events-none -z-10">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-0 left-[5%] w-px h-full bg-main-text/5" />
         <div className="absolute top-0 right-[5%] w-px h-full bg-main-text/5" />
         <div className="absolute top-[20%] left-0 w-full h-px bg-main-text/5" />
@@ -208,22 +204,22 @@ export default function AboutPage() {
           style={{
             opacity: useTransform(scrollYProgress, [0, 0.2], [0.03, 0]),
           }}
-          className="absolute top-20 right-10 text-[20vw] font-black italic select-none tracking-tighter"
+          className="absolute top-20 right-[clamp(1rem,5vw,4rem)] text-[clamp(5rem,14vw,16rem)] font-black italic tracking-tighter select-none"
         >
-          BIO_V2
+          BIOGRAPH
         </motion.div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 relative">
+      <div className="relative mx-auto w-full max-w-screen-2xl px-6 sm:px-10 lg:px-16 xl:px-20">
         {/* 2. HERO SECTION */}
-        <section className="relative mb-26 md:mb-64">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            <div className="lg:col-span-8 relative">
+        <section className="relative mb-14 md:mb-64">
+          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 xl:gap-16">
+            <div className="relative min-w-0 lg:col-span-8">
               <SlideIn direction="up">
-                <div className="relative inline-block group cursor-default">
+                <div className="relative inline-block max-w-full group cursor-default">
                   <Typography
                     variant="h1"
-                    className="font-black text-[15vw] md:text-[11vw] leading-[0.75] lowercase tracking-tighter relative z-10"
+                    className="relative z-10 font-black text-[clamp(3.75rem,11vw,9rem)] leading-[0.75] lowercase tracking-tighter"
                   >
                     haikal <br />
                     <span className="text-[#F25623] inline-block hover:skew-x-12 transition-transform duration-500">
@@ -232,20 +228,17 @@ export default function AboutPage() {
                   </Typography>
                   <RedactedOverlay
                     text="MULTIMEDIA_ENGINEER"
-                    className="text-[17vw] md:text-[12vw] top-7 md:-top-12 -left-4 opacity-10"
+                    className="left-0 top-4 text-[clamp(4rem,11.5vw,9.5rem)] opacity-10 md:-top-8"
                   />
                 </div>
-                <div className="max-w-2xl mt-10 md:mt-20 relative">
-                  {/* Accent Line */}
-                  <div className="absolute left-2 md:-left-6 top-0 bottom-0 w-1 bg-[#F25623]" />
-
-                  <Typography className="text-xl md:text-4xl font-black leading-none lowercase pl-8 tracking-tighter mb-4">
+                <div className="relative mt-10 max-w-2xl pl-6 md:mt-20 md:pl-10">
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#F25623]" />
+                  <Typography className="mb-4 text-xl font-black leading-none lowercase tracking-tighter md:text-4xl">
                     crafting{" "}
                     <span className="text-[#F25623]">high fidelity</span> logic
                     <br /> through industrial aesthetics.
                   </Typography>
-
-                  <Typography className="text-sm md:text-base font-mono opacity-50 pl-8 leading-relaxed max-w-lg">
+                  <Typography className="max-w-lg text-sm font-mono leading-relaxed opacity-50 md:text-base">
                     [!] evolving through{" "}
                     <span className="text-[#F25623]">multidisciplinary</span>{" "}
                     frameworks. executing a polymorphic approach where adaptive
@@ -256,7 +249,7 @@ export default function AboutPage() {
               </SlideIn>
             </div>
 
-            <div className="lg:col-span-4 sticky top-32">
+            <div className="min-w-0 lg:col-span-4 lg:sticky lg:top-32">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="relative group p-1"
@@ -311,15 +304,16 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 3. ARSENAL SECTION (Pipeline) */}
-        <section className="mb-64 relative">
-          {/* BACKGROUND TEXT - Diletakkan di luar kontainer grid biar gak kepotong */}
-          <div className="absolute top-10 md:-top-32 -left-15 md:-left-20 text-[30vw] md:text-[25vw] font-black opacity-[0.02] select-none pointer-events-none -rotate-2 italic uppercase z-0 tracking-tighter whitespace-nowrap">
-            STACK
+        {/* 3. ARSENAL SECTION */}
+        <section className="relative mb-14 md:mb-64">
+          <div className="pointer-events-none absolute inset-x-0 top-0 overflow-hidden -z-10">
+            <div className="absolute left-0 top-10 text-[clamp(7rem,24vw,18rem)] font-black italic uppercase tracking-tighter whitespace-nowrap opacity-[0.02] select-none -rotate-2 md:left-2 md:-top-28 md:text-[clamp(10rem,18vw,20rem)]">
+              STACK
+            </div>
           </div>
 
-          <div className="relative z-10">
-            <div className="flex items-end gap-6 mb-16 px-2">
+          <div className="relative z-10 px-2 md:px-0">
+            <div className="flex items-end gap-6 mb-16">
               <div className="flex flex-col">
                 <Typography
                   variant="h2"
@@ -362,12 +356,14 @@ export default function AboutPage() {
         </section>
 
         {/* 4. TRACK RECORD */}
-        <section className="relative mb-64">
-          <div className="absolute top-20 md:-top-40 -right-12 md:-right-20 text-[25vw] font-black opacity-[0.02] select-none pointer-events-none rotate-3 italic uppercase z-0 tracking-tighter whitespace-nowrap">
-            HISTORY
+        <section className="relative mb-14 md:mb-64">
+          <div className="pointer-events-none absolute inset-x-0 top-0 overflow-hidden -z-10">
+            <div className="absolute right-0 top-20 text-[clamp(6rem,20vw,16rem)] font-black italic uppercase tracking-tighter whitespace-nowrap opacity-[0.02] select-none rotate-3 md:right-2 md:-top-32 md:text-[clamp(9rem,16vw,18rem)]">
+              HISTORY
+            </div>
           </div>
 
-          <div className="relative z-10">
+          <div className="relative z-10 px-2 md:px-0">
             <div className="flex items-center gap-6 mb-10 md:mb-20">
               <Typography
                 variant="h2"
@@ -402,11 +398,13 @@ export default function AboutPage() {
 
         {/* 5. CREDENTIALS SECTION */}
         <section className="relative pb-24">
-          <div className="absolute -bottom-20 -left-20 text-[20vw] font-black opacity-[0.02] select-none pointer-events-none -rotate-1 italic uppercase z-0 tracking-tighter whitespace-nowrap">
-            VERIFIED
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 overflow-hidden -z-10">
+            <div className="absolute bottom-0 left-0 translate-y-1/3 text-[clamp(5rem,18vw,14rem)] font-black italic uppercase tracking-tighter whitespace-nowrap opacity-[0.02] select-none -rotate-1 md:left-2 md:text-[clamp(8rem,14vw,16rem)]">
+              VERIFIED
+            </div>
           </div>
 
-          <div className="relative z-10">
+          <div className="relative z-10 px-2 md:px-0">
             <div className="flex items-end gap-6 mb-16 overflow-hidden">
               <Typography
                 variant="h2"
