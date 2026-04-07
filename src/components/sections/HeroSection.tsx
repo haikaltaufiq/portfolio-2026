@@ -147,30 +147,32 @@ export default function HeroSection() {
       {/* 3. Bottom Grid (Fixed to Bottom) */}
       <div className="absolute bottom-0 left-0 w-full z-30 pb-10 md:pb-14">
         <Container>
-          <div className="w-full grid grid-cols-3 gap-2 md:gap-8 relative border-t border-main-text/10 pt-8">
-            {/* Pulsing Point */}
-            <motion.div
-              animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.8, 0.4] }}
-              transition={{ repeat: Infinity, duration: 2.5 }}
-              className="absolute -top-1.25 left-1/2 -translate-x-1/2 w-2 h-2 md:w-2.5 md:h-2.5 bg-[#F25623] rounded-full shadow-[0_0_12px_#F25623]"
-            />
+          <a href="/about" className="block group">
+            <div className="w-full grid grid-cols-3 gap-2 md:gap-8 relative border-t border-main-text/10 pt-8 transition-colors duration-300 group-hover:border-main-text/30">
+              {/* Pulsing Point */}
+              <motion.div
+                animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.8, 0.4] }}
+                transition={{ repeat: Infinity, duration: 2.5 }}
+                className="absolute -top-1.25 left-1/2 -translate-x-1/2 w-2 h-2 md:w-2.5 md:h-2.5 bg-[#F25623] rounded-full shadow-[0_0_12px_#F25623]"
+              />
 
-            <div className="flex justify-center md:justify-start">
-              <SlideIn delay={0.6}>
-                <RedactedLayer text="UI/UX" />
-              </SlideIn>
+              <div className="flex justify-center md:justify-start">
+                <SlideIn delay={0.6}>
+                  <RedactedLayer text="UI/UX" />
+                </SlideIn>
+              </div>
+              <div className="flex justify-center">
+                <SlideIn delay={0.8}>
+                  <RedactedLayer text="FullStack" />
+                </SlideIn>
+              </div>
+              <div className="flex justify-center md:justify-end">
+                <SlideIn delay={1.0}>
+                  <RedactedLayer text="Multimedia" />
+                </SlideIn>
+              </div>
             </div>
-            <div className="flex justify-center">
-              <SlideIn delay={0.8}>
-                <RedactedLayer text="FullStack" />
-              </SlideIn>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <SlideIn delay={1.0}>
-                <RedactedLayer text="Multimedia" />
-              </SlideIn>
-            </div>
-          </div>
+          </a>
         </Container>
       </div>
 

@@ -125,7 +125,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-transparent pt-24 pb-10 text-main-text selection:bg-[#F25623] selection:text-white">
+    <main className="relative min-h-screen overflow-hidden bg-transparent pt-14 md:pt-24 pb-10 text-main-text selection:bg-[#F25623] selection:text-white">
       <div className="fixed inset-0 -z-20 bg-main-bg" />
       <div className="fixed inset-0 -z-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px] opacity-[0.03]" />
       <div className="pointer-events-none fixed top-0 left-0 -z-10 h-full w-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02]" />
@@ -137,7 +137,7 @@ export default function ContactPage() {
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6">
-        <section className="relative mb-16">
+        <section className="relative mb-10 md:mb-16">
           <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
             <div className="relative">
               <SlideIn direction="up">
@@ -150,39 +150,55 @@ export default function ContactPage() {
                     <br />
                     <span className="text-[#F25623]">touch.</span>
                   </Typography>
+                  <div className="hidden md:block absolute top-0 left-[110%] w-max pt-4">
+                    <SlideIn delay={0.4}>
+                      <div className="space-y-4 border-l border-[#F25623]/30 pl-6">
+                        <div className="space-y-1">
+                          <p className="text-[10px] font-black tracking-[0.3em] text-[#F25623] uppercase">
+                            Availability
+                          </p>
+                          <p className="text-xs font-mono font-bold opacity-60">
+                            [ OPEN FOR PROJECTS / 2026 ]
+                          </p>
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-[10px] font-black tracking-[0.3em] text-[#F25623] uppercase">
+                            Current Location
+                          </p>
+                          <p className="text-xs font-mono font-bold opacity-60">
+                            BATAM, ID (1.0456° N, 104.0301° E)
+                          </p>
+                        </div>
+                        <div className="pt-2">
+                          <div className="h-1 w-12 bg-main-text/20" />
+                        </div>
+                      </div>
+                    </SlideIn>
+                  </div>
+
                   <RedactedOverlay
-                    text="STATUS: URGENT"
-                    className="-top-6 left-[30%] rotate-6 text-[4vw] opacity-20"
+                    text="STATUSS"
+                    className="-top-6 left-[30%] rotate-6 text-[6vw] opacity-20"
                   />
                 </div>
               </SlideIn>
-              <div className="pointer-events-none absolute -top-10 -left-10 -rotate-2 select-none text-[16vw] font-black tracking-tight opacity-[0.02]">
-                CONTACT
-              </div>
-            </div>
-
-            <div className="mt-4 md:w-75">
-              <SlideIn delay={0.2}>
-                <div className="space-y-4">
-                  <div className="flex gap-1.5">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} className="h-1 w-1 bg-[#F25623]" />
-                    ))}
-                  </div>
-                  <Typography className="border-l-4 border-[#F25623] pl-4 text-sm leading-snug font-bold lowercase opacity-80">
-                    &ldquo;Got a bold idea or just want to discuss tech over
-                    coffee? Feel free to reach out, I&apos;m always open to new
-                    connections.&rdquo;
+              <div className="pointer-events-none absolute top-42 -left-10 md:-left-40 z-0 select-none opacity-[0.02] transition-all duration-500">
+                <div className="flex flex-col space-y-[-4vw] md:space-y-[3vw]">
+                  <Typography className="text-[25vw] md:text-[18vw] font-black tracking-[10px] md:tracking-[-0.05em] uppercase italic -rotate-3 skew-x-[-10deg] leading-[0.7]">
+                    CONTACT
+                  </Typography>
+                  <Typography className="text-[25vw] md:text-[18vw] font-black tracking-[10px] md:tracking-[-0.05em] uppercase italic -rotate-3 skew-x-[-10deg] leading-[0.7] ml-[10vw] md:ml-[5vw]">
+                    ME *
                   </Typography>
                 </div>
-              </SlideIn>
+              </div>
             </div>
           </div>
         </section>
 
         <section className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="space-y-10.5 lg:col-span-5">
-            <Typography className="border-b border-main-text/20 pb-4 text-sm leading-snug font-bold lowercase opacity-80">
+            <Typography className=" md:pb-4 text-sm leading-snug font-bold lowercase opacity-80">
               &ldquo;Have a vision to build or a system to scale? I&apos;m ready
               to turn complex ideas into functional reality. Let&apos;s connect
               and build something impactful.&rdquo;
@@ -279,7 +295,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <Typography className="text-[11px] leading-none font-black tracking-widest uppercase">
-                          Online / Available
+                          Online
                         </Typography>
                         <p className="text-[9px] font-bold opacity-50 uppercase">
                           Ready for deployment 2026
@@ -341,15 +357,12 @@ export default function ContactPage() {
         </div>
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row">
           <div className="flex items-center gap-3">
-            <div className="border border-main-text/30 px-2 py-0.5 text-[9px] font-black uppercase">
-              v1.0.4
-            </div>
             <Typography className="text-[9px] font-black tracking-widest opacity-30 uppercase">
               all systems operational
             </Typography>
           </div>
           <Typography className="text-[9px] font-black tracking-widest opacity-50 italic uppercase">
-            &copy; 2026 - [DESIGNED TO DISRUPT]
+            &copy; 2026 - HAIKAL TAUFIQ
           </Typography>
         </div>
       </footer>

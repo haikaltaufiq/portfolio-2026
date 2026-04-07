@@ -193,7 +193,7 @@ export default function AboutPage() {
   return (
     <main
       ref={containerRef}
-      className="relative min-h-screen w-full overflow-x-hidden bg-transparent pt-12 pb-24 text-main-text selection:bg-[#F25623] selection:text-white md:pt-32"
+      className="relative min-h-screen w-full overflow-x-hidden bg-transparent pt-22 pb-24 text-main-text selection:bg-[#F25623] selection:text-white md:pt-32"
     >
       {/* BACKGROUND DECORATION SYSTEM */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">

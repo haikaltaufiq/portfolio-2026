@@ -35,11 +35,11 @@ const projectEntries: ProjectDetail[] = [
     year: "2024",
     category: "3D",
     categoryLabel: "Mobile Application",
-    summary: "Fishing Game Simulator.",
+    summary: "A simulation game developed using Unity that interfaces with a custom-built Arduino controller. The project focuses on synchronizing physical hardware inputs with a 3D environment.",
     description:
       "A mobile-first loyalty system that tracks transactions, reward points, and promotional campaigns with user-centric redemption flows.",
-    tags: ["Unity 3D", "Blender"],
-    tech: ["Unity 3D", "Blender"],
+    tags: ["Unity 3D", "Blender", "Arduino"],
+    tech: ["Unity 3D", "Blender", "Arduino"],
     content: [
       "Dampaknya cukup terasa di retention karena user jadi punya alasan balik transaksi dan semua histori reward bisa dipantau langsung dari aplikasi.",
     ],
@@ -71,11 +71,11 @@ const projectEntries: ProjectDetail[] = [
     category: "web",
     categoryLabel: "Marketing Website",
     summary:
-      "Website profil perusahaan dengan fokus storytelling brand dan performa.",
+     "Redesign and full-scale rebuild of PT Kreatif System’s digital presence, transforming it into a high-tier professional interface with a clean, minimalist aesthetic.",
     description:
       "A high-performance company profile site with editorial layout, responsive interactions, and CMS-ready content blocks.",
-    tags: ["React", "Next.js", "Tailwind CSS"],
-    tech: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+    tags: ["Next.js", "Tailwind CSS", "groq"],
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
     content: [
       "Hasil akhirnya adalah website yang jauh lebih cepat dan konsisten, dengan identitas visual yang lebih tajam dibanding versi sebelumnya.",
     ],
@@ -90,7 +90,7 @@ const projectEntries: ProjectDetail[] = [
     category: "web",
     categoryLabel: "Mobile Application",
     summary:
-      "Aplikasi loyalty untuk point rewards, promo, dan engagement pelanggan.",
+     "A web-based platform designed to manage customer data through a dynamic ranking system. It features automated tier progression to reward loyal customers based on their engagement and transaction history.",
     description:
       "A mobile-first loyalty system that tracks transactions, reward points, and promotional campaigns with user-centric redemption flows.",
     tags: ["Laravel", "PHP", "MYSQL"],
@@ -110,7 +110,7 @@ const projectEntries: ProjectDetail[] = [
     year: "2024",
     category: "mobile",
     categoryLabel: "Mobile Application",
-    summary: "Automatic fish feeder iot project.",
+    summary: "An integrated IoT solution designed to automate and optimize aquaculture management. This mobile application allows users to schedule precision feeding, monitor real-time water conditions, and manage overall fish health remotely.",
     description:
       "A mobile-first loyalty system that tracks transactions, reward points, and promotional campaigns with user-centric redemption flows.",
     tags: ["Flutter", "Firebase", "internet of things"],
@@ -130,7 +130,7 @@ const projectEntries: ProjectDetail[] = [
     year: "2024",
     category: "mobile",
     categoryLabel: "Mobile Application",
-    summary: "E-learning mobile apps.",
+    summary: "Mobile-based learning management system designed to streamline assignment workflows, real-time progress monitoring., and interactive student engagement for educational institutions.",
     description:
       "A mobile-first loyalty system that tracks transactions, reward points, and promotional campaigns with user-centric redemption flows.",
     tags: ["Flutter", "Firebase"],
@@ -169,7 +169,7 @@ const projectEntries: ProjectDetail[] = [
     category: "web",
     categoryLabel: "Mobile Application",
     summary:
-      "A simple crud web for managing waste payment in residential areas.",
+      "Digitalized waste management system for residential areas, providing structured CRUD operations to track monthly payments and maintain accurate service records for community residents.",
     description:
       "A mobile-first loyalty system that tracks transactions, reward points, and promotional campaigns with user-centric redemption flows.",
     tags: ["Laravel", "PHP", "MySQL"],
