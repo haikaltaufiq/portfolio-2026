@@ -235,7 +235,7 @@ export default function CustomerDetail({ project }: CustomerDetailProps) {
 
               return (
                 <SlideIn key={tier.rank} delay={i * 0.1}>
-                  <div className="group p-8 border border-main-text/20 hover:border-main-text bg-main-text/[0.02] hover:bg-main-text hover:text-main-bg transition-all duration-500 relative overflow-hidden h-full flex flex-col justify-between">
+                  <div className="group p-8 border border-main-text/20 hover:border-main-text bg-main-text/2 hover:bg-main-text hover:text-main-bg transition-all duration-500 relative overflow-hidden h-full flex flex-col justify-between">
                     {/* Rank Watermark - Bigger & Better Position */}
                     <div className="absolute -right-6 -top-4 text-8xl font-black opacity-[0.03] group-hover:opacity-10 group-hover:-translate-x-4 transition-all uppercase italic select-none">
                       {tier.rank}
@@ -270,7 +270,7 @@ export default function CustomerDetail({ project }: CustomerDetailProps) {
                     </div>
 
                     {/* Bottom Decorative Bar */}
-                    <div className="mt-10 h-[1px] w-full bg-main-text/10 group-hover:bg-main-bg/20 overflow-hidden">
+                    <div className="mt-10 h-px w-full bg-main-text/10 group-hover:bg-main-bg/20 overflow-hidden">
                       <motion.div
                         initial={{ x: "-100%" }}
                         whileInView={{ x: "0%" }}

@@ -57,7 +57,7 @@ export default function RoomBookingDetail({ project }: RoomBookingDetailProps) {
   return (
     <main className="min-h-screen text-[#e0e0e0] pt-24 pb-10 overflow-x-hidden selection:bg-[#F25623] selection:text-white relative">
       {/* BACKGROUND ARCHITECTURE */}
-      <div className="fixed inset-0 -z-10 opacity-[0.05] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:60px_60px]" />
+      <div className="fixed inset-0 -z-10 opacity-[0.05] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[60px_60px]" />
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_50%,rgba(242,86,35,0.03),transparent)]" />
 
       <div className="mx-auto max-w-6xl px-6 relative">
@@ -66,7 +66,7 @@ export default function RoomBookingDetail({ project }: RoomBookingDetailProps) {
           <SlideIn direction="up">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-[1px] bg-[#F25623]" />
+                <div className="w-8 h-px bg-[#F25623]" />
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F25623]">
                   Freelance_Project
                 </span>
