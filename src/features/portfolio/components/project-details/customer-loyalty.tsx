@@ -65,24 +65,16 @@ const RedactedOverlay = ({
 
 const LOYALTY_TIERS = [
   {
-    rank: "Diamond",
+    rank: "GOLD",
     requirement: "> 5000 pts",
-    reward: "Exclusive Revenue Sharing",
   },
   {
-    rank: "Platinum",
+    rank: "SILVER",
     requirement: "2500 - 5000 pts",
-    reward: "Priority Service & 15% Rebate",
   },
   {
-    rank: "Gold",
+    rank: "BRONZE",
     requirement: "1000 - 2500 pts",
-    reward: "Free Delivery & 10% Rebate",
-  },
-  {
-    rank: "Silver",
-    requirement: "0 - 1000 pts",
-    reward: "Point Accumulation Enabled",
   },
 ];
 
@@ -97,7 +89,7 @@ export default function CustomerDetail({ project }: CustomerDetailProps) {
     );
 
   return (
-    <main className="min-h-screen bg-transparent text-main-text pt-24 pb-10 overflow-x-hidden selection:bg-[#F25623] relative">
+    <main className="min-h-screen bg-transparent text-main-text pt-8 pb-10 overflow-x-hidden selection:bg-[#F25623] relative">
       {/* GLOBAL SYSTEM ARTIFACTS */}
       <div className="fixed inset-0 -z-20 bg-main-bg" />
       <div className="fixed inset-0 -z-10 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px]" />
@@ -105,37 +97,41 @@ export default function CustomerDetail({ project }: CustomerDetailProps) {
       <div className="mx-auto max-w-7xl px-6 relative z-10">
         {/* SECTION 1: SYSTEM IDENTIFICATION */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32 pt-16">
+          <div className="absolute italic top-38 -left-2 md:left-42 text-[24vw] md:text-[16vw] font-black opacity-[0.02] leading-20 md:leading-47 select-none tracking-[-5] md:tracking-[-10] pointer-events-none -rotate-2 uppercase">
+            loyalty reward
+          </div>
           <div className="lg:col-span-7 space-y-8">
             <SlideIn>
               <div className="relative inline-block">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-px bg-[#F25623]" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.5em] text-[#F25623]">
-                    system_archive_v2.0
+                  <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#F25623]">
+                    system archive
                   </span>
                 </div>
                 <Typography
                   variant="h1"
                   className="text-7xl md:text-[8vw] font-black lowercase tracking-tighter leading-[0.85]"
                 >
-                  interface <br />
-                  <span className="text-[#F25623] italic">showcase.</span>
+                  Customer <br />
+                  <span className="text-[#F25623] italic">Loyalty.</span>
                 </Typography>
               </div>
             </SlideIn>
-            <p className="text-lg opacity-60 leading-relaxed max-w-xl font-medium border-l-4 border-[#F25623] pl-6 py-2">
-              Visualizing the architecture of high-performance ecosystems. From
-              automated IoT feeders to enterprise-grade resource management
-              systems.
+            <p className="text-sm opacity-60 leading-relaxed max-w-xl font-medium border-l-4 border-[#F25623] pl-6 py-2">
+              A web-based platform designed to manage customer data through a
+              dynamic ranking system. It features automated tier progression to
+              reward loyal customers based on their engagement and transaction
+              history.
             </p>
           </div>
 
           <div className="lg:col-span-5 grid grid-cols-2 gap-px bg-main-text/10 border border-main-text/10 self-end">
             {[
-              { l: "Projects", v: "04_UNITS" },
-              { l: "Format", v: "SS_RAW" },
-              { l: "Render", v: "Next_v16" },
-              { l: "Loc", v: "BTM_KSI" },
+              { l: "Modules", v: "RANK_SYSTEM" },
+              { l: "Access", v: "INTERNAL_ONLY" },
+              { l: "Engine", v: "LARAVEL" },
+              { l: "Client", v: "KSI_SYSTEMS" },
             ].map((item, i) => (
               <div
                 key={i}
@@ -227,76 +223,65 @@ export default function CustomerDetail({ project }: CustomerDetailProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {LOYALTY_TIERS.map((tier, i) => (
-              <SlideIn key={tier.rank} delay={i * 0.1}>
-                <div className="group p-8 border-2 border-main-text hover:bg-main-text hover:text-main-bg transition-all duration-500 relative overflow-hidden h-full">
-                  <div className="absolute -right-4 -bottom-4 text-7xl font-black opacity-[0.03] group-hover:opacity-10 group-hover:scale-110 transition-all uppercase italic">
-                    {tier.rank}
-                  </div>
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-[#F25623] font-mono text-xs">
-                      0{i + 1}
-                    </span>
-                    <Typography className="text-2xl font-black uppercase tracking-tighter">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {LOYALTY_TIERS.map((tier, i) => {
+              // Mapping color accent biar makin tajam per rank
+              const accentColor =
+                tier.rank.toLowerCase() === "gold"
+                  ? "#FFD700"
+                  : tier.rank.toLowerCase() === "silver"
+                    ? "#C0C0C0"
+                    : "#CD7F32"; // Bronze
+
+              return (
+                <SlideIn key={tier.rank} delay={i * 0.1}>
+                  <div className="group p-8 border border-main-text/20 hover:border-main-text bg-main-text/[0.02] hover:bg-main-text hover:text-main-bg transition-all duration-500 relative overflow-hidden h-full flex flex-col justify-between">
+                    {/* Rank Watermark - Bigger & Better Position */}
+                    <div className="absolute -right-6 -top-4 text-8xl font-black opacity-[0.03] group-hover:opacity-10 group-hover:-translate-x-4 transition-all uppercase italic select-none">
                       {tier.rank}
-                    </Typography>
-                  </div>
-                  <div className="space-y-4 relative z-10">
-                    <div>
-                      <p className="text-[9px] font-black uppercase opacity-40 group-hover:opacity-60">
-                        Threshold
-                      </p>
-                      <p className="font-mono font-bold">{tier.requirement}</p>
                     </div>
+
                     <div>
-                      <p className="text-[9px] font-black uppercase opacity-40 group-hover:opacity-60">
-                        Protocol_Reward
-                      </p>
-                      <p className="font-bold italic text-[#F25623] group-hover:text-white transition-colors">
-                        {tier.reward}
-                      </p>
+                      <div className="flex items-center justify-between mb-10">
+                        <span className="font-mono text-[10px] opacity-40 group-hover:text-main-bg transition-colors">
+                          RANK_0{i + 1}
+                        </span>
+                        {/* Dynamic Dot Accent */}
+                        <div
+                          className="w-2 h-2 rounded-full animate-pulse"
+                          style={{ backgroundColor: accentColor }}
+                        />
+                      </div>
+
+                      <Typography className="text-3xl font-black uppercase tracking-tighter mb-6 leading-none">
+                        {tier.rank}.
+                      </Typography>
+
+                      <div className="space-y-6 relative z-10">
+                        <div className="space-y-1">
+                          <p className="text-[9px] font-black uppercase opacity-30 group-hover:opacity-60 tracking-[0.2em]">
+                            // Threshold_Requirement
+                          </p>
+                          <p className="font-mono text-sm font-bold tracking-tight">
+                            {tier.requirement}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Decorative Bar */}
+                    <div className="mt-10 h-[1px] w-full bg-main-text/10 group-hover:bg-main-bg/20 overflow-hidden">
+                      <motion.div
+                        initial={{ x: "-100%" }}
+                        whileInView={{ x: "0%" }}
+                        transition={{ duration: 1, delay: i * 0.2 }}
+                        className="h-full w-full bg-[#F25623]"
+                      />
                     </div>
                   </div>
-                </div>
-              </SlideIn>
-            ))}
-          </div>
-        </section>
-
-        {/* SECTION 4: FINAL RECAP */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 border-t-4 border-main-text pt-20">
-          <div className="space-y-8">
-            <Typography className="text-xs font-black uppercase tracking-[0.5em] text-[#F25623]">
-              // engineering_recap
-            </Typography>
-            <div className="columns-1 md:columns-2 gap-8 text-sm font-medium opacity-70 leading-relaxed italic">
-              {project.content.map((p, i) => (
-                <p
-                  key={i}
-                  className="mb-6 first-letter:text-4xl first-letter:font-black first-letter:text-[#F25623]"
-                >
-                  {p}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col justify-between items-end">
-            <div className="relative p-10 bg-[#F25623]/5 border-2 border-main-text group">
-              <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-[#F25623]" />
-              <p className="text-xs font-bold leading-loose">
-                "Developing these modules required a deep understanding of{" "}
-                <span className="underline decoration-[#F25623]">
-                  asynchronous state management
-                </span>{" "}
-                and real-time database syncing to ensure a seamless experience
-                across all nodes."
-              </p>
-            </div>
-            <Typography className="text-[12vw] font-black leading-none select-none tracking-tighter opacity-5 italic">
-              ARCHIVE
-            </Typography>
+                </SlideIn>
+              );
+            })}
           </div>
         </section>
       </div>

@@ -269,38 +269,65 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
 
         {/* MOBILE SHOWCASE */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4">
-              <Typography
-                variant="h3"
-                className="text-5xl font-black lowercase leading-[0.8] tracking-tighter"
-              >
-                Mobile <br /> <span className="text-[#F25623]">Mobility.</span>
-              </Typography>
-              <div className="h-1 w-20 bg-[#F25623]" /> {/* Accent line */}
+          <div className="lg:col-span-5 space-y-10 py-6">
+            {/* Headline Section */}
+            <div className="space-y-6">
+              <div className="relative">
+                <Typography
+                  variant="h3"
+                  className="text-6xl font-black lowercase leading-[0.85] tracking-tighter"
+                >
+                  Field <br />
+                  <span className="text-[#F25623] inline-flex items-center gap-2">
+                    Presence.
+                    <span className="h-1 w-12 bg-[#F25623]/30 animate-pulse hidden sm:block" />
+                  </span>
+                </Typography>
+                <div className="absolute -left-4 top-0 h-full w-0.5 bg-linear-to-b from-[#F25623] to-transparent opacity-50" />
+              </div>
+
+              <p className="text-sm text-white/70 leading-relaxed font-medium max-w-sm border-l border-white/10 pl-4">
+                Unified operational ecosystem for decentralized teams.
+                Seamlessly bridging field data with central monitoring through
+                low-latency sync protocols.
+              </p>
             </div>
 
-            <p className="text-sm opacity-60 leading-relaxed font-medium italic max-w-md">
-              Focused on field employee accessibility, featuring low-latency
-              attendance check-ins and real-time push notifications for task
-              assignments.
-            </p>
-
-            <div className="grid grid-cols-2 gap-8 pt-4">
-              <div className="border-l-4 border-[#F25623] pl-6 py-2 bg-main-text/5">
-                <p className="text-[10px] font-black uppercase tracking-widest text-[#F25623]">
-                  Tracking
+            {/* Module Grid - Fokus Monitoring & Integration */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
+              {/* Module 01: Tracking */}
+              <div className="group relative overflow-hidden border border-white/5 bg-white/2 p-6 transition-all hover:bg-[#F25623]/5">
+                <div className="flex justify-between items-start mb-4">
+                  <span className="text-[10px] font-black text-[#F25623] tracking-[0.2em] uppercase">
+                    // Monitoring
+                  </span>
+                  <span className="text-[10px] font-mono opacity-30 group-hover:opacity-100 transition-opacity">
+                    LVL_02
+                  </span>
+                </div>
+                <p className="text-lg font-black tracking-tight text-white/90">
+                  Geofence <br /> Validation
                 </p>
-                <p className="text-xs font-mono mt-1 opacity-80">
-                  GPS & Geofencing
+                <p className="text-[10px] font-mono mt-2 opacity-50 uppercase tracking-tighter">
+                  Active GPS protocol
                 </p>
               </div>
-              <div className="border-l-4 border-main-text/20 pl-6 py-2">
-                <p className="text-[10px] font-black uppercase tracking-widest">
-                  Payroll
+
+              {/* Module 02: Integration */}
+              <div className="group relative overflow-hidden border border-white/5 bg-white/2 p-6 transition-all hover:bg-[#F25623]/5">
+                <div className="flex justify-between items-start mb-4">
+                  <span className="text-[10px] font-black text-white/40 group-hover:text-[#F25623] tracking-[0.2em] uppercase transition-colors">
+                    // Integration
+                  </span>
+                  <span className="text-[10px] font-mono opacity-30 group-hover:opacity-100">
+                    SYS_04
+                  </span>
+                </div>
+                <p className="text-lg font-black tracking-tight text-white/90">
+                  Module <br /> Ecosystem
                 </p>
-                <p className="text-xs font-mono mt-1 opacity-80">
-                  E-Slip Access
+                <p className="text-[10px] font-mono mt-2 opacity-50 uppercase tracking-tighter">
+                  Multi-point sync
                 </p>
               </div>
             </div>
@@ -374,7 +401,7 @@ export default function HrSystemDetail({ project }: HrSystemDetailProps) {
           <p>Client: PT Kreatif System Indonesia</p>
         </div>
         <div className="text-[12px] font-semibold uppercase tracking-tighter">
-          Documentation - 2026.
+          2026 - HAIKAL TAUFIQ
         </div>
       </footer>
     </div>

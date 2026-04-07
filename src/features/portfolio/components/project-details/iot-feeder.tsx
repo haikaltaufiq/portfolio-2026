@@ -15,13 +15,13 @@ const IOT_NODES = [
   { id: "NODE_01", component: "ESP32", role: "Main Controller / Wi-Fi Gate" },
   {
     id: "NODE_02",
-    component: "Servo MG996R",
+    component: "Servo",
     role: "Mechanical Feeding Actuator",
   },
-  { id: "NODE_03", component: "DHT11/22", role: "Ambient Temp & Humidity" },
+  { id: "NODE_03", component: "DHT 11", role: "Ambient Temp & Humidity" },
   {
     id: "NODE_04",
-    component: "pH Meter v1.1",
+    component: "pH Meter",
     role: "Water Quality Monitoring",
   },
 ];
@@ -44,12 +44,12 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto space-y-32 pb-40 px-4 pt-24">
+    <div className="max-w-7xl mx-auto space-y-32 pb-40 px-4 pt-14 md:pt-24 overflow-x-hidden">
       {/* SECTION 1: HERO & STATS - HRIS STYLE */}
       <SlideIn>
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
-          <div className="absolute -top-20 -left-10 text-[18vw] font-black opacity-[0.02] select-none tracking-tight pointer-events-none -rotate-2">
-            AUTOMATED AQUACULTURE SYSTEM
+          <div className=" absolute top-20 md:-top-20 md:left-10 text-[18vw] font-black opacity-[0.02] select-none tracking-[-10] overflow-hidden leading-16 md:leading-53 pointer-events-none -rotate-2">
+            AQUA CULTURE SYSTEM
           </div>
           <div className="lg:col-span-6 space-y-6 z-10">
             <div className="inline-block px-3 py-1 border border-[#F25623] text-[#F25623] text-[10px] font-black uppercase tracking-widest">
@@ -154,27 +154,6 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
                 millisecond precision while monitoring
                 <strong> water pH levels</strong> and ambient temperature.
               </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-main-text/5">
-                <div className="space-y-1">
-                  <p className="text-[10px] font-black uppercase text-[#F25623]">
-                    Feeding Accuracy
-                  </p>
-                  <p className="text-2xl font-black italic">98.2%</p>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-[10px] font-black uppercase text-[#F25623]">
-                    Power Consumption
-                  </p>
-                  <p className="text-2xl font-black italic">Low-Pwr</p>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-[10px] font-black uppercase text-[#F25623]">
-                    Sync Speed
-                  </p>
-                  <p className="text-2xl font-black italic">~0.5s</p>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -255,8 +234,8 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
             </Typography>
             <div className="h-1 w-20 bg-[#F25623]" />
             <p className="text-sm opacity-60 leading-relaxed font-medium italic max-w-sm">
-              Cross-platform mobile application built to provide instantaneous
-              control over the pond ecosystem via Firebase Cloud messaging.
+              mobile application built to provide instantaneous control over the
+              pond ecosystem via Firebase Cloud messaging.
             </p>
             <div className="grid grid-cols-1 gap-4 pt-4 border-t border-main-text/10">
               {MOBILE_SCREENSHOTS.slice(0, 3).map((sc, i) => (
@@ -306,53 +285,11 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
         </div>
       </section>
 
-      {/* SECTION 5: TECHNICAL SPECS (POSTER) */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 border-t border-main-text/10 pt-24">
-        <div className="space-y-12">
-          <Typography className="text-xs font-black uppercase tracking-[0.4em] opacity-30">
-            // Engineering_Logs
-          </Typography>
-          <div className="space-y-8">
-            {project.content.map((p, i) => (
-              <p
-                key={i}
-                className="text-sm font-bold opacity-60 leading-relaxed border-l-4 border-main-text/10 hover:border-[#F25623] pl-6 transition-colors"
-              >
-                {p}
-              </p>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative aspect-video border-2 border-main-text p-8 bg-main-text text-main-bg flex flex-col justify-between overflow-hidden group">
-          <Image
-            src="/assets/fish-feeder/poster.png"
-            alt="Poster"
-            fill
-            className="object-cover opacity-10 grayscale group-hover:opacity-40 group-hover:grayscale-0 transition-all duration-1000"
-          />
-          <div className="relative z-10 flex justify-between">
-            <div className="font-mono text-[9px] font-black space-y-1">
-              <p>&gt; SYSTEM_ID: FF_PBL_2026</p>
-              <p>&gt; CALIBRATION: SUCCESS</p>
-            </div>
-            <div className="w-3 h-3 bg-[#00CC66] rounded-full animate-pulse" />
-          </div>
-          <Typography className="relative z-10 text-4xl font-black lowercase tracking-tighter italic leading-none opacity-20">
-            sustainable_ <br />
-            iot_innovation.
-          </Typography>
-        </div>
-      </section>
-
       {/* FOOTER - HRIS STYLE */}
       <footer className="pt-24 border-t border-main-text/10 flex flex-col md:flex-row justify-between gap-8 opacity-40">
         <div className="font-mono text-[9px] uppercase tracking-widest space-y-1">
           <p>Project: Automatic Fish Feeder</p>
           <p>Role: IoT Engineer & UI Designer</p>
-        </div>
-        <div className="text-[10px] font-black uppercase tracking-tighter">
-          PBL EXPO POLIBATAM // 2026.
         </div>
       </footer>
     </div>

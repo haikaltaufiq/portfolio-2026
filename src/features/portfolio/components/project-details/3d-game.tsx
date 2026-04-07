@@ -43,14 +43,14 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
   }, []);
 
   const galleryImages = [
-    { src: "/assets/fishing-game/home-screen.png", label: "UI_SYSTEM_CORE" },
-    { src: "/assets/fishing-game/fish-card.png", label: "DB_COLLECTION" },
-    { src: "/assets/fishing-game/waiting-screen.png", label: "STATE_MACHINE" },
-    { src: "/assets/fishing-game/fishing-idle.png", label: "SIM_ENVIRONMENT" },
+    { src: "/assets/fishing-game/home-screen.png", label: "UI SYSTEM CORE" },
+    { src: "/assets/fishing-game/fish-card.png", label: "FISH CARD UI" },
+    { src: "/assets/fishing-game/waiting-screen.png", label: "WAITING SCREEN" },
+    { src: "/assets/fishing-game/fishing-idle.png", label: "FISHING IDLE" },
   ];
 
   return (
-    <main className="min-h-screen bg-transparent text-main-text pt-24 pb-10 overflow-x-hidden selection:bg-[#F25623] selection:text-white relative">
+    <main className="min-h-screen bg-transparent text-main-text md:pt-24 pb-10 overflow-x-hidden selection:bg-[#F25623] selection:text-white relative">
       {/* Background Elements - Biar seirama sama Compro */}
       <div className="fixed inset-0 -z-20 bg-main-bg" />
       <div className="fixed inset-0 -z-10 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px]" />
@@ -60,49 +60,72 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
         {/* SECTION 1: HERO & STATS (Style HRIS) */}
         <section className="relative pt-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Background Text Dekorasi sperti HRIS */}
-          <div className="absolute -top-10 -left-10 text-[16vw] font-black opacity-[0.02] select-none tracking-tight pointer-events-none -rotate-2 uppercase">
-            3D_Simulation_Core
+          <div className="absolute top-58 -left-2 md:-left-12 text-[24vw] md:text-[16vw] font-black opacity-[0.02] leading-20 md:leading-47 select-none tracking-[-5] md:tracking-[-10] pointer-events-none -rotate-2 uppercase">
+            Fishing GAME
           </div>
 
-          <div className="lg:col-span-5 space-y-6 relative">
+          <div className="lg:col-span-5 md:mb-15 space-y-6 relative">
             <SlideIn>
-              <div className="inline-block px-3 py-1 border border-[#F25623] text-[#F25623] text-[10px] font-black uppercase tracking-widest bg-[#F25623]/5">
+              <div className="inline-block px-3 py-1 mb-6 border border-[#F25623] text-[#F25623] text-[10px] font-black uppercase tracking-widest bg-[#F25623]/5">
                 Project Based Learning // IoT
               </div>
               <Typography
                 variant="h1"
                 className="font-poppins font-black text-[10vw] md:text-[8vw] leading-[0.8] lowercase tracking-tighter"
               >
-                3d fishing <br />
+                fishing <br />
                 <span className="text-[#F25623]">simulator.</span>
               </Typography>
               <RedactedOverlay
-                text="VERSION_ALPHA_2.0.1"
-                className="text-[3vw] -top-10 left-[40%] rotate-2"
+                text="VERSION"
+                className="text-[10vw] -top-5 rotate-2"
               />
 
               <p className="text-sm opacity-60 leading-relaxed max-w-sm font-medium mt-6">
-                Eksperimen integrasi hardware Arduino dengan Unity 3D Engine.
-                Mensimulasikan sensasi memancing dengan input sensor real-time.
+                A Project-Based Learning initiative integrating Arduino hardware
+                with Unity 3D. Engineered a high-fidelity fishing simulator that
+                bridges physical inputs with real-time digital environments.
               </p>
             </SlideIn>
           </div>
 
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="hidden md:grid lg:col-span-7 ml-25 grid-cols-1 sm:grid-cols-2 gap-6">
             {[
-              { label: "Hardware Sync", value: "Real-time", isText: true },
-              { label: "Simulation FPS", value: "60.0", isText: true },
-              { label: "Input Logic", value: "Arduino", isText: true },
-              { label: "Environment", value: "3D_URP", isText: true },
+              { label: "Hardware Sync", value: "Real-time", code: "01" },
+              { label: "Performance", value: "Optimized", code: "02" },
+              { label: "Input Logic", value: "Arduino", code: "03" },
+              { label: "Render Engine", value: "Unity URP", code: "04" },
             ].map((stat, i) => (
               <SlideIn key={i} delay={i * 0.1}>
-                <div className="border border-main-text/10 p-8 flex flex-col justify-between group hover:bg-[#F25623] transition-all duration-500 bg-main-text/2 h-full">
-                  <span className="text-[10px] font-black opacity-40 group-hover:text-white uppercase tracking-widest">
-                    {stat.label}
+                <div className="relative border border-white/10 p-10 flex flex-col justify-between group overflow-hidden transition-all duration-700 ease-in-out hover:border-[#F25623]/50 h-44">
+                  {/* Background Decorative Typography */}
+                  <span className="absolute -bottom-4 -right-4 text-8xl font-black text-white/3 italic pointer-events-none group-hover:text-[#F25623]/10 transition-colors duration-500">
+                    {stat.code}
                   </span>
-                  <p className="text-4xl font-black group-hover:text-white transition-colors lowercase tracking-tighter">
-                    {stat.value}
-                  </p>
+
+                  {/* Top Section */}
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="h-0.5 w-0 group-hover:w-8 bg-[#F25623] transition-all duration-500 ease-out"></span>
+                      <span className="text-[11px] font-bold opacity-50 group-hover:opacity-100 group-hover:text-[#F25623] uppercase tracking-[0.2em] transition-all">
+                        {stat.label}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Bottom Section */}
+                  <div className="relative z-10">
+                    <p className="text-4xl font-black tracking-tighter leading-none group-hover:translate-x-2 transition-transform duration-500 ease-out">
+                      {stat.value}
+                      <span className="text-[#F25623] opacity-0 group-hover:opacity-100 transition-opacity">
+                        .
+                      </span>
+                    </p>
+                  </div>
+
+                  {/* Animated Corner Border */}
+                  <div className="absolute top-0 left-0 w-0 h-0.5 bg-[#F25623] group-hover:w-full transition-all duration-700" />
+                  <div className="absolute bottom-0 right-0 w-0 h-0.5 bg-[#F25623] group-hover:w-full transition-all duration-700" />
                 </div>
               </SlideIn>
             ))}
@@ -113,10 +136,10 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
         <section className="space-y-8">
           <div className="flex justify-between items-end border-b border-main-text/10 pb-6">
             <Typography variant="h3" className="text-3xl font-black lowercase">
-              loop_preview
+              preview
             </Typography>
             <span className="text-[10px] font-mono opacity-40 uppercase tracking-[0.3em]">
-              Hardware_Visual_Sync_v1.0
+              Visual Sync
             </span>
           </div>
 
@@ -158,7 +181,7 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
         </section>
 
         {/* SECTION 3: SYSTEM SPECS (Style Grid) */}
-        <section className="space-y-12">
+        <section className="space-y-8">
           <div className="flex items-center gap-4">
             <Typography
               variant="h3"
@@ -191,12 +214,12 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
         </section>
 
         {/* SECTION 4: ASSETS GALLERY (Gak kepotong & Estetik) */}
-        <section className="space-y-12">
+        <section className="space-y-8">
           <div className="flex justify-between items-end border-b border-main-text/10 pb-6">
             <Typography variant="h3" className="text-3xl font-black lowercase">
               internal_assets
             </Typography>
-            <span className="text-[10px] font-mono opacity-40 uppercase tracking-[0.3em]">
+            <span className="text-[10px] hidden md:block font-mono opacity-40 uppercase tracking-[0.3em]">
               Resource_Bank_04
             </span>
           </div>
@@ -232,61 +255,13 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
             ))}
           </div>
         </section>
-
-        {/* SECTION 5: DEV LOGS (Style Compro Specs) */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-main-text/10 pt-20">
-          <div className="lg:col-span-7 space-y-8">
-            <Typography className="text-[10px] font-black uppercase tracking-[0.4em] opacity-30">
-              // execution_protocol_pbl
-            </Typography>
-            <div className="space-y-6">
-              <p className="text-sm font-black text-[#F25623] italic leading-relaxed border-l-4 border-[#F25623] pl-6 bg-[#F25623]/5 py-4">
-                "Project ini merupakan hasil Project Based Learning (PBL) di
-                Politeknik Negeri Batam, fokus pada perancangan sistem 3D dan
-                sinkronisasi input IoT menggunakan Arduino Uno."
-              </p>
-              {project.content.map((p, i) => (
-                <p
-                  key={i}
-                  className="text-sm font-medium opacity-70 leading-relaxed border-l-2 border-main-text/10 pl-6 hover:border-[#F25623] transition-colors"
-                >
-                  {p}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          <div className="lg:col-span-5">
-            <div className="bg-main-text text-main-bg p-10 relative overflow-hidden group shadow-2xl">
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#F25623]/10 to-transparent h-24 w-full animate-scan" />
-              <Typography className="text-2xl font-black lowercase mb-8 relative z-10 leading-none">
-                deployment <br />{" "}
-                <span className="text-[#F25623]">status.</span>
-              </Typography>
-              <div className="space-y-4 font-mono text-[10px] font-bold uppercase relative z-10">
-                <div className="flex justify-between border-b border-main-bg/10 pb-2">
-                  <span className="opacity-40">stack</span>
-                  <span>Unity / C# / Arduino</span>
-                </div>
-                <div className="flex justify-between border-b border-main-bg/10 pb-2">
-                  <span className="opacity-40">input_device</span>
-                  <span>UnoJoy Controller</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="opacity-40">sim_status</span>
-                  <span className="text-[#00CC66]">Stable_Build</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
 
       <footer className="mt-40 border-t border-main-text/10 py-12 bg-main-text/2 opacity-40">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="font-mono text-[9px] uppercase tracking-widest space-y-1">
             <p>Project: 3D Fishing Simulator</p>
-            <p>Platform: Unity 3D / Win64</p>
+            <p>Platform: Unity 3D </p>
           </div>
           <Typography className="text-[10px] font-black uppercase tracking-[0.5em] italic">
             Build // Prototype // 2026.

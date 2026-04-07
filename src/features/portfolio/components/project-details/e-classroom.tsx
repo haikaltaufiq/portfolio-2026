@@ -88,7 +88,7 @@ export default function EClassroomDetail({ project }: EClassroomDetailProps) {
               </SlideIn>
             </div>
             <div className="lg:col-span-4 space-y-6">
-              <div className="p-6 border-l-4 border-[#F25623] bg-main-text/2 space-y-4">
+              <div className="p-6 border-l-4 md:ml-20 border-[#F25623] bg-main-text/2 space-y-4">
                 <p className="text-[10px] font-mono opacity-50 uppercase tracking-widest">
                   // delivery_metrics
                 </p>
@@ -97,12 +97,6 @@ export default function EClassroomDetail({ project }: EClassroomDetailProps) {
                     <p className="text-2xl font-black">Mobile</p>
                     <p className="text-[9px] opacity-50 uppercase">
                       Primary Platform
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-black">JWT</p>
-                    <p className="text-[9px] opacity-50 uppercase">
-                      Secured Auth
                     </p>
                   </div>
                 </div>
@@ -140,8 +134,7 @@ export default function EClassroomDetail({ project }: EClassroomDetailProps) {
               interface_preview
             </Typography>
             <div className="flex items-center gap-6">
-              <RedactedLayer text="Confidential_System_01" />
-              <span className="text-[10px] font-mono opacity-40 uppercase tracking-[0.3em]">
+              <span className="hidden md:block text-[10px] font-mono opacity-40 uppercase tracking-[0.3em]">
                 Mobile Deployment v1.0
               </span>
             </div>
@@ -159,8 +152,8 @@ export default function EClassroomDetail({ project }: EClassroomDetailProps) {
               <div className="h-1 w-20 bg-[#F25623]" />
               <p className="text-sm opacity-60 leading-relaxed font-medium italic max-w-sm">
                 Focused on accessibility. No fluff, just core academic modules
-                delivered through a brutalist-minimalist interface. Optimized
-                for low-latency interactions.
+                delivered through a minimalist interface. Optimized for
+                low-latency interactions.
               </p>
             </div>
 
@@ -214,112 +207,11 @@ export default function EClassroomDetail({ project }: EClassroomDetailProps) {
             </div>
           </div>
         </section>
-
-        {/* SECTION 4: ASYMMETRICAL FOOTER SHOWCASE (Hero + Screens 04 & 05) */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-40">
-          <div className="lg:col-span-8">
-            <div className="relative aspect-video border-2 border-main-text overflow-hidden group">
-              <Image
-                src="/assets/classroom/class.webp"
-                alt="Hero"
-                fill
-                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-main-bg/80 to-transparent" />
-              <div className="absolute bottom-8 left-8">
-                <RedactedLayer text="Environment_Scan_2026" />
-                <Typography className="text-3xl font-black italic lowercase tracking-tighter mt-4">
-                  Classroom_Landscape
-                </Typography>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-4 flex gap-6 justify-end lg:pt-20">
-            <div className="relative group">
-              <div className="w-36 lg:w-44 aspect-9/19 border-2 border-main-text overflow-hidden bg-[#1a1a1a]">
-                <Image
-                  src="/assets/classroom/ClassApp04.png"
-                  alt="UI 4"
-                  fill
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all"
-                />
-              </div>
-              <p className="text-[8px] font-mono opacity-30 mt-4 uppercase tracking-widest text-right italic">
-                log_asset_04
-              </p>
-            </div>
-            <div className="relative group -mt-10">
-              <div className="w-36 lg:w-44 aspect-9/19 border-2 border-[#F25623] overflow-hidden bg-[#1a1a1a] shadow-[10px_10px_0px_#F25623]/10">
-                <Image
-                  src="/assets/classroom/ClassApp05.png"
-                  alt="UI 5"
-                  fill
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all"
-                />
-              </div>
-              <p className="text-[8px] font-mono text-[#F25623] mt-4 uppercase tracking-widest text-right font-black">
-                log_asset_05
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 5: TECHNICAL SPECS */}
-        <section className="border-t border-main-text/10 pt-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            <div className="space-y-8">
-              <Typography className="text-xs font-black uppercase tracking-widest opacity-30">
-                // implementation_logs
-              </Typography>
-              <div className="space-y-4">
-                {project.content.map((p, i) => (
-                  <div
-                    key={i}
-                    className="group flex gap-4 border-b border-main-text/5 pb-4 hover:border-[#F25623] transition-colors"
-                  >
-                    <span className="text-[10px] font-black opacity-20">
-                      0{i + 1}
-                    </span>
-                    <p className="text-sm font-medium opacity-70 group-hover:opacity-100 transition-opacity">
-                      {p}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-main-text text-main-bg p-10 flex flex-col justify-between relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Typography className="text-[15vw] font-black">RBAC</Typography>
-              </div>
-              <div className="space-y-6 relative z-10">
-                <Typography className="text-3xl font-black uppercase tracking-tighter leading-none italic">
-                  Security & <br /> Data Integrity.
-                </Typography>
-                <p className="text-[11px] font-bold opacity-70 uppercase leading-relaxed max-w-xs">
-                  Setiap request diproteksi JWT dan Role-Based Access Control.
-                  Murid gak bisa intip kunci jawaban, dan guru punya kontrol
-                  penuh.
-                </p>
-              </div>
-              <div className="mt-12 flex justify-between items-end relative z-10 border-t border-main-bg/20 pt-6">
-                <div className="text-[9px] font-mono opacity-50 uppercase">
-                  Node_Env: Production <br />
-                  Encryption: AES-256
-                </div>
-                <div className="px-4 py-2 bg-[#F25623] text-white text-[10px] font-black uppercase italic shadow-[4px_4px_0px_white]">
-                  Verified_Freelance_Unit
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
 
       <footer className="mt-40 border-t border-main-text/10 py-10 flex justify-between items-center opacity-30 px-6">
         <Typography className="text-[9px] font-black uppercase tracking-[0.4em]">
-          E-Classroom Deployment Unit // 2026
+          E-Classroom Deployment Unit
         </Typography>
         <div className="flex gap-2">
           {[...Array(5)].map((_, i) => (

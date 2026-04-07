@@ -59,7 +59,9 @@ export default function ComproDetail({ project }: ComproDetailProps) {
       <div className="fixed inset-0 -z-20 bg-main-bg" />
       <div className="fixed inset-0 -z-10 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px]" />
       <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
+      <div className="absolute top-68 -left-2 md:left-5 text-[24vw] md:text-[16vw] font-black opacity-[0.02] leading-20 md:leading-47 select-none tracking-[-5] md:tracking-[-10] pointer-events-none -rotate-2 uppercase">
+        KREASII
+      </div>
       <div className="mx-auto max-w-6xl px-6 relative">
         {/* HEADER SECTION */}
         <section className="relative mb-32">
@@ -75,34 +77,136 @@ export default function ComproDetail({ project }: ComproDetailProps) {
                     <span className="text-[#F25623]">kreasii.</span>
                   </Typography>
                   <RedactedOverlay
-                    text="VERSION: ENTERPRISE_2.0"
-                    className="text-[3vw] -top-8 left-[20%] opacity-20 -rotate-3"
+                    text="ENTERPRISE"
+                    className="text-[8vw] -top-16 left-[5%] opacity-20 -rotate-3"
                   />
                 </div>
               </SlideIn>
             </div>
 
-            <div className="md:w-80 mt-12">
+            <div className="md:w-96 mt-12 relative">
               <SlideIn delay={0.2}>
-                <div className="space-y-6">
-                  <div className="flex gap-1.5">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} className="w-1.5 h-1.5 bg-[#F25623]" />
-                    ))}
+                <div className="space-y-8 relative">
+                  {/* Abstract Progress Indicator - More Classy */}
+                  <div className="flex items-center gap-4">
+                    <div className="h-px w-12 bg-[#F25623]" />
+                    <div className="flex gap-1">
+                      {[...Array(3)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="w-1 h-1 rounded-full bg-main-text/20"
+                        />
+                      ))}
+                    </div>
                   </div>
-                  <Typography className="text-sm font-bold leading-snug lowercase border-l-4 border-[#F25623] pl-4 opacity-80">
-                    "Redesigning PT Kreatif System Indonesia with an edgy,
-                    enterprise-standard aesthetic. Built for performance,
-                    optimized for scale."
-                  </Typography>
+
+                  <div className="relative group">
+                    {/* Subtle Side Accent */}
+                    <div className="absolute -left-6 top-0 bottom-0 w-px bg-linear-to-b from-[#F25623] via-[#F25623]/20 to-transparent opacity-50" />
+
+                    <div className="space-y-4">
+                      <Typography className="text-[10px] font-mono tracking-[0.3em] uppercase opacity-40">
+                        // executive_summary
+                      </Typography>
+
+                      <Typography className="text-sm md:text-[15px] font-medium leading-relaxed tracking-tight opacity-90">
+                        Architecting a new digital frontier for{" "}
+                        <span className="text-[#F25623]">
+                          PT Kreatif System Indonesia
+                        </span>
+                        . Blending industrial aesthetics with enterprise-grade
+                        performance to redefine corporate presence in the modern
+                        web era.
+                      </Typography>
+                    </div>
+                  </div>
                 </div>
               </SlideIn>
             </div>
           </div>
         </section>
 
+        {/* CENTRAL NARRATIVE CARD */}
+        <section className="mb-20 flex justify-center">
+          <SlideIn direction="up" delay={0.3}>
+            <div className="relative group w-full">
+              <div className="relative bg-main-bg border border-main-text/10 p-8 md:p-14 overflow-hidden">
+                <div className="flex flex-col md:flex-row gap-10 items-center">
+                  <div className="w-full md:w-1/3 space-y-4">
+                    <Typography className="text-[10px] font-mono font-bold text-[#F25623] tracking-[0.5em] uppercase">
+                      // phase_01: rebirth
+                    </Typography>
+                    <Typography
+                      variant="h2"
+                      className="text-4xl font-black lowercase leading-[0.9] tracking-tighter"
+                    >
+                      The <br /> Overhaul.
+                    </Typography>
+                    <div className="h-1 w-12 bg-[#F25623]" />
+                  </div>
+
+                  <div className="w-full md:w-2/3 space-y-6">
+                    <Typography className="text-sm md:text-base font-medium opacity-80 leading-relaxed italic">
+                      "This wasn't just a UI update; it was a complete
+                      structural reconstruction."
+                    </Typography>
+
+                    <Typography className="text-sm opacity-60 leading-relaxed">
+                      I spearheaded the{" "}
+                      <span className="text-main-text font-bold">
+                        redesign and rebuild
+                      </span>{" "}
+                      of the PT Kreatif System Indonesia web ecosystem from the
+                      ground up. By shifting to a modern stack, I eliminated
+                      legacy debt and established an edgy, enterprise-grade
+                      aesthetic.
+                    </Typography>
+
+                    <div className="p-5 bg-main-text/5 border-l-2 border-[#F25623] space-y-3">
+                      <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#F25623]" />
+                        <Typography className="text-[10px] font-mono font-black uppercase">
+                          Intelligence_Layer_Active
+                        </Typography>
+                      </div>
+                      <Typography className="text-xs opacity-70">
+                        Integrated{" "}
+                        <span className="text-[#F25623] font-bold">
+                          Groq AI
+                        </span>{" "}
+                        as a high-speed LPU-powered chatbot. It handles general
+                        inquiries regarding company services and corporate
+                        identity with sub-second response times, bridging the
+                        gap between automation and human-like interaction.
+                      </Typography>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom stats/tags */}
+                <div className="mt-12 pt-8 border-t border-main-text/5 flex flex-wrap gap-6 items-center justify-between">
+                  <div className="flex gap-4">
+                    <span className="text-[9px] font-mono opacity-30 tracking-widest">
+                      [ NEXT.JS ]
+                    </span>
+                    <span className="text-[9px] font-mono opacity-30 tracking-widest">
+                      [ GROQ ]
+                    </span>
+                    <span className="text-[9px] font-mono opacity-30 tracking-widest">
+                      [ FRAMER_MOTION ]
+                    </span>
+                  </div>
+                  <Typography className="text-[10px] font-mono font-bold text-[#00CC66]">
+                    STATUS: ACTIVE
+                  </Typography>
+                </div>
+              </div>
+            </div>
+          </SlideIn>
+        </section>
+
         {/* METRICS SECTION */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-40">
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
           {stats.map((stat, i) => (
             <SlideIn key={stat.label} delay={i * 0.1}>
               <div className="group relative p-6 border border-main-text/20 bg-main-text/2 hover:border-[#F25623]/50 transition-all duration-500">
@@ -132,15 +236,11 @@ export default function ComproDetail({ project }: ComproDetailProps) {
         {/* CAROUSEL SECTION */}
         <section className="mb-40">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
-            <div className="space-y-2">
-              <Typography className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F25623]">
-                visual_inspection_v2
-              </Typography>
+            <div>
               <Typography
                 variant="h2"
                 className="text-4xl md:text-5xl font-black lowercase tracking-tighter"
               >
-                interface{" "}
                 <span className="italic underline decoration-[#F25623]/30">
                   preview.
                 </span>
@@ -239,48 +339,6 @@ export default function ComproDetail({ project }: ComproDetailProps) {
             <div className="absolute bottom-6 right-6 z-20">
               <div className="px-3 py-1 bg-[#F25623] text-white font-mono text-[9px] font-bold">
                 {currentIndex + 1} / {screenshots.length}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* TECHNICAL DETAILS */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-main-text/10 pt-20">
-          <div className="lg:col-span-7 space-y-8">
-            <Typography className="text-[10px] font-black uppercase tracking-[0.4em] opacity-30">
-              // execution_protocol
-            </Typography>
-            <div className="space-y-6">
-              {project.content.map((p, i) => (
-                <p
-                  key={i}
-                  className="text-sm font-medium opacity-70 leading-relaxed border-l-2 border-[#F25623]/20 pl-6 hover:border-[#F25623] transition-colors"
-                >
-                  {p}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          <div className="lg:col-span-5">
-            <div className="bg-main-text text-main-bg p-8 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#F25623]/10 to-transparent h-24 w-full animate-scan" />
-              <Typography className="text-2xl font-black lowercase mb-8 relative z-10">
-                deployment <br /> <span className="text-[#F25623]">specs.</span>
-              </Typography>
-              <div className="space-y-4 font-mono text-[10px] font-bold uppercase relative z-10">
-                <div className="flex justify-between border-b border-main-bg/10 pb-2">
-                  <span className="opacity-40">ref_id</span>
-                  <span>KSI_PROD_2026</span>
-                </div>
-                <div className="flex justify-between border-b border-main-bg/10 pb-2">
-                  <span className="opacity-40">engine</span>
-                  <span>next.js / turbine</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="opacity-40">optim_rank</span>
-                  <span className="text-[#00CC66]">grade_a+</span>
-                </div>
               </div>
             </div>
           </div>
