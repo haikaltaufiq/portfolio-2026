@@ -1,0 +1,28 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#0B0B0B"/>
+  <rect x="48" y="48" width="1504" height="804" stroke="#2B2B2B" stroke-width="2"/>
+  <rect x="96" y="96" width="1408" height="708" fill="#111111" stroke="#F25623" stroke-width="2"/>
+  <rect x="132" y="132" width="360" height="540" fill="#151515" stroke="#2E2E2E"/>
+  <rect x="524" y="132" width="460" height="250" fill="#151515" stroke="#2E2E2E"/>
+  <rect x="1016" y="132" width="452" height="250" fill="#151515" stroke="#2E2E2E"/>
+  <rect x="524" y="414" width="944" height="258" fill="#151515" stroke="#2E2E2E"/>
+  <rect x="132" y="704" width="1336" height="52" fill="#F25623" fill-opacity="0.12" stroke="#F25623" stroke-width="2"/>
+  <text x="134" y="748" fill="#F25623" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="4">NATO PC // POS SYSTEM COVER</text>
+  <text x="136" y="182" fill="#F7F4EF" font-family="Arial, sans-serif" font-size="54" font-weight="700">POINT OF SALE</text>
+  <text x="136" y="222" fill="#7F7F7F" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">PRIVATE FREELANCE BUILD</text>
+  <text x="560" y="194" fill="#F7F4EF" font-family="Arial, sans-serif" font-size="26" font-weight="700">Cashier Dashboard</text>
+  <text x="1052" y="194" fill="#F7F4EF" font-family="Arial, sans-serif" font-size="26" font-weight="700">Inventory Control</text>
+  <text x="560" y="476" fill="#F7F4EF" font-family="Arial, sans-serif" font-size="26" font-weight="700">Operational Reporting</text>
+  <rect x="164" y="268" width="296" height="54" rx="6" fill="#F25623" fill-opacity="0.16"/>
+  <rect x="164" y="344" width="220" height="20" rx="4" fill="#232323"/>
+  <rect x="164" y="378" width="248" height="20" rx="4" fill="#232323"/>
+  <rect x="164" y="412" width="192" height="20" rx="4" fill="#232323"/>
+  <rect x="560" y="234" width="180" height="106" rx="10" fill="#1B1B1B" stroke="#2E2E2E"/>
+  <rect x="764" y="234" width="180" height="106" rx="10" fill="#1B1B1B" stroke="#2E2E2E"/>
+  <rect x="1052" y="234" width="172" height="24" rx="4" fill="#232323"/>
+  <rect x="1052" y="278" width="348" height="18" rx="4" fill="#232323"/>
+  <rect x="1052" y="312" width="292" height="18" rx="4" fill="#232323"/>
+  <rect x="560" y="522" width="872" height="18" rx="4" fill="#232323"/>
+  <rect x="560" y="562" width="760" height="18" rx="4" fill="#232323"/>
+  <rect x="560" y="602" width="804" height="18" rx="4" fill="#232323"/>
+</svg>

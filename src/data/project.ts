@@ -179,6 +179,27 @@ const projectEntries: ProjectDetail[] = [
     ],
     customType: "garbage-management",
   },
+  {
+    id: "9",
+    slug: "pos",
+    title: "Point of Sale",
+    image: "/assets/pos/cover.svg",
+    year: "2025",
+    category: "web",
+    categoryLabel: "Web Application",
+    summary:
+      "A private POS web application for NATO PC that centralizes cashier workflows, product control, stock visibility, and daily sales reporting in one internal system.",
+    description:
+      "A custom store operations platform focused on transaction speed, cleaner item management, and practical reporting for day-to-day retail activity.",
+    tags: ["Laravel", "MySQL", "Tailwind CSS"],
+    tech: ["Laravel", "MySQL", "Tailwind CSS"],
+    content: [
+      "The main objective was to give NATO PC a cleaner checkout workflow while keeping product data and stock information easier to manage from the same environment.",
+      "The system direction focused on everyday retail practicality: quick cashier actions, clear admin oversight, and lightweight reporting that supports operational decisions without adding extra complexity.",
+      "Because this was a private freelance project, the preview section is prepared with placeholder frames for now so the final production screenshots can be inserted later without rebuilding the page structure.",
+    ],
+    customType: "enterprise-pos",
+  },
 ];
 
 export const projectsData = projectEntries.reduce<

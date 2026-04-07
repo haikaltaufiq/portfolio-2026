@@ -8,6 +8,7 @@ import FishingGameDetail from "./3d-game";
 import EClassroomDetail from "./e-classroom";
 import RoomBookingDetail from "./room-booking";
 import GarbagePaymentDetail from "./garbage-payment";
+import PosDetail from "./pos";
 
 type ProjectDetailRendererProps = {
   project: ProjectDetail;
@@ -33,6 +34,8 @@ export default function ProjectDetailRenderer({
       return <RoomBookingDetail project={project} />;
     case "garbage-management":
       return <GarbagePaymentDetail project={project} />;
+    case "enterprise-pos":
+      return <PosDetail project={project} />;
     default:
       return <DefaultDetail project={project} />;
   }
