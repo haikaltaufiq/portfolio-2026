@@ -182,8 +182,26 @@ export default function AboutSection() {
                   <span className="text-[10px] font-semibold uppercase tracking-[0.2em] group-hover/btn:text-[#F25623] transition-colors">
                     access full bio
                   </span>
-                  <div className="w-8 h-8 rounded-full border border-main-text/30 flex items-center justify-center text-[10px] group-hover/btn:bg-[#F25623] group-hover/btn:border-[#F25623] transition-all">
-                    →
+                  <div className="w-8 h-8 rounded-full border border-main-text/30 flex items-center justify-center group-hover/btn:bg-[#F25623] group-hover/btn:border-[#F25623] transition-all overflow-hidden">
+                    <motion.svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      variants={{
+                        hover: { x: 2, scale: 1.1 },
+                      }}
+                    >
+                      <path
+                        d="M5 12H19M19 12L13 6M19 12L13 18"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="group-hover/btn:stroke-white transition-colors"
+                      />
+                    </motion.svg>
                   </div>
                 </motion.a>
               </motion.div>

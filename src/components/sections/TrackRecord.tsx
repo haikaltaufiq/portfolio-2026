@@ -103,7 +103,7 @@ export default function TrackRecord() {
 
   return (
     <section className="relative py-1 md:py-10 bg-transparent overflow-hidden">
-      <div className="absolute top-2 md:top-10 -left-10 text-[35vw] md:text-[18vw] font-black opacity-[0.02] md:opacity-[0.02] select-none pointer-events-none -rotate-3 italic uppercase leading-none block">
+      <div className="absolute top-2 md:top-10 left-5 text-[35vw] md:text-[18vw] font-black opacity-[0.02] md:opacity-[0.02] select-none pointer-events-none tracking-tighter -rotate-3 italic uppercase leading-none block">
         History
       </div>
 

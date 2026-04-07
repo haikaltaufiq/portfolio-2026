@@ -79,7 +79,7 @@ export default function HeroSection() {
         </div>
 
         {/* 2026 Background - Adjusted Opacity and Size */}
-        <Typography className="absolute bottom-10 -right-5 md:-right-10 text-[35vw] md:text-[25vw] font-black opacity-[0.02] select-none leading-none rotate-0 md:rotate-12">
+        <Typography className="absolute bottom-10 right-2 md:right-20 text-[35vw] md:text-[25vw] font-black opacity-[0.02] select-none leading-none rotate-0 md:rotate-12">
           2026
         </Typography>
       </motion.div>
@@ -121,6 +121,14 @@ export default function HeroSection() {
                       >
                         portfolio.
                       </Typography>
+                    </motion.div>
+                    {/* Redacted Overlay for Main Text */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      variants={{ hover: { opacity: 0.7, x: [0, -1, 1, 0] } }}
+                      className="absolute inset-0 flex items-center justify-center font-redacted text-[#F25623] mix-blend-plus-lighter pointer-events-none tracking-[-0.05em] lowercase leading-[0.8] text-[18vw] md:text-[100px] select-none"
+                    >
+                      portfolio.
                     </motion.div>
                   </div>
 
@@ -179,7 +187,7 @@ export default function HeroSection() {
       {/* 4. Side Name (Fixed Position) */}
       <motion.div
         style={{ y: useTransform(dy, [-500, 500], [-20, 20]) }}
-        className="absolute right-10 md:right-13 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-5 pointer-events-none z-10 lg:block"
+        className="absolute right-10 md:right-13 md:top-1/2 -translate-y-1/2 flex items-center justify-center opacity-5 pointer-events-none z-10 lg:block"
       >
         <div className="-rotate-90 origin-center translate-x-1/2">
           <Typography className="text-8xl md:text-9xl font-black lowercase tracking-tighter whitespace-nowrap leading-none">
