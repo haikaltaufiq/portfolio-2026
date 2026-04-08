@@ -196,7 +196,7 @@ export default function GarbagePaymentDetail({
                 </div>
 
                 {/* Clean Progress Bar */}
-                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-current/5 z-20">
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-current/5 z-20">
                   <motion.div
                     className="h-full bg-[#F25623]"
                     initial={{ width: "0%" }}
