@@ -130,12 +130,6 @@ export default function ContactPage() {
       <div className="fixed inset-0 -z-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[40px_40px] opacity-[0.03]" />
       <div className="pointer-events-none fixed top-0 left-0 -z-10 h-full w-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02]" />
 
-      <div className="pointer-events-none fixed top-20 right-[-5%] origin-right rotate-90 opacity-[0.02] select-none">
-        <Typography className="text-[15vh] font-black tracking-tighter uppercase">
-          Contact System v1.0
-        </Typography>
-      </div>
-
       <div className="relative mx-auto max-w-6xl px-6">
         <section className="relative mb-10 md:mb-16">
           <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
@@ -184,10 +178,10 @@ export default function ContactPage() {
               </SlideIn>
               <div className="pointer-events-none absolute top-42 -left-10 md:-left-40 z-0 select-none opacity-[0.02] transition-all duration-500">
                 <div className="flex flex-col space-y-[-4vw] md:space-y-[3vw]">
-                  <Typography className="text-[25vw] md:text-[18vw] font-black tracking-[10px] md:tracking-[-0.05em] uppercase italic skew-x-[-10deg] leading-[0.7]">
+                  <Typography className="text-[20vw] md:text-[18vw] font-black tracking-[-2px] md:tracking-[-0.05em] uppercase italic skew-x-[-10deg] leading-[0.7]">
                     CONTACT
                   </Typography>
-                  <Typography className="text-[25vw] md:text-[18vw] font-black tracking-[10px] md:tracking-[-0.05em] uppercase italic skew-x-[-10deg] leading-[0.7] ml-[10vw] md:ml-[5vw]">
+                  <Typography className="text-[20vw] md:text-[18vw] font-black tracking-[-2px] md:tracking-[-0.05em] uppercase italic skew-x-[-10deg] leading-[1.3] md:leading-[0.7] ml-[10vw] md:ml-[5vw]">
                     ME *
                   </Typography>
                 </div>

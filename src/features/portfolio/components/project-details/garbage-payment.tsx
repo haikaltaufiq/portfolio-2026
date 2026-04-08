@@ -54,9 +54,10 @@ const BASIC_FEATURES: FeatureItem[] = [
 ];
 
 const PREVIEW_IMAGES: PreviewImage[] = [
-  { id: 1, src: "/assets/hr/dashboard.png", label: "Dashboard_View" },
-  { id: 2, src: "/assets/preview-2.png", label: "Admin_Panel" },
-  { id: 3, src: "/assets/preview-3.png", label: "Analytics_Module" },
+  { id: 1, src: "/assets/garbage/landing.png", label: "Landing_Page" },
+  { id: 2, src: "/assets/garbage/login.png", label: "Login_Page" },
+  { id: 3, src: "/assets/garbage/dashboard.png", label: "Dashboard_View" },
+  { id: 4, src: "/assets/garbage/transaction.png", label: "CRUD_Operations" },
 ];
 
 /**

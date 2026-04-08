@@ -183,7 +183,7 @@ const projectEntries: ProjectDetail[] = [
     id: "9",
     slug: "pos",
     title: "Point of Sale",
-    image: "/assets/pos/cover.svg",
+    image: "/assets/pos/login.png",
     year: "2025",
     category: "web",
     categoryLabel: "Web Application",

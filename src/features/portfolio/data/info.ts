@@ -37,5 +37,6 @@ export const infoList = [
 "Architected a flexible inventory ecosystem with multi-supplier synchronization and advanced configuration matching to streamline complex hardware stock management."
     ],
     skills: ["Laravel", "Tailwind", "Midtrans"],
+    link: "pos",
   },
 ];
