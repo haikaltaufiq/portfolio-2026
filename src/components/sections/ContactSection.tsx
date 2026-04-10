@@ -79,8 +79,8 @@ export default function ContactSection() {
               <div className="mt-2 space-y-8">
                 <p className="max-w-sm text-sm leading-tight font-semibold opacity-80">
                   &ldquo;Have a vision to build or a system to scale? I&apos;m
-                  ready to turn complex ideas into functional reality. Let&apos;s
-                  connect and build something impactful.&rdquo;
+                  ready to turn complex ideas into functional reality.
+                  Let&apos;s connect and build something impactful.&rdquo;
                 </p>
 
                 <form
@@ -114,7 +114,7 @@ export default function ContactSection() {
                     <textarea
                       name="message"
                       rows={3}
-                      placeholder="what&apos;s on your mind?"
+                      placeholder="what's on your mind?"
                       value={form.message}
                       onChange={onFieldChange}
                       maxLength={CONTACT_MESSAGE_MAX_LENGTH}
@@ -212,23 +212,6 @@ export default function ContactSection() {
             </SlideIn>
           </div>
         </div>
-      </div>
-
-      <div className="pointer-events-none absolute bottom-10 left-0 hidden w-full overflow-hidden opacity-5 md:block">
-        <motion.div
-          animate={{ x: [0, -1000] }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="flex gap-20 whitespace-nowrap text-[12vw] leading-none font-black lowercase"
-        >
-          <span>
-            available for new opportunities &bull; let&apos;s build the future
-            &bull;{" "}
-          </span>
-          <span>
-            available for new opportunities &bull; let&apos;s build the future
-            &bull;{" "}
-          </span>
-        </motion.div>
       </div>
     </section>
   );

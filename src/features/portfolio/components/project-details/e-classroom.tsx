@@ -211,7 +211,7 @@ export default function EClassroomDetail({ project }: EClassroomDetailProps) {
 
       <footer className="mt-40 border-t border-main-text/10 py-10 flex justify-between items-center opacity-30 px-6">
         <Typography className="text-[9px] font-black uppercase tracking-[0.4em]">
-          E-Classroom Deployment Unit
+          E-Classroom
         </Typography>
         <div className="flex gap-2">
           {[...Array(5)].map((_, i) => (

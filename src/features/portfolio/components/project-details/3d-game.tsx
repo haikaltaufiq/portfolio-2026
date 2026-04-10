@@ -45,7 +45,7 @@ export default function FishingGameDetail({ project }: FishingGameDetailProps) {
   const galleryImages = [
     { src: "/assets/fishing-game/home-screen.png", label: "UI SYSTEM CORE" },
     { src: "/assets/fishing-game/fish-card.png", label: "FISH CARD UI" },
-    { src: "/assets/fishing-game/waiting-screen.png", label: "WAITING SCREEN" },
+    { src: "/assets/fishing-game/device.png", label: "HARDWARE" },
     { src: "/assets/fishing-game/fishing-idle.png", label: "FISHING IDLE" },
   ];
 

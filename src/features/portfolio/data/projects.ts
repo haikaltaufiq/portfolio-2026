@@ -14,7 +14,7 @@ export const projects: Project[] = [
     id: "portfolio-2",
     slug: "3d-game",
     title: "Fishing Game",
-    video: "/assets/fishing-game/demo.mp4",
+    image: "/assets/fishing-game/home-screen.png",
     description:
       "A simulation game developed using Unity that interfaces with a custom-built Arduino controller. The project focuses on synchronizing physical hardware inputs with a 3D environment.",
     tags: ["Unity", "Arduino", "Blender"],

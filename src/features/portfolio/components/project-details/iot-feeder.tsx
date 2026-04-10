@@ -48,8 +48,8 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
       {/* SECTION 1: HERO & STATS - HRIS STYLE */}
       <SlideIn>
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
-          <div className=" absolute top-20 md:-top-20 md:left-10 text-[18vw] font-black opacity-[0.02] select-none tracking-[-10] overflow-hidden leading-16 md:leading-53 pointer-events-none -rotate-2">
-            AQUA CULTURE SYSTEM
+          <div className=" absolute top-20 md:-top-20 md:left-10 text-[18vw] font-black opacity-[0.02] select-none tracking-[-10] overflow-hidden leading-16 md:leading-60 pointer-events-none -rotate-2">
+            FISH FEEDING
           </div>
           <div className="lg:col-span-6 space-y-6 z-10">
             <div className="inline-block px-3 py-1 border border-[#F25623] text-[#F25623] text-[10px] font-black uppercase tracking-widest">
@@ -67,29 +67,6 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
               hardware precision with mobile accessibility for real-time fish
               pond management.
             </p>
-          </div>
-
-          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              { label: "Stability", value: "99.8%", sub: "Uptime" },
-              { label: "Response", value: "120ms", sub: "Latency" },
-              { label: "Hardware Nodes", value: "04", sub: "Active" },
-              { label: "Status", value: "OPERATIONAL", isText: true },
-            ].map((stat, i) => (
-              <div
-                key={i}
-                className="border border-main-text/10 p-8 flex flex-col justify-between group hover:bg-[#F25623] transition-all duration-500"
-              >
-                <span className="text-[10px] font-black opacity-40 group-hover:text-white uppercase tracking-widest">
-                  {stat.label}
-                </span>
-                <p
-                  className={`${stat.isText ? "text-xl" : "text-5xl"} font-black group-hover:text-white transition-colors`}
-                >
-                  {stat.value}
-                </p>
-              </div>
-            ))}
           </div>
         </section>
       </SlideIn>
@@ -177,7 +154,6 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
       {/* SECTION 4: DEVICE & MOBILE SHOWCASE - FLOATING STYLE */}
       <section className="space-y-32">
         {/* HARDWARE PREVIEW VIDEO */}
-        {/* HARDWARE PREVIEW VIDEO - SHOWCASE.MP4 */}
         <div className="space-y-8">
           <div className="flex justify-between items-end border-b border-main-text/10 pb-6">
             <Typography variant="h3" className="text-3xl font-black lowercase">
@@ -199,7 +175,10 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105"
             >
-              <source src="/assets/fish-feeder/showcase.mp4" type="video/mp4" />
+              <source
+                src="/assets/fish-feeder/DEMO-APLIKASI.mp4"
+                type="video/mp4"
+              />
               Your browser does not support the video tag.
             </video>
 
@@ -217,7 +196,7 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
                 LIVE_FEED_01
               </div>
               <p className="text-4xl font-black text-white italic tracking-tighter leading-none">
-                CORE_HARDWARE_DEMO
+                DEMO
               </p>
             </div>
           </div>
@@ -289,7 +268,7 @@ export default function IotFeederDetail({ project }: IotFeederDetailProps) {
       <footer className="pt-24 border-t border-main-text/10 flex flex-col md:flex-row justify-between gap-8 opacity-40">
         <div className="font-mono text-[9px] uppercase tracking-widest space-y-1">
           <p>Project: Automatic Fish Feeder</p>
-          <p>Role: IoT Engineer & UI Designer</p>
+          <p>Role: IoT Engineer & Flutter Mobile Developer</p>
         </div>
       </footer>
     </div>

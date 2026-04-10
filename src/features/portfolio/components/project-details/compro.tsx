@@ -348,7 +348,7 @@ export default function ComproDetail({ project }: ComproDetailProps) {
       <footer className="mt-40 border-t border-main-text/10 py-10 bg-main-text/2">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <Typography className="text-[9px] font-black uppercase tracking-[0.3em] opacity-30 italic">
-            © 2026 — PT KREATIF SYSTEM INDONESIA // CORE_OVERHAUL
+            © 2026 — HAIKAL TAUFIQ
           </Typography>
           <div className="flex gap-4">
             {[...Array(4)].map((_, i) => (
