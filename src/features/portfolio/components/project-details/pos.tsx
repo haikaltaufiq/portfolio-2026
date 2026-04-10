@@ -332,7 +332,7 @@ export default function PosDetail({ project }: PosDetailProps) {
             </div>
           </div>
 
-          <div className="relative flex min-h-[430px] w-full flex-col overflow-hidden border border-main-text/10 bg-[#0a0a0a] sm:min-h-[520px] md:aspect-video md:min-h-0 lg:min-h-[600px]">
+          <div className="relative flex min-h-107.5 w-full flex-col overflow-hidden border border-main-text/10 bg-[#0a0a0a] sm:min-h-130 md:aspect-video md:min-h-0 lg:min-h-150">
             <div className="relative z-20 flex items-center justify-between border-b border-white/10 bg-black/50 px-3 py-2.5 backdrop-blur-md sm:px-4 sm:py-3">
               <div className="flex gap-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#F25623]/60" />
@@ -416,7 +416,7 @@ export default function PosDetail({ project }: PosDetailProps) {
                 onClick={() => setActiveSlide(index)}
                 className={`group border p-4 text-left transition-all duration-300 ${
                   activeSlide === index
-                    ? "translate-y-[-2px] border-[#F25623] bg-[#F25623]/8"
+                    ? "-translate-y-0.5 border-[#F25623] bg-[#F25623]/8"
                     : "border-main-text/10 bg-main-text/2 hover:border-main-text/30"
                 }`}
               >
