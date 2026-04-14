@@ -1,5 +1,6 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import {
   Poppins,
   League_Spartan,
@@ -51,6 +52,7 @@ export default function RootLayout({
         <Providers>
           <PageWrapper>{children}</PageWrapper>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
